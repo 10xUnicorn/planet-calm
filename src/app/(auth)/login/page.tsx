@@ -16,13 +16,19 @@ export default function LoginPage() {
     e.preventDefault()
     setLoading(true)
     setError('')
-    const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) {
-      setError(error.message)
+    try {
+      const supabase = createClient()
+      const { error: authError } = await supabase.auth.signInWithPassword({ email, password })
+      if (authError) {
+        setError(authError.message || 'Invalid email or password')
+        setLoading(false)
+      } else {
+        router.push('/overview')
+        router.refresh()
+      }
+    } catch {
+      setError('Unable to sign in. Please try again.')
       setLoading(false)
-    } else {
-      router.push('/overview')
     }
   }
 
@@ -49,7 +55,7 @@ export default function LoginPage() {
         <form onSubmit={handleLogin}
           className="rounded-2xl p-8 shadow-lg"
           style={{ background: '#fff', border: '1px solid rgba(98,52,145,0.1)' }}>
-          {error && (
+          {error && typeof error === 'string' && error.length > 0 && (
             <div className="mb-4 p-3 rounded-lg text-sm" style={{ background: '#fde8e8', color: '#c0392b' }}>
               {error}
             </div>
