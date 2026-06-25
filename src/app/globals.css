@@ -1,26 +1,59 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: #f5eef8;
+  --color-bg-cream: #fef9e5;
+  --color-sidebar: #2d1a47;
+  --color-primary: #623491;
+  --color-primary-light: #9b6fc4;
+  --color-primary-lighter: #c4a8e0;
+  --color-accent: #e8c487;
+  --color-text: #2d1a47;
+  --color-text-muted: #7a5ea0;
+  --color-success: #2a9d5c;
+  --color-warning: #9a6800;
+  --color-danger: #c0392b;
+  --color-card: #ffffff;
+  --color-border: rgba(98, 52, 145, 0.1);
+  --color-border-accent: rgba(232, 196, 135, 0.18);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Georgia', serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  font-size: 13px;
 }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-primary-lighter); border-radius: 3px; }
+
+/* Status Pills */
+.pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 10.5px; font-weight: 700; letter-spacing: .3px; font-family: 'Georgia', serif; }
+.pill-green { background: #e8f5ee; color: #1e7d47; }
+.pill-amber { background: #fdf3dc; color: #9a6800; }
+.pill-red { background: #fde8e8; color: #c0392b; }
+.pill-purple { background: #ede4f5; color: #623491; }
+.pill-blue { background: #e4edf5; color: #1a5a8a; }
+.pill-gold { background: linear-gradient(135deg, #fdf0d0, #f5e0a0); color: #7a5500; border: 1px solid rgba(232, 196, 135, 0.6); }
+
+/* Tags */
+.tag { display: inline-block; background: #ede4f5; color: #623491; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; margin-right: 4px; letter-spacing: .3px; }
+
+/* AI Chip */
+.ai-chip { display: inline-flex; align-items: center; gap: 5px; background: linear-gradient(135deg, #2d1a47, #623491); color: #e8c487; font-size: 10.5px; padding: 4px 10px; border-radius: 20px; font-weight: 700; font-family: 'Georgia', serif; }
+
+/* Progress Bar */
+.progress-bar { height: 6px; background: rgba(98, 52, 145, 0.12); border-radius: 3px; margin-top: 6px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #623491, #e8c487); }
+
+/* Gold accent */
+.gold-accent { color: #b8860b; font-weight: 700; }
+
+/* KPI Card gradient top */
+.kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #623491, #e8c487); }
