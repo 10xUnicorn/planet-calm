@@ -1,10 +1,10 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Bell } from 'lucide-react'
 import { createClient } from '@/lib/supabase-browser'
-import { useRouter } from 'next/navigation'
 
 const pageTitles: Record<string, string> = {
   '/overview': 'Mission Overview',
@@ -32,6 +32,21 @@ export default function Topbar() {
   const pathname = usePathname()
   const router = useRouter()
   const title = pageTitles[pathname] || 'Dashboard'
+  const [userName, setUserName] = useState('')
+  const [userInitial, setUserInitial] = useState('?')
+
+  useEffect(() => {
+    const supabase = createClient()
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) {
+        const first = user.user_metadata?.first_name || ''
+        const last = user.user_metadata?.last_name || ''
+        const name = first || user.email?.split('@')[0] || 'User'
+        setUserName(name)
+        setUserInitial((first?.[0] || user.email?.[0] || '?').toUpperCase())
+      }
+    })
+  }, [])
 
   const handleSignOut = async () => {
     const supabase = createClient()
@@ -52,10 +67,10 @@ export default function Topbar() {
       </div>
       <div className="text-[12.5px] italic"
         style={{ color: '#7a5ea0', fontFamily: 'Georgia, serif' }}>
-        Welcome back, Stephanie ✦
+        {userName ? `Welcome back, ${userName} ✦` : ''}
       </div>
       <div className="flex items-center gap-3">
-        <div className="ai-chip">🤖 AI Brain</div>
+        <Link href="/ai-brain" className="ai-chip cursor-pointer">🤖 AI Brain</Link>
         <Link href="/tasks"
           className="px-[14px] py-[6px] rounded-full text-[11.5px] cursor-pointer transition-all duration-150"
           style={{
@@ -68,10 +83,6 @@ export default function Topbar() {
         </Link>
         <Link href="/notifications" className="relative">
           <Bell size={18} style={{ color: '#623491' }} />
-          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full text-[8px] font-bold flex items-center justify-center"
-            style={{ background: '#e8c487', color: '#2d1a47' }}>
-            5
-          </span>
         </Link>
         <button onClick={handleSignOut}
           className="w-9 h-9 rounded-full text-[13px] font-bold flex items-center justify-center cursor-pointer"
@@ -83,7 +94,7 @@ export default function Topbar() {
             boxShadow: '0 2px 8px rgba(98,52,145,0.25)',
           }}
           title="Sign out">
-          S
+          {userInitial}
         </button>
       </div>
     </div>

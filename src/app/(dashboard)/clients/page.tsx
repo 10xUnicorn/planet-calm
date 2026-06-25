@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { demoClients } from '@/lib/demo-data'
-import { Search, Download, UserPlus, Filter } from 'lucide-react'
+import { Search, UserPlus } from 'lucide-react'
 
 export default function ClientsPage() {
   const [search, setSearch] = useState('')

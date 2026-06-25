@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Save, Users, Key, Bell, Brain, Calendar, Shield } from 'lucide-react'
+import { Save } from 'lucide-react'
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState('general')

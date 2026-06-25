@@ -1,92 +1,86 @@
 'use client'
 
+import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import {
-  Compass, TrendingUp, Users, BookOpen, Rocket, Settings,
-  LayoutDashboard, BarChart3, UserPlus, GitBranch, Tag, Handshake,
-  UserCircle, UsersRound, Heart, MessageSquare,
-  Library, FileText, Sparkles, Brain, Bell, CheckSquare,
-  CreditCard, FileBarChart
-} from 'lucide-react'
 
 const navGroups = [
   {
     label: 'Command',
     items: [
-      { icon: LayoutDashboard, label: 'Overview', href: '/overview', emoji: '🌿' },
-      { icon: Heart, label: 'Community Hub', href: '/community', emoji: '🐾', badge: 12 },
+      { label: 'Overview', href: '/overview', emoji: '🌿' },
+      { label: 'Community Hub', href: '/community', emoji: '🐾' },
     ],
   },
   {
     label: 'Growth',
     items: [
-      { icon: GitBranch, label: 'Journey & Pipeline', href: '/pipeline', emoji: '🗺️' },
-      { icon: Sparkles, label: 'Client Portal', href: '/portal', emoji: '✨' },
+      { label: 'Journey & Pipeline', href: '/pipeline', emoji: '🗺️' },
+      { label: 'Client Portal', href: '/portal', emoji: '✨' },
     ],
   },
   {
     label: 'Content & Revenue',
     items: [
-      { icon: BookOpen, label: 'Content & Book Launch', href: '/content', emoji: '📖' },
-      { icon: CreditCard, label: 'Payments & Finance', href: '/payments', emoji: '💳' },
+      { label: 'Content & Book Launch', href: '/content', emoji: '📖' },
+      { label: 'Payments & Finance', href: '/payments', emoji: '💳' },
     ],
   },
   {
     label: 'Intelligence',
     items: [
-      { icon: Brain, label: 'AI Brain', href: '/ai-brain', emoji: '🤖' },
-      { icon: BarChart3, label: 'Reports & KPIs', href: '/kpis', emoji: '📊', badge: 3 },
+      { label: 'AI Brain', href: '/ai-brain', emoji: '🤖' },
+      { label: 'Reports & KPIs', href: '/kpis', emoji: '📊' },
     ],
   },
   {
     label: 'Manage',
     items: [
-      { icon: Users, label: 'Clients', href: '/clients', emoji: '👥' },
-      { icon: UsersRound, label: 'Cohorts', href: '/cohort', emoji: '🎓' },
-      { icon: UserPlus, label: 'Leads', href: '/leads', emoji: '🎯' },
-      { icon: Handshake, label: 'Partners', href: '/partners', emoji: '🤝' },
-      { icon: Tag, label: 'Deals', href: '/deals', emoji: '🏷️' },
+      { label: 'Clients', href: '/clients', emoji: '👥' },
+      { label: 'Cohorts', href: '/cohort', emoji: '🎓' },
+      { label: 'Leads', href: '/leads', emoji: '🎯' },
+      { label: 'Partners', href: '/partners', emoji: '🤝' },
+      { label: 'Deals', href: '/deals', emoji: '🏷️' },
     ],
   },
   {
     label: 'Tools',
     items: [
-      { icon: MessageSquare, label: 'Messaging', href: '/messaging', emoji: '💬' },
-      { icon: FileText, label: 'Worksheets', href: '/worksheets', emoji: '📝' },
-      { icon: CheckSquare, label: 'Tasks', href: '/tasks', emoji: '✅' },
-      { icon: Bell, label: 'Notifications', href: '/notifications', emoji: '🔔' },
+      { label: 'Messaging', href: '/messaging', emoji: '💬' },
+      { label: 'Worksheets', href: '/worksheets', emoji: '📝' },
+      { label: 'Tasks', href: '/tasks', emoji: '✅' },
+      { label: 'Notifications', href: '/notifications', emoji: '🔔' },
     ],
   },
   {
     label: 'Settings',
     items: [
-      { icon: Settings, label: 'Settings & Team', href: '/settings', emoji: '⚙️' },
+      { label: 'Settings & Team', href: '/settings', emoji: '⚙️' },
     ],
   },
 ]
 
 export default function Sidebar() {
   const pathname = usePathname()
+  const [logoError, setLogoError] = useState(false)
 
   return (
     <nav className="w-[240px] min-h-screen fixed top-0 left-0 z-50 flex flex-col"
       style={{ background: '#2d1a47' }}>
       {/* Logo */}
       <div className="px-[18px] pt-[22px] pb-[16px]" style={{ borderBottom: '1px solid rgba(232,196,135,0.18)' }}>
-        <img
-          src="https://trpnlkntvulkjerevngm.supabase.co/storage/v1/object/public/dashboard-assets/logos/1782362694767-Planet_Calm_Logo.png"
-          alt="Planet Calm"
-          className="w-[148px] block"
-          onError={(e) => {
-            (e.target as HTMLImageElement).style.display = 'none'
-            const fallback = document.getElementById('logo-fallback')
-            if (fallback) fallback.style.display = 'block'
-          }}
-        />
-        <div id="logo-fallback" className="hidden text-[18px] font-bold tracking-wide" style={{ color: '#e8c487' }}>
-          Planet Calm
-        </div>
+        {!logoError ? (
+          <img
+            src="https://trpnlkntvulkjerevngm.supabase.co/storage/v1/object/public/dashboard-assets/logos/1782362694767-Planet_Calm_Logo.png"
+            alt="Planet Calm"
+            className="w-[148px] block"
+            onError={() => setLogoError(true)}
+          />
+        ) : (
+          <div className="text-[18px] font-bold tracking-wide" style={{ color: '#e8c487' }}>
+            Planet Calm
+          </div>
+        )}
       </div>
 
       {/* Nav Groups */}
@@ -115,12 +109,6 @@ export default function Sidebar() {
                 >
                   <span className="text-[14px] w-[18px] text-center">{item.emoji}</span>
                   {item.label}
-                  {item.badge && (
-                    <span className="ml-auto text-[9px] font-extrabold px-[6px] py-[2px] rounded-full"
-                      style={{ background: '#e8c487', color: '#2d1a47' }}>
-                      {item.badge}
-                    </span>
-                  )}
                 </Link>
               )
             })}
@@ -131,7 +119,7 @@ export default function Sidebar() {
       {/* Footer */}
       <div className="py-4 px-[18px]" style={{ borderTop: '1px solid rgba(232,196,135,0.15)' }}>
         <div className="text-[10px] tracking-wide" style={{ color: 'rgba(232,196,135,0.5)' }}>
-          PLANET CALM © 2025<br />Calm-First Leadership
+          PLANET CALM © 2026<br />Calm-First Leadership
         </div>
       </div>
     </nav>

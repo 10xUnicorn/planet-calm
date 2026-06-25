@@ -56,16 +56,20 @@ export default function CohortPage() {
               {c.level && <span className="tag">{c.level}</span>}
             </div>
 
-            {/* Progress heatmap placeholder */}
+            {/* Progress heatmap */}
             <div className="mt-3 flex gap-1">
-              {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="h-3 flex-1 rounded-sm"
-                  style={{
-                    background: i < Math.floor(Math.random() * 8) + 1
-                      ? `rgba(98,52,145,${0.15 + Math.random() * 0.6})`
-                      : 'rgba(98,52,145,0.06)',
-                  }} />
-              ))}
+              {Array.from({ length: 8 }).map((_, i) => {
+                const seed = (parseInt(c.id) * 7 + i * 13) % 10
+                const filled = seed > 3
+                return (
+                  <div key={i} className="h-3 flex-1 rounded-sm"
+                    style={{
+                      background: filled
+                        ? `rgba(98,52,145,${0.2 + (seed / 10) * 0.5})`
+                        : 'rgba(98,52,145,0.06)',
+                    }} />
+                )
+              })}
             </div>
           </div>
         ))}

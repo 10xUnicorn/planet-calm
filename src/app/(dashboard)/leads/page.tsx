@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { demoLeads } from '@/lib/demo-data'
-import { Search, Filter, Download, UserPlus } from 'lucide-react'
+import { Search, Download, UserPlus } from 'lucide-react'
 
 export default function LeadsPage() {
   const [search, setSearch] = useState('')

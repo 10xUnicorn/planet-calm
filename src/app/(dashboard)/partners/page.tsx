@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { demoPartners } from '@/lib/demo-data'
-import { Search, Download, UserPlus, RefreshCw } from 'lucide-react'
+import { Search, RefreshCw } from 'lucide-react'
 
 export default function PartnersPage() {
   const [statusFilter, setStatusFilter] = useState('all')

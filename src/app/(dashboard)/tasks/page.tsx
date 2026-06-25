@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Plus, CheckCircle, Circle, Clock } from 'lucide-react'
 
-const demoTasks = [
+const initialTasks = [
   { id: '1', title: 'Review Best Friends pilot contract', priority: 'high', due: 'Jun 26', assigned: 'Stephanie', status: 'pending', module: 'Pipeline' },
   { id: '2', title: 'Send book chapter preview to Substack', priority: 'high', due: 'Jun 27', assigned: 'Stephanie', status: 'pending', module: 'Content' },
   { id: '3', title: 'Coach check-in with 14 at-risk Studio members', priority: 'medium', due: 'Jun 28', assigned: 'Coach Jen', status: 'in_progress', module: 'Clients' },
@@ -14,9 +14,23 @@ const demoTasks = [
   { id: '8', title: 'Onboard Austin Animal Center org admin', priority: 'high', due: 'Jun 25', assigned: 'Stephanie', status: 'completed', module: 'Cohort' },
 ]
 
+const statusCycle: Record<string, string> = {
+  pending: 'in_progress',
+  in_progress: 'completed',
+  completed: 'pending',
+}
+
 export default function TasksPage() {
+  const [tasks, setTasks] = useState(initialTasks)
   const [filter, setFilter] = useState('all')
-  const filtered = filter === 'all' ? demoTasks : demoTasks.filter(t => t.status === filter)
+
+  const filtered = filter === 'all' ? tasks : tasks.filter(t => t.status === filter)
+
+  const toggleStatus = (id: string) => {
+    setTasks(prev => prev.map(t =>
+      t.id === id ? { ...t, status: statusCycle[t.status] || 'pending' } : t
+    ))
+  }
 
   return (
     <div>
@@ -41,16 +55,23 @@ export default function TasksPage() {
 
       <div className="bg-white rounded-[14px] p-5"
         style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+        {filtered.length === 0 && (
+          <div className="text-center py-8 text-[12px] italic" style={{ color: '#9b6fc4' }}>
+            No tasks match this filter
+          </div>
+        )}
         {filtered.map(t => (
           <div key={t.id} className="flex items-center gap-4 py-3 cursor-pointer hover:bg-[rgba(232,196,135,0.08)] rounded-lg px-3"
             style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
-            {t.status === 'completed' ? (
-              <CheckCircle size={18} style={{ color: '#2a9d5c' }} />
-            ) : t.status === 'in_progress' ? (
-              <Clock size={18} style={{ color: '#e8c487' }} />
-            ) : (
-              <Circle size={18} style={{ color: '#9b6fc4' }} />
-            )}
+            <button onClick={() => toggleStatus(t.id)} className="cursor-pointer" style={{ background: 'none', border: 'none', padding: 0 }}>
+              {t.status === 'completed' ? (
+                <CheckCircle size={18} style={{ color: '#2a9d5c' }} />
+              ) : t.status === 'in_progress' ? (
+                <Clock size={18} style={{ color: '#e8c487' }} />
+              ) : (
+                <Circle size={18} style={{ color: '#9b6fc4' }} />
+              )}
+            </button>
             <div className="flex-1">
               <div className={`text-[12.5px] font-bold ${t.status === 'completed' ? 'line-through opacity-50' : ''}`}
                 style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{t.title}</div>
