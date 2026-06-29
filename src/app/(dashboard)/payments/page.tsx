@@ -1,6 +1,7 @@
 'use client'
 
 import { revenueByOffer } from '@/lib/demo-data'
+import { CreditCard } from 'lucide-react'
 
 const recentPayments = [
   { id: '1', client: 'Rachel Nguyen', amount: '$6,000', offer: 'Calm Council', date: 'Jun 24, 2026', status: 'succeeded' },
@@ -17,10 +18,10 @@ export default function PaymentsPage() {
       {/* Revenue Stats */}
       <div className="grid grid-cols-4 gap-4 mb-6">
         {[
-          { label: 'MRR', value: '$17,671', trend: '↑ 12% vs last month' },
-          { label: 'ARR', value: '$127,840', trend: '↑ 18.4% vs prior year' },
+          { label: 'MRR', value: '$17,671', trend: '\u2191 12% vs last month' },
+          { label: 'ARR', value: '$127,840', trend: '\u2191 18.4% vs prior year' },
           { label: 'Avg LTV', value: '$1,840', trend: 'Across all tiers' },
-          { label: 'Churn Rate', value: '3.2%', trend: '↓ Improving' },
+          { label: 'Churn Rate', value: '3.2%', trend: '\u2193 Improving' },
         ].map(s => (
           <div key={s.label} className="bg-white rounded-[14px] p-5 relative overflow-hidden"
             style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
@@ -36,7 +37,9 @@ export default function PaymentsPage() {
         {/* Revenue by Offer */}
         <div className="bg-white rounded-[14px] p-5"
           style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>💳 Revenue by Offer</div>
+          <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+            <CreditCard size={16} style={{ color: '#623491' }} /> Revenue by Offer
+          </div>
           <table className="w-full">
             <thead>
               <tr>

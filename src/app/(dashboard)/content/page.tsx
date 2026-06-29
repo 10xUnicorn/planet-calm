@@ -28,15 +28,17 @@ export default function ContentPage() {
       {/* Book Launch Banner */}
       <div className="rounded-[14px] p-6 mb-6 relative overflow-hidden"
         style={{ background: 'linear-gradient(135deg,#2d1a47 0%,#623491 60%,#9b6fc4 100%)' }}>
-        <div className="absolute right-8 top-1/2 -translate-y-1/2 text-[48px] opacity-15">📖</div>
+        <div className="absolute right-8 top-1/2 -translate-y-1/2 opacity-15">
+          <BookOpen size={48} style={{ color: '#fff' }} />
+        </div>
         <div className="flex items-center gap-2 mb-2">
           <h2 className="text-[18px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#e8c487' }}>
-            &quot;What the BARK?&quot; — Book Launch Content
+            &quot;What the BARK?&quot; &mdash; Book Launch Content
           </h2>
           <span className="pill pill-amber">Sept 2026</span>
         </div>
         <p className="text-[12px]" style={{ color: 'rgba(255,255,255,0.75)', fontFamily: 'Georgia, serif' }}>
-          348 pre-sales · 54% Substack growth · Chapter previews releasing weekly
+          348 pre-sales &middot; 54% Substack growth &middot; Chapter previews releasing weekly
         </p>
       </div>
 

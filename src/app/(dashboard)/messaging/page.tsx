@@ -14,7 +14,7 @@ const demoThreads = [
 const allMessages: Record<string, Array<{ sender: string; text: string; time: string; fromMe: boolean }>> = {
   '1': [
     { sender: 'Marisol Vega', text: 'Hi Stephanie! Just wanted to say the worksheet was really helpful. My GSD Max had a breakthrough this week!', time: '10:32 AM', fromMe: false },
-    { sender: 'You', text: "That's wonderful to hear, Marisol! Max's progress with the structured calm approach shows exactly why the BARKType framework works. Keep up the beautiful work. 🐾", time: '10:45 AM', fromMe: true },
+    { sender: 'You', text: "That's wonderful to hear, Marisol! Max's progress with the structured calm approach shows exactly why the BARKType framework works. Keep up the beautiful work.", time: '10:45 AM', fromMe: true },
     { sender: 'Marisol Vega', text: 'Thank you for the worksheet feedback! The breathing exercise before walks has been a game-changer.', time: '11:02 AM', fromMe: false },
   ],
   '2': [

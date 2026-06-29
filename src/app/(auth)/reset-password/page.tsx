@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase-browser'
 import Link from 'next/link'
+import { Mail, CheckCircle } from 'lucide-react'
 
 export default function ResetPasswordPage() {
   const [email, setEmail] = useState('')
@@ -28,45 +29,118 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: '#f5eef8' }}>
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+    <div className="min-h-screen flex items-center justify-center px-4"
+      style={{ background: 'linear-gradient(135deg, #f5eef8 0%, #ede4f5 50%, #fdf8ec 100%)' }}>
+      <div className="w-full max-w-[420px]">
+        {/* Logo + Header */}
+        <div className="text-center mb-6">
+          <div className="w-[140px] h-[140px] mx-auto mb-5 rounded-full flex items-center justify-center overflow-hidden"
+            style={{ background: '#2d1a47', boxShadow: '0 8px 32px rgba(45,26,71,0.3)' }}>
+            <img
+              src="https://trpnlkntvulkjerevngm.supabase.co/storage/v1/object/public/dashboard-assets/logos/1782362694767-Planet_Calm_Logo.png"
+              alt="Planet Calm"
+              className="w-[120px] h-[120px] object-contain"
+              style={{ mixBlendMode: 'lighten' }}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+            />
+          </div>
+          <h1 className="text-[26px] font-bold tracking-[-0.3px]"
+            style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
             Reset Password
           </h1>
+          <p className="text-[13px] italic mt-1"
+            style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>
+            We will send you a reset link
+          </p>
         </div>
+
         {sent ? (
-          <div className="rounded-2xl p-8 text-center shadow-lg"
-            style={{ background: '#fff', border: '1px solid rgba(98,52,145,0.1)' }}>
-            <p className="text-sm" style={{ color: '#7a5ea0', fontFamily: 'Georgia, serif' }}>
-              Reset link sent to <strong>{email}</strong>. Check your inbox.
+          <div className="rounded-[20px] p-8 text-center"
+            style={{
+              background: '#fff',
+              border: '1px solid rgba(98,52,145,0.08)',
+              boxShadow: '0 4px 24px rgba(98,52,145,0.08), 0 1px 3px rgba(98,52,145,0.04)',
+            }}>
+            <div className="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center"
+              style={{ background: 'rgba(34,197,94,0.12)' }}>
+              <CheckCircle size={28} style={{ color: '#16a34a' }} />
+            </div>
+            <h2 className="text-[18px] font-bold mb-2" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+              Check your inbox
+            </h2>
+            <p className="text-[13px]" style={{ color: '#7a5ea0', fontFamily: 'Georgia, serif' }}>
+              Reset link sent to <strong style={{ color: '#2d1a47' }}>{email}</strong>. Click it to set a new password.
             </p>
-            <Link href="/login" className="inline-block mt-4 text-sm underline" style={{ color: '#623491' }}>
+            <Link href="/login"
+              className="inline-block mt-5 text-[11.5px] transition-opacity hover:opacity-70"
+              style={{ color: '#623491', fontFamily: 'Georgia, serif', textDecoration: 'none', borderBottom: '1px solid rgba(98,52,145,0.25)' }}>
               Back to login
             </Link>
           </div>
         ) : (
-          <form onSubmit={handleReset} className="rounded-2xl p-8 shadow-lg"
-            style={{ background: '#fff', border: '1px solid rgba(98,52,145,0.1)' }}>
-            {error && (
-              <div className="mb-4 p-3 rounded-lg text-sm" style={{ background: '#fde8e8', color: '#c0392b' }}>{error}</div>
+          <div className="rounded-[20px] p-8"
+            style={{
+              background: '#fff',
+              border: '1px solid rgba(98,52,145,0.08)',
+              boxShadow: '0 4px 24px rgba(98,52,145,0.08), 0 1px 3px rgba(98,52,145,0.04)',
+            }}>
+            {error && typeof error === 'string' && error.length > 0 && (
+              <div className="mb-5 p-3 rounded-[12px] text-[12.5px]"
+                style={{ background: '#fde8e8', color: '#c0392b', fontFamily: 'Georgia, serif', border: '1px solid rgba(192,57,43,0.15)' }}>
+                {error}
+              </div>
             )}
-            <div className="mb-6">
-              <label className="block text-xs font-bold uppercase tracking-wider mb-2" style={{ color: '#9b6fc4' }}>Email</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
-                className="w-full px-4 py-3 rounded-xl text-sm outline-none"
-                style={{ border: '1px solid rgba(98,52,145,0.2)', fontFamily: 'Georgia, serif', color: '#2d1a47' }} />
+
+            <form onSubmit={handleReset}>
+              <div className="mb-6">
+                <label className="block text-[10px] font-bold uppercase tracking-[1.8px] mb-[6px]"
+                  style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>
+                  Email Address
+                </label>
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
+                  className="w-full px-4 py-[12px] rounded-[12px] text-[13px] outline-none transition-all"
+                  style={{
+                    border: '1.5px solid rgba(98,52,145,0.15)',
+                    fontFamily: 'Georgia, serif',
+                    color: '#2d1a47',
+                    background: '#faf8fc',
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = '#623491'}
+                  onBlur={(e) => e.target.style.borderColor = 'rgba(98,52,145,0.15)'}
+                  placeholder="you@example.com" />
+              </div>
+
+              <button type="submit" disabled={loading}
+                className="w-full py-[13px] rounded-[12px] text-[13px] font-bold cursor-pointer transition-all disabled:opacity-60"
+                style={{
+                  background: 'linear-gradient(135deg, #623491, #7d4db5)',
+                  color: '#e8c487',
+                  fontFamily: 'Georgia, serif',
+                  border: 'none',
+                  letterSpacing: '.4px',
+                  boxShadow: '0 4px 16px rgba(98,52,145,0.3)',
+                }}>
+                {loading ? 'Sending...' : 'Send Reset Link'}
+              </button>
+            </form>
+
+            <div className="flex justify-between mt-5 text-[11.5px]" style={{ fontFamily: 'Georgia, serif' }}>
+              <Link href="/login" className="transition-opacity hover:opacity-70"
+                style={{ color: '#623491', textDecoration: 'none', borderBottom: '1px solid rgba(98,52,145,0.25)' }}>
+                Back to login
+              </Link>
+              <Link href="/register" className="transition-opacity hover:opacity-70"
+                style={{ color: '#623491', textDecoration: 'none', borderBottom: '1px solid rgba(98,52,145,0.25)' }}>
+                Create account
+              </Link>
             </div>
-            <button type="submit" disabled={loading}
-              className="w-full py-3 rounded-xl text-sm font-bold cursor-pointer transition-opacity disabled:opacity-60"
-              style={{ background: 'linear-gradient(135deg, #623491, #9b6fc4)', color: '#e8c487', fontFamily: 'Georgia, serif', border: 'none' }}>
-              {loading ? 'Sending...' : 'Send Reset Link'}
-            </button>
-            <div className="text-center mt-4">
-              <Link href="/login" className="text-xs underline" style={{ color: '#623491' }}>Back to login</Link>
-            </div>
-          </form>
+          </div>
         )}
+
+        <p className="text-center mt-6 text-[10px] tracking-wide"
+          style={{ color: 'rgba(98,52,145,0.4)', fontFamily: 'Georgia, serif' }}>
+          PLANET CALM &copy; 2026 &middot; Calm-First Leadership
+        </p>
       </div>
     </div>
   )

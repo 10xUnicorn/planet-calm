@@ -2,9 +2,9 @@
 // This allows the dashboard to render with realistic data matching the mockup
 
 export const kpiData = {
-  totalRevenue: { value: '$127,840', trend: '↑ 18.4% vs prior year', sub: 'Stripe + Shopify combined', up: true },
-  communityMembers: { value: '1,247', trend: '↑ 94 this month', sub: 'Heartbeat + Substack + Kajabi', up: true },
-  bookPreSales: { value: '348', trend: '↑ 62 since last week', sub: 'Sept 2026 launch target: 2,000', up: true },
+  totalRevenue: { value: '$127,840', trend: '\u2191 18.4% vs prior year', sub: 'Stripe + Shopify combined', up: true },
+  communityMembers: { value: '1,247', trend: '\u2191 94 this month', sub: 'Heartbeat + Substack + Kajabi', up: true },
+  bookPreSales: { value: '348', trend: '\u2191 62 since last week', sub: 'Sept 2026 launch target: 2,000', up: true },
   barktypePipeline: { value: '$84K', trend: '5 orgs in active cert talks', sub: 'Best Friends pilot: stage 3', up: false },
 }
 
@@ -12,15 +12,15 @@ export const communityPulse = {
   collectiveCount: 842,
   studioCount: 405,
   threads: [
-    { title: 'My rescue GSD finally walked calmly past another dog! 🥹', author: '@MarisolV', reactions: 47, space: 'Peaceful Paws Collective', hot: true },
-    { title: 'BARKType quiz unlocked something in me — week 3 update', author: '@TrevorK', reactions: 31, space: 'Progress Studio', hot: false },
-    { title: 'Anyone else reading the early chapter drops from Stephanie? 🐾', author: '@LinnaeR', reactions: 28, space: 'Book Pre-Sale Circle', hot: false },
-    { title: 'Calm Council office hours recap — my biggest takeaway', author: '@DrPeterW', reactions: 19, space: 'Calm Council', hot: false },
+    { title: 'My rescue GSD finally walked calmly past another dog!', author: '@MarisolV', reactions: 47, space: 'Peaceful Paws Collective', hot: true },
+    { title: 'BARKType quiz unlocked something in me \u2014 week 3 update', author: '@TrevorK', reactions: 31, space: 'Progress Studio', hot: false },
+    { title: 'Anyone else reading the early chapter drops from Stephanie?', author: '@LinnaeR', reactions: 28, space: 'Book Pre-Sale Circle', hot: false },
+    { title: 'Calm Council office hours recap \u2014 my biggest takeaway', author: '@DrPeterW', reactions: 19, space: 'Calm Council', hot: false },
   ],
 }
 
 export const bookLaunchPhases = [
-  { name: 'Quiz → Decoder Ebook', price: 'Free → $7', status: 'Live', statusClass: 'pill-green', goal: '2,400 leads', progress: 72 },
+  { name: 'Quiz \u2192 Decoder Ebook', price: 'Free \u2192 $7', status: 'Live', statusClass: 'pill-green', goal: '2,400 leads', progress: 72 },
   { name: 'Substack Nurture', price: 'Free series', status: 'Active', statusClass: 'pill-green', goal: '8,000 subs', progress: 54 },
   { name: 'Pre-Sale Campaign', price: '$20 book', status: 'In Progress', statusClass: 'pill-amber', goal: '2,000 orders', progress: 17 },
   { name: 'AWIN Affiliate Reactivation', price: '168 dormant', status: 'Launching', statusClass: 'pill-amber', goal: '120 active', progress: 28 },
@@ -41,15 +41,15 @@ export const silentBuyerData = {
 
 export const aiInsights = [
   {
-    icon: '🐾',
+    icon: 'paw',
     title: 'Community Momentum Alert',
-    text: "Members who post within 7 days of joining retain at 3.2× the rate. 38 new members haven't posted yet — send a warm nudge from Stephanie.",
+    text: "Members who post within 7 days of joining retain at 3.2\u00d7 the rate. 38 new members haven't posted yet \u2014 send a warm nudge from Stephanie.",
     bg: 'linear-gradient(135deg,#f9f5fe,#ede4f5)',
     border: '#623491',
     textColor: '#623491',
   },
   {
-    icon: '📖',
+    icon: 'book',
     title: 'Pre-Sale Momentum Window',
     text: 'Your Substack open rate is 52%. An exclusive early-reader chapter drop to top-engaged subscribers could push pre-sales +80 units this week.',
     bg: 'linear-gradient(135deg,#fdf8ec,#fdf0d0)',
@@ -57,7 +57,7 @@ export const aiInsights = [
     textColor: '#9a6800',
   },
   {
-    icon: '✦',
+    icon: 'sparkles',
     title: 'BARKType Opportunity',
     text: 'Best Friends Animal Society pilot ready to sign. 2 additional shelter orgs showing high-intent behavior. Total cert pipeline value: $84K.',
     bg: 'linear-gradient(135deg,#e8f5ee,#d4f0e2)',
@@ -65,8 +65,8 @@ export const aiInsights = [
     textColor: '#1e7d47',
   },
   {
-    icon: '⚠️',
-    title: 'Churn Risk — 14 Progress Studio',
+    icon: 'alert',
+    title: 'Churn Risk \u2014 14 Progress Studio',
     text: "14 Peaceful Progress Studio members haven't logged in for 21+ days. Proactive 1:1 check-in recommended before next billing cycle.",
     bg: 'linear-gradient(135deg,#fde8e8,#fcd4d4)',
     border: '#c0392b',
@@ -75,12 +75,12 @@ export const aiInsights = [
 ]
 
 export const revenueByOffer = [
-  { offer: 'Calm Council ($6K/yr)', revenue: '$18,000', trend: '↑ stable' },
+  { offer: 'Calm Council ($6K/yr)', revenue: '$18,000', trend: '\u2191 stable' },
   { offer: 'Wayfinder Exp. ($25K)', revenue: '$50,000', trend: '2 sold YTD' },
-  { offer: 'Progress Studio ($275/mo)', revenue: '$11,138', trend: '↑ 8%' },
-  { offer: 'BARKType Cert ($3–5K)', revenue: '$24,000', trend: 'Pipeline' },
-  { offer: 'Peaceful Paws ($49/mo)', revenue: '$6,258', trend: '↑ 12%' },
-  { offer: 'Chew Sub + Ebook + Book', revenue: '$18,444', trend: '↑ seasonal' },
+  { offer: 'Progress Studio ($275/mo)', revenue: '$11,138', trend: '\u2191 8%' },
+  { offer: 'BARKType Cert ($3\u20135K)', revenue: '$24,000', trend: 'Pipeline' },
+  { offer: 'Peaceful Paws ($49/mo)', revenue: '$6,258', trend: '\u2191 12%' },
+  { offer: 'Chew Sub + Ebook + Book', revenue: '$18,444', trend: '\u2191 seasonal' },
 ]
 
 export const integrations = [
@@ -142,16 +142,16 @@ export const demoPartners = [
 ]
 
 export const demoCohorts = [
-  { id: '1', name: 'BARKType Foundations — Best Friends Pilot', type: 'BARKType', org: 'Best Friends Animal Society', start: '2026-07-15', members: 12, status: 'enrolling', level: 'Foundations', isPilot: true },
-  { id: '2', name: 'BARKType Practitioner — SF SPCA', type: 'BARKType', org: 'SF SPCA', start: '2026-06-01', members: 8, status: 'active', level: 'Practitioner', isPilot: false },
-  { id: '3', name: 'Peaceful Progress Studio — Summer 2026', type: 'Studio Group', org: null, start: '2026-06-15', members: 18, status: 'active', level: null, isPilot: false },
-  { id: '4', name: 'Calm Council — Q3 Cohort', type: 'Council', org: null, start: '2026-07-01', members: 6, status: 'enrolling', level: null, isPilot: false },
+  { id: '1', name: 'BARKType Foundations \u2014 Best Friends Pilot', type: 'BARKType', org: 'Best Friends Animal Society', start: '2026-07-15', members: 12, status: 'enrolling', level: 'Foundations', isPilot: true },
+  { id: '2', name: 'BARKType Practitioner \u2014 SF SPCA', type: 'BARKType', org: 'SF SPCA', start: '2026-06-01', members: 8, status: 'active', level: 'Practitioner', isPilot: false },
+  { id: '3', name: 'Peaceful Progress Studio \u2014 Summer 2026', type: 'Studio Group', org: null, start: '2026-06-15', members: 18, status: 'active', level: null, isPilot: false },
+  { id: '4', name: 'Calm Council \u2014 Q3 Cohort', type: 'Council', org: null, start: '2026-07-01', members: 6, status: 'enrolling', level: null, isPilot: false },
 ]
 
 export const demoContent = [
-  { id: '1', title: 'BARKType Foundations — Module 1: Understanding Your Dog', type: 'course', tier: ['client_studio', 'client_council', 'org_member'], collection: 'BARKType Foundations', published: true },
+  { id: '1', title: 'BARKType Foundations \u2014 Module 1: Understanding Your Dog', type: 'course', tier: ['client_studio', 'client_council', 'org_member'], collection: 'BARKType Foundations', published: true },
   { id: '2', title: 'Calm-First Morning Routine (Video)', type: 'video', tier: ['client_collective', 'client_studio', 'client_council'], collection: 'Calm-First Essentials', published: true },
-  { id: '3', title: 'What the BARK? — Chapter 1 Preview', type: 'pdf', tier: ['client_collective', 'client_studio', 'client_council', 'client_wayfinder'], collection: 'Book Launch Prep', published: true },
+  { id: '3', title: 'What the BARK? \u2014 Chapter 1 Preview', type: 'pdf', tier: ['client_collective', 'client_studio', 'client_council', 'client_wayfinder'], collection: 'Book Launch Prep', published: true },
   { id: '4', title: 'Dog Decoder Ebook', type: 'pdf', tier: ['client_collective', 'client_studio', 'client_council'], collection: 'Entry Products', published: true },
   { id: '5', title: 'Weekly Calm Check-In Template', type: 'template', tier: ['client_studio', 'client_council'], collection: 'Worksheets & Templates', published: true },
   { id: '6', title: 'Council VIP: Exclusive Stephanie Q&A Recording', type: 'video', tier: ['client_council'], collection: 'Council Exclusives', published: true },

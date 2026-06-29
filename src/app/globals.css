@@ -28,13 +28,53 @@ body {
   font-size: 13px;
 }
 
-/* Scrollbar */
+/* ── Focus & Keyboard Navigation ── */
+*:focus-visible {
+  outline: 2px solid #623491;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Remove default outline for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Global Interactive Transitions ── */
+a, button, [role="button"], input, select, textarea {
+  transition: all 200ms ease;
+}
+
+a, button, [role="button"] {
+  cursor: pointer;
+}
+
+/* ── Input Focus Styles ── */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #623491;
+  outline-offset: 1px;
+  border-color: #623491;
+  box-shadow: 0 0 0 3px rgba(98, 52, 145, 0.15);
+}
+
+/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--color-bg); }
 ::-webkit-scrollbar-thumb { background: var(--color-primary-lighter); border-radius: 3px; }
 
-/* Status Pills */
-.pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 10.5px; font-weight: 700; letter-spacing: .3px; font-family: 'Georgia', serif; }
+/* ── Status Pills ── */
+.pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  font-family: 'Georgia', serif;
+  white-space: nowrap;
+}
 .pill-green { background: #e8f5ee; color: #1e7d47; }
 .pill-amber { background: #fdf3dc; color: #9a6800; }
 .pill-red { background: #fde8e8; color: #c0392b; }
@@ -42,18 +82,67 @@ body {
 .pill-blue { background: #e4edf5; color: #1a5a8a; }
 .pill-gold { background: linear-gradient(135deg, #fdf0d0, #f5e0a0); color: #7a5500; border: 1px solid rgba(232, 196, 135, 0.6); }
 
-/* Tags */
-.tag { display: inline-block; background: #ede4f5; color: #623491; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; margin-right: 4px; letter-spacing: .3px; }
+/* ── Tags ── */
+.tag {
+  display: inline-block;
+  background: #ede4f5;
+  color: #623491;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+  margin-right: 4px;
+  letter-spacing: .3px;
+}
 
-/* AI Chip */
-.ai-chip { display: inline-flex; align-items: center; gap: 5px; background: linear-gradient(135deg, #2d1a47, #623491); color: #e8c487; font-size: 10.5px; padding: 4px 10px; border-radius: 20px; font-weight: 700; font-family: 'Georgia', serif; }
+/* ── AI Chip ── */
+.ai-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, #2d1a47, #623491);
+  color: #e8c487;
+  font-size: 10.5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-family: 'Georgia', serif;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid rgba(232, 196, 135, 0.25);
+}
+.ai-chip:hover {
+  background: linear-gradient(135deg, #3a2258, #7442a8);
+  border-color: rgba(232, 196, 135, 0.45);
+}
 
-/* Progress Bar */
+/* ── Sidebar Nav Hover ── */
+.sidebar-nav-link:hover {
+  background: rgba(232, 196, 135, 0.08) !important;
+  color: #e8c487 !important;
+}
+
+/* ── Topbar Button Hover States ── */
+.topbar-btn:hover {
+  background: rgba(98, 52, 145, 0.14) !important;
+  border-color: rgba(98, 52, 145, 0.3) !important;
+}
+
+.topbar-icon-btn:hover {
+  background: rgba(98, 52, 145, 0.08) !important;
+}
+
+.topbar-avatar:hover {
+  opacity: 0.85;
+  box-shadow: 0 3px 12px rgba(98, 52, 145, 0.35) !important;
+}
+
+/* ── Progress Bar ── */
 .progress-bar { height: 6px; background: rgba(98, 52, 145, 0.12); border-radius: 3px; margin-top: 6px; overflow: hidden; }
 .progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #623491, #e8c487); }
 
-/* Gold accent */
+/* ── Gold Accent ── */
 .gold-accent { color: #b8860b; font-weight: 700; }
 
-/* KPI Card gradient top */
+/* ── KPI Card Gradient Top ── */
 .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #623491, #e8c487); }

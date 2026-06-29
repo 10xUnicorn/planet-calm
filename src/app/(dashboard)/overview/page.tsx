@@ -3,6 +3,25 @@ import {
   aiInsights, revenueByOffer, integrations
 } from '@/lib/demo-data'
 import Link from 'next/link'
+import {
+  PawPrint, BookOpen, RefreshCw, Brain, Sparkles, CreditCard,
+  Link2, Zap, User, Send, Map, BarChart3, Flame, AlertTriangle
+} from 'lucide-react'
+
+const insightIconMap: Record<string, React.ReactNode> = {
+  paw: <PawPrint size={14} />,
+  book: <BookOpen size={14} />,
+  sparkles: <Sparkles size={14} />,
+  alert: <AlertTriangle size={14} />,
+}
+
+const quickActionIcons: Record<string, React.ReactNode> = {
+  '/clients': <User size={16} />,
+  '/messaging': <Send size={16} />,
+  '/pipeline': <Map size={16} />,
+  '/ai-brain': <Brain size={16} />,
+  '/kpis': <BarChart3 size={16} />,
+}
 
 export default function OverviewPage() {
   return (
@@ -35,11 +54,11 @@ export default function OverviewPage() {
         <div className="bg-white rounded-[14px] p-5"
           style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
           <div className="flex items-center justify-between mb-4">
-            <div className="text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
-              🐾 Community Pulse
+            <div className="flex items-center gap-2 text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+              <PawPrint size={16} style={{ color: '#623491' }} /> Community Pulse
             </div>
             <Link href="/community" className="text-[11.5px] underline"
-              style={{ color: '#623491', textDecorationColor: 'rgba(98,52,145,0.3)' }}>View All →</Link>
+              style={{ color: '#623491', textDecorationColor: 'rgba(98,52,145,0.3)' }}>View All &rarr;</Link>
           </div>
           <div className="grid grid-cols-2 gap-[10px] mb-4">
             <div className="rounded-[11px] p-[14px] text-center"
@@ -67,10 +86,10 @@ export default function OverviewPage() {
             <div key={i} className="py-[13px]" style={{ borderBottom: i < communityPulse.threads.length - 1 ? '1px solid rgba(98,52,145,0.08)' : 'none' }}>
               <div className="text-[12.5px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
                 {t.title}
-                {t.hot && <span className="text-[10px] ml-[6px]" style={{ color: '#e8c487' }}>🔥 HOT</span>}
+                {t.hot && <span className="inline-flex items-center gap-1 text-[10px] ml-[6px]" style={{ color: '#e8c487' }}><Flame size={11} /> HOT</span>}
               </div>
               <div className="text-[11px] italic" style={{ color: '#9b6fc4' }}>
-                Posted by {t.author} · {t.reactions} reactions · {t.space}
+                Posted by {t.author} &middot; {t.reactions} reactions &middot; {t.space}
               </div>
             </div>
           ))}
@@ -80,8 +99,8 @@ export default function OverviewPage() {
         <div className="bg-white rounded-[14px] p-5"
           style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
           <div className="flex items-center justify-between mb-4">
-            <div className="text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
-              📖 Book Launch Sequence — &quot;What the BARK?&quot;
+            <div className="flex items-center gap-2 text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+              <BookOpen size={16} style={{ color: '#623491' }} /> Book Launch Sequence &mdash; &quot;What the BARK?&quot;
             </div>
             <span className="pill pill-amber">Sept 2026 Target</span>
           </div>
@@ -122,8 +141,8 @@ export default function OverviewPage() {
         <div className="bg-white rounded-[14px] p-5"
           style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
           <div className="flex items-center justify-between mb-4">
-            <div className="text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
-              🔁 Silent Buyer Reactivation
+            <div className="flex items-center gap-2 text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+              <RefreshCw size={16} style={{ color: '#623491' }} /> Silent Buyer Reactivation
             </div>
             <span className="pill pill-gold">~550 Targets</span>
           </div>
@@ -167,18 +186,18 @@ export default function OverviewPage() {
         <div className="bg-white rounded-[14px] p-5"
           style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
           <div className="flex items-center justify-between mb-4">
-            <div className="text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
-              🤖 AI Brain — Insights
+            <div className="flex items-center gap-2 text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+              <Brain size={16} style={{ color: '#623491' }} /> AI Brain &mdash; Insights
             </div>
-            <span className="ai-chip">✦ Powered by AI</span>
+            <span className="ai-chip flex items-center gap-1"><Sparkles size={11} /> Powered by AI</span>
           </div>
           <div className="flex flex-col gap-[11px]">
             {aiInsights.map((ins, i) => (
               <div key={i} className="rounded-[11px] p-[14px]"
                 style={{ background: ins.bg, borderLeft: `3px solid ${ins.border}` }}>
-                <div className="text-[11.5px] font-bold mb-1"
+                <div className="flex items-center gap-[6px] text-[11.5px] font-bold mb-1"
                   style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
-                  {ins.icon} {ins.title}
+                  <span style={{ color: ins.border }}>{insightIconMap[ins.icon]}</span> {ins.title}
                 </div>
                 <div className="text-[11.5px] italic leading-[1.55]"
                   style={{ fontFamily: 'Georgia, serif', color: ins.textColor }}>
@@ -195,8 +214,8 @@ export default function OverviewPage() {
         {/* Revenue by Offer */}
         <div className="bg-white rounded-[14px] p-5"
           style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
-            💳 Revenue by Offer
+          <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+            <CreditCard size={16} style={{ color: '#623491' }} /> Revenue by Offer
           </div>
           <table className="w-full">
             <thead>
@@ -222,8 +241,8 @@ export default function OverviewPage() {
         {/* Integration Health */}
         <div className="bg-white rounded-[14px] p-5"
           style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
-            🔗 Integration Health
+          <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+            <Link2 size={16} style={{ color: '#623491' }} /> Integration Health
           </div>
           <div className="flex flex-col gap-2">
             {integrations.map((int, i) => (
@@ -239,16 +258,16 @@ export default function OverviewPage() {
         {/* Quick Actions */}
         <div className="bg-white rounded-[14px] p-5"
           style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
-            ⚡ Quick Actions
+          <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+            <Zap size={16} style={{ color: '#623491' }} /> Quick Actions
           </div>
           <div className="flex flex-col gap-3">
             {[
-              { label: 'Add New Client', href: '/clients', icon: '👤' },
-              { label: 'Send Broadcast', href: '/messaging', icon: '📨' },
-              { label: 'View Pipeline', href: '/pipeline', icon: '🗺️' },
-              { label: 'Run AI Sequence', href: '/ai-brain', icon: '🤖' },
-              { label: 'View Reports', href: '/kpis', icon: '📊' },
+              { label: 'Add New Client', href: '/clients' },
+              { label: 'Send Broadcast', href: '/messaging' },
+              { label: 'View Pipeline', href: '/pipeline' },
+              { label: 'Run AI Sequence', href: '/ai-brain' },
+              { label: 'View Reports', href: '/kpis' },
             ].map((action) => (
               <Link key={action.href} href={action.href}
                 className="flex items-center gap-3 p-3 rounded-[10px] transition-all duration-150 cursor-pointer"
@@ -256,7 +275,7 @@ export default function OverviewPage() {
                   background: 'linear-gradient(135deg,#f9f5fe,#ede4f5)',
                   border: '1px solid rgba(98,52,145,0.08)',
                 }}>
-                <span className="text-[16px]">{action.icon}</span>
+                <span style={{ color: '#623491' }}>{quickActionIcons[action.href]}</span>
                 <span className="text-[12px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
                   {action.label}
                 </span>
