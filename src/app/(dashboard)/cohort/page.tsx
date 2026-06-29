@@ -19,7 +19,7 @@ export default function CohortPage() {
       <div className="grid grid-cols-2 gap-4">
         {demoCohorts.map(c => (
           <div key={c.id} className="bg-white rounded-[14px] p-5 cursor-pointer transition-shadow hover:shadow-lg"
-            style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+            style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
             <div className="flex items-start justify-between mb-3">
               <div>
                 <div className="text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>

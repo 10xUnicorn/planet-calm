@@ -29,6 +29,7 @@ interface NavItem {
   label: string
   href: string
   icon: LucideIcon
+  badge?: number
 }
 
 interface NavGroup {
@@ -41,7 +42,7 @@ const navGroups: NavGroup[] = [
     label: 'Command',
     items: [
       { label: 'Overview', href: '/overview', icon: LayoutDashboard },
-      { label: 'Community Hub', href: '/community', icon: Heart },
+      { label: 'Community Hub', href: '/community', icon: Heart, badge: 12 },
     ],
   },
   {
@@ -62,7 +63,7 @@ const navGroups: NavGroup[] = [
     label: 'Intelligence',
     items: [
       { label: 'AI Brain', href: '/ai-brain', icon: Brain },
-      { label: 'Reports & KPIs', href: '/kpis', icon: BarChart3 },
+      { label: 'Reports & KPIs', href: '/kpis', icon: BarChart3, badge: 3 },
     ],
   },
   {
@@ -177,6 +178,12 @@ export default function Sidebar() {
                     aria-hidden="true"
                   />
                   {item.label}
+                  {item.badge && (
+                    <span className="ml-auto text-[9px] font-extrabold px-[6px] py-[2px] rounded-full"
+                      style={{ background: '#e8c487', color: '#2d1a47' }}>
+                      {item.badge}
+                    </span>
+                  )}
                 </Link>
               )
             })}

@@ -33,13 +33,13 @@ export default function WorksheetsPage() {
       <div className="grid grid-cols-2 gap-4 mb-6">
         {/* Templates */}
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
             <FileText size={16} style={{ color: '#623491' }} /> Worksheet Templates
           </div>
           {worksheets.map(w => (
             <div key={w.id} className="flex items-center justify-between py-3 cursor-pointer"
-              style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+              style={{ borderBottom: '1px solid #f0e8f5' }}>
               <div>
                 <div className="text-[12.5px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{w.title}</div>
                 <div className="flex gap-2 mt-1">
@@ -63,13 +63,13 @@ export default function WorksheetsPage() {
 
         {/* Review Queue */}
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
             <ClipboardList size={16} style={{ color: '#623491' }} /> Coach Review Queue
           </div>
           {reviewQueue.map(r => (
-            <div key={r.id} className="flex items-center justify-between py-3 cursor-pointer hover:bg-[rgba(232,196,135,0.08)] rounded-lg px-2"
-              style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+            <div key={r.id} className="flex items-center justify-between py-3 cursor-pointer hover:bg-[#fdf8ec] rounded-lg px-2"
+              style={{ borderBottom: '1px solid #f0e8f5' }}>
               <div>
                 <div className="text-[12.5px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{r.client}</div>
                 <div className="text-[11px] italic" style={{ color: '#7a5ea0' }}>{r.worksheet}</div>
@@ -79,7 +79,7 @@ export default function WorksheetsPage() {
                 </div>
               </div>
               <button className="flex items-center gap-1 px-3 py-[6px] rounded-[12px] text-[10.5px] font-bold cursor-pointer"
-                style={{ background: 'rgba(98,52,145,0.08)', color: '#623491', fontFamily: 'Georgia, serif', border: '1px solid rgba(98,52,145,0.15)' }}>
+                style={{ background: '#ede4f5', color: '#623491', fontFamily: 'Georgia, serif', border: '1.5px solid #d6c8e4' }}>
                 <Eye size={11} /> Review
               </button>
             </div>

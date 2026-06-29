@@ -46,20 +46,20 @@ export default function PortalPage() {
       {/* Progress */}
       <div className="grid grid-cols-3 gap-4 mb-6">
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style={{ color: '#9b6fc4' }}>Your Progress</div>
           <div className="progress-bar mb-1"><div className="progress-fill" style={{ width: '68%' }} /></div>
           <div className="text-[10px] font-bold" style={{ color: '#623491' }}>68% &mdash; Learning Path</div>
         </div>
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style={{ color: '#9b6fc4' }}>Next Step</div>
           <div className="text-[12.5px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
             Complete Worksheet 3 &mdash; Calm Anchoring
           </div>
         </div>
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="text-[10px] font-bold tracking-[1.5px] uppercase mb-2" style={{ color: '#9b6fc4' }}>Upcoming Event</div>
           <div className="text-[12.5px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
             Studio Group Call &mdash; June 28
@@ -74,7 +74,7 @@ export default function PortalPage() {
       <div className="grid grid-cols-3 gap-[14px] mb-6">
         {offers.map(o => (
           <div key={o.tier} className="bg-white rounded-[13px] p-[18px]"
-            style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 12px rgba(98,52,145,0.06)' }}>
+            style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
             <div className="mb-2">{offerIcons[o.tier]}</div>
             <div className="text-[13px] font-bold mb-[3px]" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{o.name}</div>
             <div className="text-[16px] font-bold mb-[6px]" style={{ fontFamily: 'Georgia, serif', color: '#623491' }}>{o.price}</div>
@@ -95,7 +95,7 @@ export default function PortalPage() {
 
       {/* Quick Links */}
       <div className="bg-white rounded-[14px] p-5"
-        style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+        style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
         <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
           <Link2 size={16} style={{ color: '#623491' }} /> Quick Links
         </div>
@@ -108,7 +108,7 @@ export default function PortalPage() {
           ].map(l => (
             <Link key={l.href} href={l.href}
               className="flex items-center gap-3 p-3 rounded-[10px] transition-all cursor-pointer"
-              style={{ background: 'linear-gradient(135deg,#f9f5fe,#ede4f5)', border: '1px solid rgba(98,52,145,0.08)' }}>
+              style={{ background: 'linear-gradient(135deg,#f9f5fe,#ede4f5)', border: '1px solid #d6c8e4' }}>
               {quickLinkIcons[l.href]}
               <span className="text-[12px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{l.label}</span>
             </Link>

@@ -51,19 +51,19 @@ export default function NotificationsPage() {
         {unreadCount > 0 && (
           <button onClick={markAllRead}
             className="flex items-center gap-1 text-[11px] cursor-pointer px-3 py-[6px] rounded-[12px]"
-            style={{ background: 'rgba(98,52,145,0.08)', color: '#623491', fontFamily: 'Georgia, serif', border: '1px solid rgba(98,52,145,0.15)' }}>
+            style={{ background: '#ede4f5', color: '#623491', fontFamily: 'Georgia, serif', border: '1.5px solid #d6c8e4' }}>
             <Check size={12} /> Mark all as read
           </button>
         )}
       </div>
 
       <div className="bg-white rounded-[14px] overflow-hidden"
-        style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+        style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
         {notifications.map(n => (
           <div key={n.id} onClick={() => toggleRead(n.id)}
-            className="flex items-start gap-3 px-5 py-4 cursor-pointer transition-all hover:bg-[rgba(232,196,135,0.08)]"
+            className="flex items-start gap-3 px-5 py-4 cursor-pointer transition-all hover:bg-[#fdf8ec]"
             style={{
-              borderBottom: '1px solid rgba(98,52,145,0.06)',
+              borderBottom: '1px solid #f0e8f5',
               background: n.read ? 'transparent' : 'rgba(232,196,135,0.05)',
             }}>
             <span className="mt-[2px] flex-shrink-0">{iconMap[n.type] || defaultIcon}</span>

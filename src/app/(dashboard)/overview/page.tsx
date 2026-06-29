@@ -35,7 +35,7 @@ export default function OverviewPage() {
           { label: 'BARKType Pipeline', ...kpiData.barktypePipeline },
         ].map((kpi) => (
           <div key={kpi.label} className="bg-white rounded-[14px] p-5 relative overflow-hidden"
-            style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+            style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
             <div className="absolute top-0 left-0 right-0 h-[3px]"
               style={{ background: 'linear-gradient(90deg,#623491,#e8c487)' }} />
             <div className="text-[10px] font-bold tracking-[1.8px] uppercase mb-2"
@@ -52,7 +52,7 @@ export default function OverviewPage() {
       <div className="grid grid-cols-2 gap-4 mb-6">
         {/* Community Pulse */}
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2 text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
               <PawPrint size={16} style={{ color: '#623491' }} /> Community Pulse
@@ -83,7 +83,7 @@ export default function OverviewPage() {
             </div>
           </div>
           {communityPulse.threads.map((t, i) => (
-            <div key={i} className="py-[13px]" style={{ borderBottom: i < communityPulse.threads.length - 1 ? '1px solid rgba(98,52,145,0.08)' : 'none' }}>
+            <div key={i} className="py-[13px]" style={{ borderBottom: i < communityPulse.threads.length - 1 ? '1px solid #ede4f5' : 'none' }}>
               <div className="text-[12.5px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
                 {t.title}
                 {t.hot && <span className="inline-flex items-center gap-1 text-[10px] ml-[6px]" style={{ color: '#e8c487' }}><Flame size={11} /> HOT</span>}
@@ -97,7 +97,7 @@ export default function OverviewPage() {
 
         {/* Book Launch Sequence */}
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2 text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
               <BookOpen size={16} style={{ color: '#623491' }} /> Book Launch Sequence &mdash; &quot;What the BARK?&quot;
@@ -109,22 +109,22 @@ export default function OverviewPage() {
               <tr>
                 {['Phase', 'Status', 'Goal', 'Progress'].map(h => (
                   <th key={h} className="text-left text-[10px] font-bold tracking-[1.5px] uppercase pb-2"
-                    style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', borderBottom: '2px solid rgba(98,52,145,0.1)' }}>{h}</th>
+                    style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', borderBottom: '2px solid #ede4f5' }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {bookLaunchPhases.map((p, i) => (
                 <tr key={i}>
-                  <td className="py-[11px] pr-3" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+                  <td className="py-[11px] pr-3" style={{ borderBottom: '1px solid #f0e8f5' }}>
                     <strong className="text-[12.5px]">{p.name}</strong>
                     <br /><span className="text-[10.5px] italic" style={{ color: '#7a5ea0' }}>{p.price}</span>
                   </td>
-                  <td className="py-[11px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+                  <td className="py-[11px]" style={{ borderBottom: '1px solid #f0e8f5' }}>
                     <span className={`pill ${p.statusClass}`}>{p.status}</span>
                   </td>
-                  <td className="py-[11px] text-[12.5px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>{p.goal}</td>
-                  <td className="py-[11px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+                  <td className="py-[11px] text-[12.5px]" style={{ borderBottom: '1px solid #f0e8f5' }}>{p.goal}</td>
+                  <td className="py-[11px]" style={{ borderBottom: '1px solid #f0e8f5' }}>
                     <div className="progress-bar"><div className="progress-fill" style={{ width: `${p.progress}%` }} /></div>
                     <span className="text-[10px] font-bold" style={{ color: '#623491' }}>{p.progress}%</span>
                   </td>
@@ -139,7 +139,7 @@ export default function OverviewPage() {
       <div className="grid grid-cols-2 gap-4 mb-6">
         {/* Silent Buyer */}
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2 text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
               <RefreshCw size={16} style={{ color: '#623491' }} /> Silent Buyer Reactivation
@@ -163,17 +163,17 @@ export default function OverviewPage() {
               <tr>
                 {['Segment', 'Source', 'Re-engage via', 'Status'].map(h => (
                   <th key={h} className="text-left text-[10px] font-bold tracking-[1.5px] uppercase pb-2 px-3"
-                    style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', borderBottom: '2px solid rgba(98,52,145,0.1)' }}>{h}</th>
+                    style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', borderBottom: '2px solid #ede4f5' }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {silentBuyerData.segments.map((s, i) => (
                 <tr key={i}>
-                  <td className="py-[11px] px-3 text-[12.5px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>{s.segment}</td>
-                  <td className="py-[11px] px-3 text-[12.5px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>{s.source}</td>
-                  <td className="py-[11px] px-3 text-[12.5px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>{s.via}</td>
-                  <td className="py-[11px] px-3" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+                  <td className="py-[11px] px-3 text-[12.5px]" style={{ borderBottom: '1px solid #f0e8f5' }}>{s.segment}</td>
+                  <td className="py-[11px] px-3 text-[12.5px]" style={{ borderBottom: '1px solid #f0e8f5' }}>{s.source}</td>
+                  <td className="py-[11px] px-3 text-[12.5px]" style={{ borderBottom: '1px solid #f0e8f5' }}>{s.via}</td>
+                  <td className="py-[11px] px-3" style={{ borderBottom: '1px solid #f0e8f5' }}>
                     <span className={`pill ${s.statusClass}`}>{s.status}</span>
                   </td>
                 </tr>
@@ -184,7 +184,7 @@ export default function OverviewPage() {
 
         {/* AI Brain Insights */}
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2 text-[14px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
               <Brain size={16} style={{ color: '#623491' }} /> AI Brain &mdash; Insights
@@ -213,7 +213,7 @@ export default function OverviewPage() {
       <div className="grid grid-cols-3 gap-4 mb-6">
         {/* Revenue by Offer */}
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
             <CreditCard size={16} style={{ color: '#623491' }} /> Revenue by Offer
           </div>
@@ -222,16 +222,16 @@ export default function OverviewPage() {
               <tr>
                 {['Offer', 'MRR / Rev', 'Trend'].map(h => (
                   <th key={h} className="text-left text-[10px] font-bold tracking-[1.5px] uppercase pb-2 px-3"
-                    style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', borderBottom: '2px solid rgba(98,52,145,0.1)' }}>{h}</th>
+                    style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', borderBottom: '2px solid #ede4f5' }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {revenueByOffer.map((r, i) => (
                 <tr key={i}>
-                  <td className="py-[11px] px-3 text-[12.5px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>{r.offer}</td>
-                  <td className="py-[11px] px-3 text-[12.5px] font-bold" style={{ color: '#b8860b', borderBottom: '1px solid rgba(98,52,145,0.06)' }}>{r.revenue}</td>
-                  <td className="py-[11px] px-3 text-[12.5px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>{r.trend}</td>
+                  <td className="py-[11px] px-3 text-[12.5px]" style={{ borderBottom: '1px solid #f0e8f5' }}>{r.offer}</td>
+                  <td className="py-[11px] px-3 text-[12.5px] font-bold" style={{ color: '#b8860b', borderBottom: '1px solid #f0e8f5' }}>{r.revenue}</td>
+                  <td className="py-[11px] px-3 text-[12.5px]" style={{ borderBottom: '1px solid #f0e8f5' }}>{r.trend}</td>
                 </tr>
               ))}
             </tbody>
@@ -240,7 +240,7 @@ export default function OverviewPage() {
 
         {/* Integration Health */}
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
             <Link2 size={16} style={{ color: '#623491' }} /> Integration Health
           </div>
@@ -257,7 +257,7 @@ export default function OverviewPage() {
 
         {/* Quick Actions */}
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
             <Zap size={16} style={{ color: '#623491' }} /> Quick Actions
           </div>
@@ -273,7 +273,7 @@ export default function OverviewPage() {
                 className="flex items-center gap-3 p-3 rounded-[10px] transition-all duration-150 cursor-pointer"
                 style={{
                   background: 'linear-gradient(135deg,#f9f5fe,#ede4f5)',
-                  border: '1px solid rgba(98,52,145,0.08)',
+                  border: '1px solid #d6c8e4',
                 }}>
                 <span style={{ color: '#623491' }}>{quickActionIcons[action.href]}</span>
                 <span className="text-[12px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>

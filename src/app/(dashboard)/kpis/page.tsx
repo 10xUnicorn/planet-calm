@@ -15,10 +15,10 @@ export default function KPIsPage() {
             <button key={r} onClick={() => setRange(r)}
               className="px-3 py-[7px] rounded-full text-[10.5px] font-bold cursor-pointer"
               style={{
-                background: range === r ? '#623491' : 'rgba(98,52,145,0.08)',
+                background: range === r ? '#623491' : '#ede4f5',
                 color: range === r ? '#e8c487' : '#623491',
                 fontFamily: 'Georgia, serif',
-                border: range === r ? 'none' : '1px solid rgba(98,52,145,0.15)',
+                border: range === r ? 'none' : '1.5px solid #d6c8e4',
               }}>
               {r}
             </button>
@@ -39,7 +39,7 @@ export default function KPIsPage() {
           { label: 'Churned Revenue', value: '$1,420', trend: '↓ 2.1%', up: false },
         ].map(k => (
           <div key={k.label} className="bg-white rounded-[14px] p-5 relative overflow-hidden"
-            style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+            style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
             <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: 'linear-gradient(90deg,#623491,#e8c487)' }} />
             <div className="text-[10px] font-bold tracking-[1.8px] uppercase mb-2" style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>{k.label}</div>
             <div className="text-[24px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{k.value}</div>
@@ -58,7 +58,7 @@ export default function KPIsPage() {
           { label: 'Tier Conversions', value: '23', trend: '12% to paid' },
         ].map(k => (
           <div key={k.label} className="bg-white rounded-[14px] p-5 relative overflow-hidden"
-            style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+            style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
             <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: 'linear-gradient(90deg,#623491,#e8c487)' }} />
             <div className="text-[10px] font-bold tracking-[1.8px] uppercase mb-2" style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>{k.label}</div>
             <div className="text-[24px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{k.value}</div>
@@ -79,7 +79,7 @@ export default function KPIsPage() {
               { label: 'Certifications', value: '8' },
             ].map(k => (
               <div key={k.label} className="bg-white rounded-[14px] p-5 relative overflow-hidden"
-                style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+                style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
                 <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: 'linear-gradient(90deg,#623491,#e8c487)' }} />
                 <div className="text-[10px] font-bold tracking-[1.8px] uppercase mb-2" style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>{k.label}</div>
                 <div className="text-[24px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{k.value}</div>
@@ -97,7 +97,7 @@ export default function KPIsPage() {
               { label: 'Lapsed Count', value: '134' },
             ].map(k => (
               <div key={k.label} className="bg-white rounded-[14px] p-5 relative overflow-hidden"
-                style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+                style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
                 <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: 'linear-gradient(90deg,#623491,#e8c487)' }} />
                 <div className="text-[10px] font-bold tracking-[1.8px] uppercase mb-2" style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>{k.label}</div>
                 <div className="text-[24px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{k.value}</div>

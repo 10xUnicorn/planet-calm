@@ -58,7 +58,7 @@ export default function ResetPasswordPage() {
           <div className="rounded-[20px] p-8 text-center"
             style={{
               background: '#fff',
-              border: '1px solid rgba(98,52,145,0.08)',
+              border: '1px solid #d6c8e4',
               boxShadow: '0 4px 24px rgba(98,52,145,0.08), 0 1px 3px rgba(98,52,145,0.04)',
             }}>
             <div className="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center"
@@ -81,7 +81,7 @@ export default function ResetPasswordPage() {
           <div className="rounded-[20px] p-8"
             style={{
               background: '#fff',
-              border: '1px solid rgba(98,52,145,0.08)',
+              border: '1px solid #d6c8e4',
               boxShadow: '0 4px 24px rgba(98,52,145,0.08), 0 1px 3px rgba(98,52,145,0.04)',
             }}>
             {error && typeof error === 'string' && error.length > 0 && (
@@ -100,13 +100,13 @@ export default function ResetPasswordPage() {
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
                   className="w-full px-4 py-[12px] rounded-[12px] text-[13px] outline-none transition-all"
                   style={{
-                    border: '1.5px solid rgba(98,52,145,0.15)',
+                    border: '1.5px solid #d6c8e4',
                     fontFamily: 'Georgia, serif',
                     color: '#2d1a47',
                     background: '#faf8fc',
                   }}
                   onFocus={(e) => e.target.style.borderColor = '#623491'}
-                  onBlur={(e) => e.target.style.borderColor = 'rgba(98,52,145,0.15)'}
+                  onBlur={(e) => e.target.style.borderColor = '#d6c8e4'}
                   placeholder="you@example.com" />
               </div>
 

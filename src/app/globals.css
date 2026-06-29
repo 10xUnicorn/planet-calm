@@ -14,8 +14,9 @@
   --color-warning: #9a6800;
   --color-danger: #c0392b;
   --color-card: #ffffff;
-  --color-border: rgba(98, 52, 145, 0.1);
-  --color-border-accent: rgba(232, 196, 135, 0.18);
+  --color-border: #d6c8e4;
+  --color-border-light: #f0e8f5;
+  --color-border-accent: #e8d5a8;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }

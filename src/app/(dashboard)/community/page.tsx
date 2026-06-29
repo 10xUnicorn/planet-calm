@@ -42,7 +42,7 @@ export default function CommunityPage() {
           { val: '94', label: 'New This Month' },
         ].map(s => (
           <div key={s.label} className="bg-white rounded-[13px] p-[18px] text-center relative overflow-hidden"
-            style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 12px rgba(98,52,145,0.07)' }}>
+            style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
             <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ background: 'linear-gradient(90deg,#e8c487,#623491)' }} />
             <div className="flex justify-center mb-[6px]">{statIcons[s.label]}</div>
             <div className="text-[24px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{s.val}</div>
@@ -55,12 +55,12 @@ export default function CommunityPage() {
       <div className="grid gap-4 mb-6" style={{ gridTemplateColumns: '1.4fr 1fr' }}>
         {/* Threads */}
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
             <Flame size={16} style={{ color: '#623491' }} /> Trending Threads
           </div>
           {communityPulse.threads.map((t, i) => (
-            <div key={i} className="py-[13px]" style={{ borderBottom: i < communityPulse.threads.length - 1 ? '1px solid rgba(98,52,145,0.08)' : 'none' }}>
+            <div key={i} className="py-[13px]" style={{ borderBottom: i < communityPulse.threads.length - 1 ? '1px solid #ede4f5' : 'none' }}>
               <div className="text-[12.5px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
                 {t.title}
                 {t.hot && <span className="inline-flex items-center gap-1 text-[10px] ml-[6px]" style={{ color: '#e8c487' }}><Flame size={11} /> HOT</span>}
@@ -74,13 +74,13 @@ export default function CommunityPage() {
 
         {/* Active Members */}
         <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
           <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
             <Sparkles size={16} style={{ color: '#623491' }} /> Most Active Members
           </div>
           {recentMembers.map((m, i) => (
             <div key={i} className="flex items-center gap-[10px] py-[10px]"
-              style={{ borderBottom: i < recentMembers.length - 1 ? '1px solid rgba(98,52,145,0.07)' : 'none' }}>
+              style={{ borderBottom: i < recentMembers.length - 1 ? '1px solid #ede4f5' : 'none' }}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-bold text-white member-av ${m.color}`}
                 style={{
                   background: m.color === 'c1' ? 'linear-gradient(135deg,#623491,#9b6fc4)' :
@@ -102,7 +102,7 @@ export default function CommunityPage() {
 
       {/* Reactivation Bar */}
       <div className="bg-white rounded-[14px] p-5"
-        style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+        style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
         <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
           <RefreshCw size={16} style={{ color: '#623491' }} /> Re-Engagement Dashboard
         </div>
@@ -113,7 +113,7 @@ export default function CommunityPage() {
             { num: '7', label: 'At Risk of Churning', cta: 'Personal Check-in' },
           ].map(r => (
             <div key={r.label} className="rounded-[12px] p-4 text-center"
-              style={{ background: 'linear-gradient(135deg,#f9f5fe,#fdf0ff)', border: '1px solid rgba(98,52,145,0.1)' }}>
+              style={{ background: 'linear-gradient(135deg,#f9f5fe,#fdf0ff)', border: '1px solid #d6c8e4' }}>
               <div className="text-[26px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#623491' }}>{r.num}</div>
               <div className="text-[10.5px] font-bold tracking-[1.2px] uppercase mt-1"
                 style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>{r.label}</div>

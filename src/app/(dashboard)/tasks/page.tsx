@@ -39,10 +39,10 @@ export default function TasksPage() {
           <button key={f} onClick={() => setFilter(f)}
             className="px-3 py-[7px] rounded-full text-[10.5px] font-bold cursor-pointer"
             style={{
-              background: filter === f ? '#623491' : 'rgba(98,52,145,0.08)',
+              background: filter === f ? '#623491' : '#ede4f5',
               color: filter === f ? '#e8c487' : '#623491',
               fontFamily: 'Georgia, serif',
-              border: filter === f ? 'none' : '1px solid rgba(98,52,145,0.15)',
+              border: filter === f ? 'none' : '1.5px solid #d6c8e4',
             }}>
             {f === 'all' ? 'All' : f === 'in_progress' ? 'In Progress' : f.charAt(0).toUpperCase() + f.slice(1)}
           </button>
@@ -54,15 +54,15 @@ export default function TasksPage() {
       </div>
 
       <div className="bg-white rounded-[14px] p-5"
-        style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+        style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
         {filtered.length === 0 && (
           <div className="text-center py-8 text-[12px] italic" style={{ color: '#9b6fc4' }}>
             No tasks match this filter
           </div>
         )}
         {filtered.map(t => (
-          <div key={t.id} className="flex items-center gap-4 py-3 cursor-pointer hover:bg-[rgba(232,196,135,0.08)] rounded-lg px-3"
-            style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+          <div key={t.id} className="flex items-center gap-4 py-3 cursor-pointer hover:bg-[#fdf8ec] rounded-lg px-3"
+            style={{ borderBottom: '1px solid #f0e8f5' }}>
             <button onClick={() => toggleStatus(t.id)} className="cursor-pointer" style={{ background: 'none', border: 'none', padding: 0 }}>
               {t.status === 'completed' ? (
                 <CheckCircle size={18} style={{ color: '#2a9d5c' }} />

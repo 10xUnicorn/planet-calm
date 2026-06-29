@@ -60,7 +60,7 @@ export default function Topbar() {
       style={{
         background: 'rgba(245,238,248,0.96)',
         backdropFilter: 'blur(8px)',
-        borderBottom: '1px solid rgba(98,52,145,0.1)',
+        borderBottom: '1px solid #d6c8e4',
       }}
     >
       <div
@@ -88,8 +88,8 @@ export default function Topbar() {
           href="/tasks"
           className="topbar-btn px-[14px] py-[6px] rounded-full text-[11.5px] cursor-pointer transition-all duration-200"
           style={{
-            background: 'rgba(98,52,145,0.08)',
-            border: '1px solid rgba(98,52,145,0.18)',
+            background: '#ede4f5',
+            border: '1px solid #d6c8e4',
             color: '#623491',
             fontFamily: 'Georgia, serif',
           }}

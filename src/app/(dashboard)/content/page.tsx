@@ -48,16 +48,16 @@ export default function ContentPage() {
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#9b6fc4' }} />
           <input type="text" placeholder="Search content..." value={search} onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-9 pr-4 py-[9px] rounded-xl text-[12.5px] outline-none"
-            style={{ border: '1px solid rgba(98,52,145,0.2)', fontFamily: 'Georgia, serif', color: '#2d1a47' }} />
+            style={{ border: '2px solid #d6c8e4', fontFamily: 'Georgia, serif', color: '#2d1a47' }} />
         </div>
         {types.map(t => (
           <button key={t} onClick={() => setTypeFilter(t)}
             className="px-3 py-[7px] rounded-full text-[10.5px] font-bold cursor-pointer"
             style={{
-              background: typeFilter === t ? '#623491' : 'rgba(98,52,145,0.08)',
+              background: typeFilter === t ? '#623491' : '#ede4f5',
               color: typeFilter === t ? '#e8c487' : '#623491',
               fontFamily: 'Georgia, serif',
-              border: typeFilter === t ? 'none' : '1px solid rgba(98,52,145,0.15)',
+              border: typeFilter === t ? 'none' : '1.5px solid #d6c8e4',
             }}>
             {t === 'all' ? 'All Types' : t.charAt(0).toUpperCase() + t.slice(1)}
           </button>
@@ -72,9 +72,9 @@ export default function ContentPage() {
       <div className="grid grid-cols-3 gap-4">
         {filtered.map(item => (
           <div key={item.id} className="bg-white rounded-[14px] p-5 cursor-pointer transition-shadow hover:shadow-lg"
-            style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+            style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
             <div className="flex items-start justify-between mb-3">
-              <div className="p-2 rounded-lg" style={{ background: 'rgba(98,52,145,0.08)', color: '#623491' }}>
+              <div className="p-2 rounded-lg" style={{ background: '#ede4f5', color: '#623491' }}>
                 {typeIcons[item.type]}
               </div>
               <span className={`pill ${item.published ? 'pill-green' : 'pill-amber'}`}>
