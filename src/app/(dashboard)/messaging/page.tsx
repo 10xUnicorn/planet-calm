@@ -60,10 +60,10 @@ export default function MessagingPage() {
     <div className="grid gap-4" style={{ gridTemplateColumns: '320px 1fr', height: 'calc(100vh - 120px)' }}>
       {/* Thread List */}
       <div className="bg-white rounded-[14px] overflow-hidden flex flex-col"
-        style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
-        <div className="p-4 flex items-center justify-between" style={{ borderBottom: '1px solid #ede4f5' }}>
+        style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+        <div className="p-4 flex items-center justify-between" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
           <div className="text-[13px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>Messages</div>
-          <button className="p-2 rounded-full cursor-pointer" style={{ background: '#ede4f5' }}>
+          <button className="p-2 rounded-full cursor-pointer" style={{ background: 'rgba(98,52,145,0.08)' }}>
             <Users size={14} style={{ color: '#623491' }} />
           </button>
         </div>
@@ -74,7 +74,7 @@ export default function MessagingPage() {
               style={{
                 background: activeThread === t.id ? 'rgba(232,196,135,0.15)' : 'transparent',
                 borderLeft: activeThread === t.id ? '3px solid #e8c487' : '3px solid transparent',
-                borderBottom: '1px solid #f0e8f5',
+                borderBottom: '1px solid rgba(98,52,145,0.06)',
               }}>
               <div className="flex items-center justify-between mb-1">
                 <span className="text-[12.5px] font-bold" style={{ color: '#2d1a47', fontFamily: 'Georgia, serif' }}>{t.name}</span>
@@ -91,9 +91,9 @@ export default function MessagingPage() {
 
       {/* Chat Area */}
       <div className="bg-white rounded-[14px] overflow-hidden flex flex-col"
-        style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
+        style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
         {/* Header */}
-        <div className="p-4 flex items-center gap-3" style={{ borderBottom: '1px solid #ede4f5' }}>
+        <div className="p-4 flex items-center gap-3" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
           <div className="w-9 h-9 rounded-full flex items-center justify-center text-[12px] font-bold text-white"
             style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)' }}>
             {currentThread.initials}
@@ -112,7 +112,7 @@ export default function MessagingPage() {
                 style={{
                   background: m.fromMe ? 'linear-gradient(135deg,#623491,#9b6fc4)' : '#f9f5fe',
                   color: m.fromMe ? '#fff' : '#2d1a47',
-                  border: m.fromMe ? 'none' : '1px solid #d6c8e4',
+                  border: m.fromMe ? 'none' : '1px solid rgba(98,52,145,0.1)',
                 }}>
                 <div className="text-[12.5px] leading-[1.6]" style={{ fontFamily: 'Georgia, serif' }}>{m.text}</div>
                 <div className="text-[9px] mt-1 text-right" style={{ color: m.fromMe ? 'rgba(255,255,255,0.6)' : '#9b6fc4' }}>{m.time}</div>
@@ -122,9 +122,9 @@ export default function MessagingPage() {
         </div>
 
         {/* Composer */}
-        <div className="p-4" style={{ borderTop: '1px solid #ede4f5' }}>
+        <div className="p-4" style={{ borderTop: '1px solid rgba(98,52,145,0.06)' }}>
           <form onSubmit={(e) => { e.preventDefault(); handleSend() }} className="flex items-center gap-2">
-            <button type="button" className="p-2 rounded-full cursor-pointer" style={{ background: '#ede4f5' }}>
+            <button type="button" className="p-2 rounded-full cursor-pointer" style={{ background: 'rgba(98,52,145,0.08)' }}>
               <Paperclip size={14} style={{ color: '#623491' }} />
             </button>
             <input
@@ -133,7 +133,7 @@ export default function MessagingPage() {
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="Type a message..."
               className="flex-1 px-4 py-[9px] rounded-xl text-[12.5px] outline-none"
-              style={{ border: '2px solid #d6c8e4', fontFamily: 'Georgia, serif', color: '#2d1a47' }}
+              style={{ border: '1px solid rgba(98,52,145,0.2)', fontFamily: 'Georgia, serif', color: '#2d1a47' }}
             />
             <button type="submit" className="p-2 rounded-full cursor-pointer"
               style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)' }}>

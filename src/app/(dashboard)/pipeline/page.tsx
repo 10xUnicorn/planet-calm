@@ -41,9 +41,9 @@ export default function PipelinePage() {
             <button key={v} onClick={() => setView(v as typeof view)}
               className="px-4 py-2 rounded-full text-[11.5px] font-bold transition-all cursor-pointer"
               style={{
-                background: view === v ? 'linear-gradient(135deg,#623491,#9b6fc4)' : '#ede4f5',
+                background: view === v ? 'linear-gradient(135deg,#623491,#9b6fc4)' : 'rgba(98,52,145,0.08)',
                 color: view === v ? '#e8c487' : '#623491',
-                border: view === v ? 'none' : '1px solid #d6c8e4',
+                border: view === v ? 'none' : '1px solid rgba(98,52,145,0.15)',
                 fontFamily: 'Georgia, serif',
               }}>
               {v === 'all' ? 'All Deals' : v === 'individual' ? 'Individual' : 'BARKType Orgs'}
@@ -58,7 +58,7 @@ export default function PipelinePage() {
           const stageDeals = filteredDeals.filter(d => d.stage === stage.key)
           return (
             <div key={stage.key} className="bg-white rounded-[14px] p-[14px]"
-              style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
+              style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
               <div className="text-[10px] font-bold tracking-[1.5px] uppercase mb-[10px] pb-2"
                 style={{
                   color: '#9b6fc4',
@@ -67,14 +67,14 @@ export default function PipelinePage() {
                 }}>
                 {stage.label}
                 <span className="ml-2 text-[9px] px-[5px] py-[1px] rounded-full"
-                  style={{ background: '#ede4f5', color: '#623491' }}>
+                  style={{ background: 'rgba(98,52,145,0.08)', color: '#623491' }}>
                   {stageDeals.length}
                 </span>
               </div>
               <div className="flex flex-col gap-2">
                 {stageDeals.map((deal) => (
                   <div key={deal.id} className="rounded-[10px] p-[10px] cursor-pointer transition-shadow hover:shadow-md"
-                    style={{ background: '#f9f5fe', border: '1px solid #d6c8e4' }}>
+                    style={{ background: '#f9f5fe', border: '1px solid rgba(98,52,145,0.1)' }}>
                     <div className="text-[12px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
                       {deal.name}
                     </div>

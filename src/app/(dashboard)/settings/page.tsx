@@ -41,7 +41,7 @@ export default function SettingsPage() {
   ]
 
   const inputStyle: React.CSSProperties = {
-    border: '1.5px solid #d6c8e4',
+    border: '1px solid rgba(98,52,145,0.15)',
     fontFamily: 'Georgia, serif',
     color: '#2d1a47',
     background: '#faf8fc',
@@ -52,7 +52,7 @@ export default function SettingsPage() {
   }
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    e.target.style.borderColor = '#d6c8e4'
+    e.target.style.borderColor = 'rgba(98,52,145,0.15)'
   }
 
   const toggleNotification = (name: string) => {
@@ -67,10 +67,10 @@ export default function SettingsPage() {
           <button key={t.key} onClick={() => setActiveTab(t.key)}
             className="px-4 py-[9px] rounded-[12px] text-[11.5px] font-bold cursor-pointer flex items-center gap-2 transition-all"
             style={{
-              background: activeTab === t.key ? 'linear-gradient(135deg,#623491,#9b6fc4)' : '#ede4f5',
+              background: activeTab === t.key ? 'linear-gradient(135deg,#623491,#9b6fc4)' : 'rgba(98,52,145,0.08)',
               color: activeTab === t.key ? '#e8c487' : '#623491',
               fontFamily: 'Georgia, serif',
-              border: activeTab === t.key ? '1.5px solid transparent' : '1.5px solid #d6c8e4',
+              border: activeTab === t.key ? '1.5px solid transparent' : '1px solid rgba(98,52,145,0.15)',
               boxShadow: activeTab === t.key ? '0 4px 16px rgba(98,52,145,0.25)' : 'none',
             }}>
             <t.Icon size={14} /> {t.label}
@@ -81,7 +81,7 @@ export default function SettingsPage() {
       {/* General Settings */}
       {activeTab === 'general' && (
         <div className="bg-white rounded-[16px] p-6 md:p-8"
-          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
+          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
           <div className="flex items-center gap-2 mb-6">
             <div className="w-8 h-8 rounded-[10px] flex items-center justify-center"
               style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)' }}>
@@ -177,7 +177,7 @@ export default function SettingsPage() {
       {/* Team & Roles */}
       {activeTab === 'team' && (
         <div className="bg-white rounded-[16px] p-6 md:p-8"
-          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
+          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-[10px] flex items-center justify-center"
@@ -210,7 +210,7 @@ export default function SettingsPage() {
                       style={{
                         color: '#9b6fc4',
                         fontFamily: 'Georgia, serif',
-                        borderBottom: '2px solid #ede4f5',
+                        borderBottom: '2px solid rgba(98,52,145,0.1)',
                         width: idx === 0 ? '25%' : idx === 1 ? '35%' : '20%',
                       }}>
                       {h}
@@ -227,14 +227,14 @@ export default function SettingsPage() {
                 ].map((m, i) => (
                   <tr key={i} className="transition-colors" style={{ background: i % 2 === 1 ? '#faf8fc' : 'transparent' }}>
                     <td className="py-[12px] px-4 text-[13px] font-bold"
-                      style={{ borderBottom: '1px solid #f0e8f5', color: '#2d1a47', fontFamily: 'Georgia, serif' }}>
+                      style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#2d1a47', fontFamily: 'Georgia, serif' }}>
                       {m.name}
                     </td>
                     <td className="py-[12px] px-4 text-[13px]"
-                      style={{ borderBottom: '1px solid #f0e8f5', color: '#7a5ea0', fontFamily: 'Georgia, serif' }}>
+                      style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#7a5ea0', fontFamily: 'Georgia, serif' }}>
                       {m.email}
                     </td>
-                    <td className="py-[12px] px-4" style={{ borderBottom: '1px solid #f0e8f5' }}>
+                    <td className="py-[12px] px-4" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
                       <span className="inline-block px-3 py-[4px] rounded-full text-[10px] font-bold uppercase tracking-[1px]"
                         style={{
                           background: m.role === 'Super Admin' ? 'rgba(98,52,145,0.12)' : 'rgba(98,52,145,0.08)',
@@ -244,7 +244,7 @@ export default function SettingsPage() {
                         {m.role}
                       </span>
                     </td>
-                    <td className="py-[12px] px-4" style={{ borderBottom: '1px solid #f0e8f5' }}>
+                    <td className="py-[12px] px-4" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
                       <span className="inline-block px-3 py-[4px] rounded-full text-[10px] font-bold uppercase tracking-[1px]"
                         style={{
                           background: 'rgba(34,197,94,0.12)',
@@ -265,7 +265,7 @@ export default function SettingsPage() {
       {/* AI Settings */}
       {activeTab === 'ai' && (
         <div className="bg-white rounded-[16px] p-6 md:p-8"
-          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
+          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
           <div className="flex items-center gap-2 mb-6">
             <div className="w-8 h-8 rounded-[10px] flex items-center justify-center"
               style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)' }}>
@@ -279,7 +279,7 @@ export default function SettingsPage() {
             className="w-full px-4 py-[12px] rounded-[12px] text-[13px] outline-none h-36 resize-none mb-5 transition-all"
             style={inputStyle}
             onFocus={(e) => { e.target.style.borderColor = '#623491' }}
-            onBlur={(e) => { e.target.style.borderColor = '#d6c8e4' }}
+            onBlur={(e) => { e.target.style.borderColor = 'rgba(98,52,145,0.15)' }}
             defaultValue="Use warm, grounded, dog-centered language. Reflect Calm-First Leadership philosophy. Never aggressive or salesy. BARKType terminology is encouraged. Reference the journey from reactive to calm. Acknowledge the bond between human and dog."
           />
           <button className="px-6 py-[12px] rounded-[12px] text-[13px] font-bold cursor-pointer flex items-center gap-2 transition-all"
@@ -298,7 +298,7 @@ export default function SettingsPage() {
       {/* Launch Config */}
       {activeTab === 'launch' && (
         <div className="bg-white rounded-[16px] p-6 md:p-8"
-          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
+          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
           <div className="flex items-center gap-2 mb-6">
             <div className="w-8 h-8 rounded-[10px] flex items-center justify-center"
               style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)' }}>
@@ -353,7 +353,7 @@ export default function SettingsPage() {
                   className="w-full px-4 py-[12px] rounded-[12px] text-[13px] outline-none transition-all cursor-pointer"
                   style={inputStyle}
                   onFocus={(e) => { e.target.style.borderColor = '#623491' }}
-                  onBlur={(e) => { e.target.style.borderColor = '#d6c8e4' }}>
+                  onBlur={(e) => { e.target.style.borderColor = 'rgba(98,52,145,0.15)' }}>
                   <option value="true">Active</option>
                   <option value="false">Paused</option>
                 </select>
@@ -377,7 +377,7 @@ export default function SettingsPage() {
       {/* Integrations */}
       {activeTab === 'integrations' && (
         <div className="bg-white rounded-[16px] p-6 md:p-8"
-          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
+          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
           <div className="flex items-center gap-2 mb-6">
             <div className="w-8 h-8 rounded-[10px] flex items-center justify-center"
               style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)' }}>
@@ -396,7 +396,7 @@ export default function SettingsPage() {
               { name: 'Kajabi', key: 'KAJABI_API_KEY', status: 'Connected' },
             ].map(int => (
               <div key={int.name} className="flex items-center justify-between p-4 rounded-[12px]"
-                style={{ background: '#faf8fc', border: '1px solid #d6c8e4' }}>
+                style={{ background: '#faf8fc', border: '1px solid rgba(98,52,145,0.1)' }}>
                 <div className="flex items-center gap-3">
                   <div className="w-7 h-7 rounded-[8px] flex items-center justify-center"
                     style={{ background: 'rgba(98,52,145,0.1)' }}>
@@ -424,7 +424,7 @@ export default function SettingsPage() {
       {/* Notifications */}
       {activeTab === 'notifications' && (
         <div className="bg-white rounded-[16px] p-6 md:p-8"
-          style={{ border: '1px solid #d6c8e4', boxShadow: '0 2px 12px rgba(98,52,145,0.08)' }}>
+          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
           <div className="flex items-center gap-2 mb-6">
             <div className="w-8 h-8 rounded-[10px] flex items-center justify-center"
               style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)' }}>
@@ -437,7 +437,7 @@ export default function SettingsPage() {
           <div className="flex flex-col gap-3">
             {Object.entries(notifications).map(([name, enabled]) => (
               <div key={name} className="flex items-center justify-between p-4 rounded-[12px]"
-                style={{ background: '#faf8fc', border: '1px solid #d6c8e4' }}>
+                style={{ background: '#faf8fc', border: '1px solid rgba(98,52,145,0.1)' }}>
                 <span className="text-[13px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{name}</span>
                 <button
                   type="button"

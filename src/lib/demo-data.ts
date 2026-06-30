@@ -41,7 +41,7 @@ export const silentBuyerData = {
 
 export const aiInsights = [
   {
-    icon: 'paw',
+    icon: '🐾',
     title: 'Community Momentum Alert',
     text: "Members who post within 7 days of joining retain at 3.2\u00d7 the rate. 38 new members haven't posted yet \u2014 send a warm nudge from Stephanie.",
     bg: 'linear-gradient(135deg,#f9f5fe,#ede4f5)',
@@ -49,7 +49,7 @@ export const aiInsights = [
     textColor: '#623491',
   },
   {
-    icon: 'book',
+    icon: '📖',
     title: 'Pre-Sale Momentum Window',
     text: 'Your Substack open rate is 52%. An exclusive early-reader chapter drop to top-engaged subscribers could push pre-sales +80 units this week.',
     bg: 'linear-gradient(135deg,#fdf8ec,#fdf0d0)',
@@ -57,7 +57,7 @@ export const aiInsights = [
     textColor: '#9a6800',
   },
   {
-    icon: 'sparkles',
+    icon: '✦',
     title: 'BARKType Opportunity',
     text: 'Best Friends Animal Society pilot ready to sign. 2 additional shelter orgs showing high-intent behavior. Total cert pipeline value: $84K.',
     bg: 'linear-gradient(135deg,#e8f5ee,#d4f0e2)',
@@ -65,7 +65,7 @@ export const aiInsights = [
     textColor: '#1e7d47',
   },
   {
-    icon: 'alert',
+    icon: '⚠️',
     title: 'Churn Risk \u2014 14 Progress Studio',
     text: "14 Peaceful Progress Studio members haven't logged in for 21+ days. Proactive 1:1 check-in recommended before next billing cycle.",
     bg: 'linear-gradient(135deg,#fde8e8,#fcd4d4)',
