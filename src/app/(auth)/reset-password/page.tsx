@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase-browser'
 import Link from 'next/link'
-import { Mail, CheckCircle } from 'lucide-react'
 
 export default function ResetPasswordPage() {
   const [email, setEmail] = useState('')
@@ -29,118 +28,119 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4"
-      style={{ background: 'linear-gradient(135deg, #f5eef8 0%, #ede4f5 50%, #fdf8ec 100%)' }}>
-      <div className="w-full max-w-[420px]">
-        {/* Logo + Header */}
-        <div className="text-center mb-6">
-          <div className="w-[140px] h-[140px] mx-auto mb-5 rounded-full flex items-center justify-center overflow-hidden"
-            style={{ background: '#2d1a47', boxShadow: '0 8px 32px rgba(45,26,71,0.3)' }}>
+    <div style={{
+      minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
+      background: 'linear-gradient(160deg, #f5eef8 0%, #ede4f5 40%, #fdf8ec 100%)', padding: '0 16px',
+    }}>
+      <div style={{ width: '100%', maxWidth: 400 }}>
+        {/* Logo */}
+        <div style={{ textAlign: 'center', marginBottom: 24 }}>
+          <div style={{
+            width: 130, height: 130, margin: '0 auto 20px', borderRadius: '50%',
+            background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            overflow: 'hidden', boxShadow: '0 8px 40px rgba(45,26,71,0.15)',
+          }}>
             <img
               src="https://trpnlkntvulkjerevngm.supabase.co/storage/v1/object/public/dashboard-assets/logos/1782362694767-Planet_Calm_Logo.png"
               alt="Planet Calm"
-              className="w-[120px] h-[120px] object-contain"
-              style={{ mixBlendMode: 'lighten' }}
+              style={{ width: 120, height: 120, objectFit: 'contain' }}
               onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
             />
           </div>
-          <h1 className="text-[26px] font-bold tracking-[-0.3px]"
-            style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+          <div style={{ fontFamily: 'Georgia, serif', fontSize: 28, fontWeight: 700, color: '#2d1a47', letterSpacing: '-.5px' }}>
             Reset Password
-          </h1>
-          <p className="text-[13px] italic mt-1"
-            style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>
+          </div>
+          <div style={{ fontFamily: 'Georgia, serif', fontSize: 13, color: '#9b6fc4', fontStyle: 'italic', marginTop: 6 }}>
             We will send you a reset link
-          </p>
+          </div>
         </div>
 
         {sent ? (
-          <div className="rounded-[20px] p-8 text-center"
-            style={{
-              background: '#fff',
-              border: '1px solid #d6c8e4',
-              boxShadow: '0 4px 24px rgba(98,52,145,0.08), 0 1px 3px rgba(98,52,145,0.04)',
+          <div style={{
+            background: '#fff', borderRadius: 20, padding: 32, textAlign: 'center',
+            border: '1px solid rgba(98,52,145,0.12)',
+            boxShadow: '0 8px 40px rgba(98,52,145,0.1), 0 2px 8px rgba(98,52,145,0.05)',
+          }}>
+            <div style={{
+              width: 56, height: 56, margin: '0 auto 16px', borderRadius: '50%',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: 'rgba(34,197,94,0.12)',
             }}>
-            <div className="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center"
-              style={{ background: 'rgba(34,197,94,0.12)' }}>
-              <CheckCircle size={28} style={{ color: '#16a34a' }} />
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
             </div>
-            <h2 className="text-[18px] font-bold mb-2" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+            <div style={{ fontFamily: 'Georgia, serif', fontSize: 18, fontWeight: 700, color: '#2d1a47', marginBottom: 8 }}>
               Check your inbox
-            </h2>
-            <p className="text-[13px]" style={{ color: '#7a5ea0', fontFamily: 'Georgia, serif' }}>
+            </div>
+            <div style={{ fontFamily: 'Georgia, serif', fontSize: 13, color: '#7a5ea0' }}>
               Reset link sent to <strong style={{ color: '#2d1a47' }}>{email}</strong>. Click it to set a new password.
-            </p>
-            <Link href="/login"
-              className="inline-block mt-5 text-[11.5px] transition-opacity hover:opacity-70"
-              style={{ color: '#623491', fontFamily: 'Georgia, serif', textDecoration: 'none', borderBottom: '1px solid rgba(98,52,145,0.25)' }}>
-              Back to login
-            </Link>
+            </div>
+            <div style={{ marginTop: 20 }}>
+              <Link href="/login" style={{
+                fontSize: 12, color: '#623491', textDecoration: 'none',
+                borderBottom: '1px solid rgba(98,52,145,0.25)', fontFamily: 'Georgia, serif',
+              }}>Back to login</Link>
+            </div>
           </div>
         ) : (
-          <div className="rounded-[20px] p-8"
-            style={{
-              background: '#fff',
-              border: '1px solid #d6c8e4',
-              boxShadow: '0 4px 24px rgba(98,52,145,0.08), 0 1px 3px rgba(98,52,145,0.04)',
-            }}>
+          <div style={{
+            background: '#fff', borderRadius: 20, padding: 32,
+            border: '1px solid rgba(98,52,145,0.12)',
+            boxShadow: '0 8px 40px rgba(98,52,145,0.1), 0 2px 8px rgba(98,52,145,0.05)',
+          }}>
             {error && typeof error === 'string' && error.length > 0 && (
-              <div className="mb-5 p-3 rounded-[12px] text-[12.5px]"
-                style={{ background: '#fde8e8', color: '#c0392b', fontFamily: 'Georgia, serif', border: '1px solid rgba(192,57,43,0.15)' }}>
-                {error}
-              </div>
+              <div style={{
+                marginBottom: 20, padding: 12, borderRadius: 12,
+                background: '#fde8e8', color: '#c0392b', fontSize: '12.5px', fontFamily: 'Georgia, serif',
+              }}>{error}</div>
             )}
 
             <form onSubmit={handleReset}>
-              <div className="mb-6">
-                <label className="block text-[10px] font-bold uppercase tracking-[1.8px] mb-[6px]"
-                  style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>
-                  Email Address
-                </label>
+              <div style={{ marginBottom: 28 }}>
+                <label style={{
+                  display: 'block', fontSize: 10, fontWeight: 700, letterSpacing: '1.8px',
+                  textTransform: 'uppercase' as const, color: '#9b6fc4', marginBottom: 8, fontFamily: 'Georgia, serif',
+                }}>Email Address</label>
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
-                  className="w-full px-4 py-[12px] rounded-[12px] text-[13px] outline-none transition-all"
+                  placeholder="you@example.com"
                   style={{
-                    border: '1.5px solid #d6c8e4',
-                    fontFamily: 'Georgia, serif',
-                    color: '#2d1a47',
-                    background: '#faf8fc',
+                    width: '100%', padding: '13px 16px', borderRadius: 12,
+                    border: '1.5px solid rgba(98,52,145,0.18)', fontFamily: 'Georgia, serif',
+                    fontSize: 14, color: '#2d1a47', background: '#faf8fc', outline: 'none',
                   }}
-                  onFocus={(e) => e.target.style.borderColor = '#623491'}
-                  onBlur={(e) => e.target.style.borderColor = '#d6c8e4'}
-                  placeholder="you@example.com" />
+                />
               </div>
 
-              <button type="submit" disabled={loading}
-                className="w-full py-[13px] rounded-[12px] text-[13px] font-bold cursor-pointer transition-all disabled:opacity-60"
-                style={{
-                  background: 'linear-gradient(135deg, #623491, #7d4db5)',
-                  color: '#e8c487',
-                  fontFamily: 'Georgia, serif',
-                  border: 'none',
-                  letterSpacing: '.4px',
-                  boxShadow: '0 4px 16px rgba(98,52,145,0.3)',
-                }}>
+              <button type="submit" disabled={loading} style={{
+                width: '100%', padding: 14, borderRadius: 12,
+                background: 'linear-gradient(135deg, #623491, #7d4db5)',
+                color: '#e8c487', fontFamily: 'Georgia, serif', fontSize: 14, fontWeight: 700,
+                border: 'none', cursor: 'pointer', letterSpacing: '.5px',
+                boxShadow: '0 6px 20px rgba(98,52,145,0.35)',
+                opacity: loading ? 0.6 : 1,
+              }}>
                 {loading ? 'Sending...' : 'Send Reset Link'}
               </button>
             </form>
 
-            <div className="flex justify-between mt-5 text-[11.5px]" style={{ fontFamily: 'Georgia, serif' }}>
-              <Link href="/login" className="transition-opacity hover:opacity-70"
-                style={{ color: '#623491', textDecoration: 'none', borderBottom: '1px solid rgba(98,52,145,0.25)' }}>
-                Back to login
-              </Link>
-              <Link href="/register" className="transition-opacity hover:opacity-70"
-                style={{ color: '#623491', textDecoration: 'none', borderBottom: '1px solid rgba(98,52,145,0.25)' }}>
-                Create account
-              </Link>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 20 }}>
+              <Link href="/login" style={{
+                fontSize: 12, color: '#623491', textDecoration: 'none',
+                borderBottom: '1px solid rgba(98,52,145,0.25)', fontFamily: 'Georgia, serif',
+              }}>Back to login</Link>
+              <Link href="/register" style={{
+                fontSize: 12, color: '#623491', textDecoration: 'none',
+                borderBottom: '1px solid rgba(98,52,145,0.25)', fontFamily: 'Georgia, serif',
+              }}>Create account</Link>
             </div>
           </div>
         )}
 
-        <p className="text-center mt-6 text-[10px] tracking-wide"
-          style={{ color: 'rgba(98,52,145,0.4)', fontFamily: 'Georgia, serif' }}>
+        <div style={{ textAlign: 'center', marginTop: 24, fontSize: 10, color: '#9b6fc4', letterSpacing: '1px', fontFamily: 'Georgia, serif' }}>
           PLANET CALM &copy; 2026 &middot; Calm-First Leadership
-        </p>
+        </div>
       </div>
     </div>
   )

@@ -22,38 +22,34 @@ export default function PaymentsPage() {
           { label: 'Avg LTV', value: '$1,840', trend: 'Across all tiers' },
           { label: 'Churn Rate', value: '3.2%', trend: '\u2193 Improving' },
         ].map(s => (
-          <div key={s.label} className="bg-white rounded-[14px] p-5 relative overflow-hidden"
-            style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-            <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: 'linear-gradient(90deg,#623491,#e8c487)' }} />
-            <div className="text-[10px] font-bold tracking-[1.8px] uppercase mb-2" style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>{s.label}</div>
-            <div className="text-[28px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{s.value}</div>
-            <div className="text-[11px] mt-1" style={{ color: '#2a9d5c' }}>{s.trend}</div>
+          <div key={s.label} className="kpi-card">
+            <div style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', fontSize: '10px', fontWeight: 700, letterSpacing: '1.8px', textTransform: 'uppercase', marginBottom: '8px' }}>{s.label}</div>
+            <div style={{ fontFamily: 'Georgia, serif', color: '#2d1a47', fontSize: '28px', fontWeight: 700 }}>{s.value}</div>
+            <div style={{ color: '#2a9d5c', fontSize: '11px', marginTop: '4px' }}>{s.trend}</div>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-2 gap-4 mb-6">
         {/* Revenue by Offer */}
-        <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+        <div className="card">
+          <div className="section-title" style={{ marginBottom: '16px' }}>
             💳 Revenue by Offer
           </div>
-          <table className="w-full">
+          <table>
             <thead>
               <tr>
                 {['Offer', 'Revenue', 'Trend'].map(h => (
-                  <th key={h} className="text-left text-[10px] font-bold tracking-[1.5px] uppercase pb-2 px-3"
-                    style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', borderBottom: '2px solid rgba(98,52,145,0.1)' }}>{h}</th>
+                  <th key={h}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {revenueByOffer.map((r, i) => (
                 <tr key={i}>
-                  <td className="py-[11px] px-3 text-[12.5px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>{r.offer}</td>
-                  <td className="py-[11px] px-3 font-bold text-[12.5px]" style={{ color: '#b8860b', borderBottom: '1px solid rgba(98,52,145,0.06)' }}>{r.revenue}</td>
-                  <td className="py-[11px] px-3 text-[12.5px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>{r.trend}</td>
+                  <td>{r.offer}</td>
+                  <td className="gold-accent">{r.revenue}</td>
+                  <td>{r.trend}</td>
                 </tr>
               ))}
             </tbody>
@@ -61,26 +57,24 @@ export default function PaymentsPage() {
         </div>
 
         {/* Recent Payments */}
-        <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>Recent Transactions</div>
-          <table className="w-full">
+        <div className="card">
+          <div className="section-title" style={{ marginBottom: '16px' }}>Recent Transactions</div>
+          <table>
             <thead>
               <tr>
                 {['Client', 'Amount', 'Offer', 'Date', 'Status'].map(h => (
-                  <th key={h} className="text-left text-[10px] font-bold tracking-[1.5px] uppercase pb-2 px-3"
-                    style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', borderBottom: '2px solid rgba(98,52,145,0.1)' }}>{h}</th>
+                  <th key={h}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {recentPayments.map(p => (
-                <tr key={p.id} className="hover:bg-[rgba(232,196,135,0.08)]">
-                  <td className="py-[11px] px-3 text-[12.5px] font-bold" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#2d1a47' }}>{p.client}</td>
-                  <td className="py-[11px] px-3 text-[12.5px] font-bold" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#b8860b' }}>{p.amount}</td>
-                  <td className="py-[11px] px-3 text-[12px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#7a5ea0' }}>{p.offer}</td>
-                  <td className="py-[11px] px-3 text-[12px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#7a5ea0' }}>{p.date}</td>
-                  <td className="py-[11px] px-3" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+                <tr key={p.id}>
+                  <td style={{ fontWeight: 700, color: '#2d1a47' }}>{p.client}</td>
+                  <td className="gold-accent">{p.amount}</td>
+                  <td style={{ color: '#7a5ea0', fontSize: '12px' }}>{p.offer}</td>
+                  <td style={{ color: '#7a5ea0', fontSize: '12px' }}>{p.date}</td>
+                  <td>
                     <span className={`pill ${p.status === 'succeeded' ? 'pill-green' : 'pill-red'}`}>{p.status}</span>
                   </td>
                 </tr>

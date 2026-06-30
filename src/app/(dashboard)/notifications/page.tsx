@@ -41,39 +41,41 @@ export default function NotificationsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div className="text-[12px]" style={{ color: '#7a5ea0', fontFamily: 'Georgia, serif' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+        <div style={{ fontSize: '12px', color: '#7a5ea0', fontFamily: 'Georgia, serif' }}>
           {unreadCount} unread notification{unreadCount !== 1 ? 's' : ''}
         </div>
         {unreadCount > 0 && (
-          <button onClick={markAllRead}
-            className="flex items-center gap-1 text-[11px] cursor-pointer px-3 py-[6px] rounded-[12px]"
-            style={{ background: 'rgba(98,52,145,0.08)', color: '#623491', fontFamily: 'Georgia, serif', border: '1px solid rgba(98,52,145,0.15)' }}>
+          <button onClick={markAllRead} className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '6px 12px', fontSize: '11px' }}>
             <Check size={12} /> Mark all as read
           </button>
         )}
       </div>
 
-      <div className="bg-white rounded-[14px] overflow-hidden"
-        style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+      <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
         {notifications.map(n => (
           <div key={n.id} onClick={() => toggleRead(n.id)}
-            className="flex items-start gap-3 px-5 py-4 cursor-pointer transition-all hover:bg-[rgba(232,196,135,0.08)]"
             style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '12px',
+              padding: '16px 20px',
+              cursor: 'pointer',
+              transition: 'all 0.18s',
               borderBottom: '1px solid rgba(98,52,145,0.06)',
               background: n.read ? 'transparent' : 'rgba(232,196,135,0.05)',
             }}>
-            <span className="mt-[2px] flex-shrink-0 text-[16px]">{iconMap[n.type] || defaultIcon}</span>
-            <div className="flex-1">
-              <div className="flex items-center gap-2">
-                <span className={`text-[12.5px] ${n.read ? '' : 'font-bold'}`} style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+            <span style={{ marginTop: '2px', flexShrink: 0, fontSize: '16px' }}>{iconMap[n.type] || defaultIcon}</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '12.5px', fontWeight: n.read ? 400 : 700, fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
                   {n.title}
                 </span>
-                {!n.read && <span className="w-2 h-2 rounded-full" style={{ background: '#e8c487' }} />}
+                {!n.read && <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#e8c487' }} />}
               </div>
-              <div className="text-[11.5px] mt-[2px]" style={{ color: '#7a5ea0' }}>{n.body}</div>
+              <div style={{ fontSize: '11.5px', marginTop: '2px', color: '#7a5ea0' }}>{n.body}</div>
             </div>
-            <span className="text-[10px] mt-1 whitespace-nowrap" style={{ color: '#9b6fc4' }}>{n.time}</span>
+            <span style={{ fontSize: '10px', marginTop: '4px', whiteSpace: 'nowrap', color: '#9b6fc4' }}>{n.time}</span>
           </div>
         ))}
       </div>

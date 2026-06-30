@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planet Calm — Dashboard Redesign Mockup</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Georgia',serif;background:#f5eef8;color:#2d1a47;min-height:100vh;font-size:13px}
+
+  /* ══════ LOGIN PAGE ══════ */
+  .login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#f5eef8 0%,#ede4f5 40%,#fdf8ec 100%);display:none}
+  .login-page.active{display:flex}
+  .login-card-wrap{width:100%;max-width:400px;padding:0 16px}
+  .login-logo{width:130px;height:130px;margin:0 auto 24px;border-radius:50%;background:#2d1a47;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 40px rgba(45,26,71,0.35);overflow:hidden}
+  .login-logo img{width:110px;height:110px;object-fit:contain;mix-blend-mode:lighten}
+  .login-title{text-align:center;font-size:28px;font-weight:700;color:#2d1a47;letter-spacing:-.5px;margin-bottom:6px}
+  .login-sub{text-align:center;font-size:13px;color:#9b6fc4;font-style:italic;margin-bottom:28px}
+  .login-card{background:#fff;border-radius:20px;padding:32px;border:1px solid rgba(98,52,145,0.12);box-shadow:0 8px 40px rgba(98,52,145,0.1),0 2px 8px rgba(98,52,145,0.05)}
+  .login-label{display:block;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#9b6fc4;margin-bottom:8px}
+  .login-input{width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid rgba(98,52,145,0.18);font-family:'Georgia',serif;font-size:14px;color:#2d1a47;background:#faf8fc;outline:none;transition:border-color .2s,box-shadow .2s}
+  .login-input:focus{border-color:#623491;box-shadow:0 0 0 3px rgba(98,52,145,0.1)}
+  .login-input::placeholder{color:#c4a8e0}
+  .login-field{margin-bottom:20px}
+  .login-field:last-of-type{margin-bottom:28px}
+  .login-btn{width:100%;padding:14px;border-radius:12px;background:linear-gradient(135deg,#623491,#7d4db5);color:#e8c487;font-family:'Georgia',serif;font-size:14px;font-weight:700;border:none;cursor:pointer;letter-spacing:.5px;box-shadow:0 6px 20px rgba(98,52,145,0.35);transition:opacity .2s}
+  .login-btn:hover{opacity:.9}
+  .login-links{display:flex;justify-content:space-between;margin-top:20px}
+  .login-links a{font-size:12px;color:#623491;text-decoration:none;border-bottom:1px solid rgba(98,52,145,0.25);font-family:'Georgia',serif;transition:opacity .2s}
+  .login-links a:hover{opacity:.7}
+  .login-footer{text-align:center;margin-top:24px;font-size:10px;color:#9b6fc4;letter-spacing:1px}
+
+  /* ══════ DASHBOARD SHELL ══════ */
+  .dashboard{display:none;min-height:100vh}
+  .dashboard.active{display:flex}
+
+  /* SIDEBAR */
+  .sidebar{width:240px;min-height:100vh;background:#2d1a47;display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100}
+  .sidebar-logo{padding:22px 18px 16px;border-bottom:1px solid rgba(232,196,135,0.18)}
+  .sidebar-logo img{width:148px;display:block}
+  .sidebar-logo-text{color:#e8c487;font-size:18px;font-weight:700;letter-spacing:.5px;display:none}
+  .nav-section{padding:14px 0 4px}
+  .nav-label{font-family:'Georgia',serif;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(232,196,135,0.55);padding:0 20px 6px}
+  .nav-item{display:flex;align-items:center;gap:10px;padding:9px 20px;cursor:pointer;color:rgba(255,255,255,0.75);font-size:12.5px;font-family:'Georgia',serif;transition:all .18s;border-left:3px solid transparent;letter-spacing:.2px}
+  .nav-item:hover{background:rgba(232,196,135,0.1);color:#fff}
+  .nav-item.active{background:rgba(232,196,135,0.15);color:#e8c487;border-left:3px solid #e8c487;font-weight:700}
+  .nav-icon{font-size:14px;width:18px;text-align:center}
+  .nav-badge{margin-left:auto;background:#e8c487;color:#2d1a47;font-size:9px;font-weight:800;padding:2px 6px;border-radius:20px}
+  .sidebar-footer{margin-top:auto;padding:16px 18px;border-top:1px solid rgba(232,196,135,0.15)}
+  .sidebar-footer-text{color:rgba(232,196,135,0.5);font-size:10px;letter-spacing:.5px}
+
+  /* TOP BAR */
+  .topbar{position:fixed;top:0;left:240px;right:0;height:62px;background:rgba(245,238,248,0.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(98,52,145,0.1);display:flex;align-items:center;padding:0 28px;z-index:90;gap:16px}
+  .topbar-title{font-family:'Georgia',serif;font-size:21px;font-weight:700;color:#2d1a47;flex:1;letter-spacing:-.2px}
+  .topbar-greeting{font-size:12.5px;color:#7a5ea0;font-family:'Georgia',serif;font-style:italic}
+  .topbar-actions{display:flex;align-items:center;gap:12px}
+  .avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);color:#e8c487;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Georgia',serif;border:2px solid #e8c487;box-shadow:0 2px 8px rgba(98,52,145,0.25)}
+  .topbar-btn{background:rgba(98,52,145,0.08);border:1px solid rgba(98,52,145,0.18);color:#623491;font-size:11.5px;padding:6px 14px;border-radius:20px;cursor:pointer;font-family:'Georgia',serif;transition:all .15s}
+  .topbar-btn:hover{background:#623491;color:#e8c487}
+  .ai-chip{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#2d1a47,#623491);color:#e8c487;font-size:10.5px;padding:4px 10px;border-radius:20px;font-weight:700;font-family:'Georgia',serif}
+
+  /* MAIN CONTENT */
+  .main{margin-left:240px;padding-top:62px;min-height:100vh}
+  .view{padding:28px}
+
+  /* ══════ CARDS & COMPONENTS ══════ */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+  .kpi-card{background:#fff;border-radius:14px;padding:20px 22px;border:1px solid rgba(98,52,145,0.1);box-shadow:0 2px 16px rgba(98,52,145,0.06);position:relative;overflow:hidden}
+  .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#623491,#e8c487)}
+  .kpi-label{font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#9b6fc4;margin-bottom:8px}
+  .kpi-val{font-family:'Georgia',serif;font-size:28px;font-weight:700;color:#2d1a47;line-height:1}
+  .kpi-trend{font-size:11px;margin-top:6px}
+  .kpi-trend.up{color:#2a9d5c}
+  .kpi-sub{font-size:10.5px;color:#9b6fc4;margin-top:2px;font-style:italic}
+
+  .section-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .section-title{font-family:'Georgia',serif;font-size:14px;font-weight:700;color:#2d1a47;letter-spacing:.3px}
+  .section-action{font-size:11.5px;color:#623491;cursor:pointer;font-family:'Georgia',serif;text-decoration:underline;text-decoration-color:rgba(98,52,145,0.3)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px}
+  .card{background:#fff;border-radius:14px;padding:20px;border:1px solid rgba(98,52,145,0.1);box-shadow:0 2px 16px rgba(98,52,145,0.06)}
+
+  /* TABLE */
+  table{width:100%;border-collapse:collapse}
+  thead th{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#9b6fc4;padding:8px 12px;text-align:left;border-bottom:2px solid rgba(98,52,145,0.1);font-family:'Georgia',serif}
+  tbody td{padding:11px 12px;border-bottom:1px solid rgba(98,52,145,0.06);font-size:12.5px;color:#2d1a47;vertical-align:middle}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover td{background:rgba(232,196,135,0.08)}
+
+  /* PILLS */
+  .pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10.5px;font-weight:700;letter-spacing:.3px;font-family:'Georgia',serif}
+  .pill-green{background:#e8f5ee;color:#1e7d47}
+  .pill-amber{background:#fdf3dc;color:#9a6800}
+  .pill-red{background:#fde8e8;color:#c0392b}
+  .pill-purple{background:#ede4f5;color:#623491}
+  .pill-gold{background:linear-gradient(135deg,#fdf0d0,#f5e0a0);color:#7a5500;border:1px solid rgba(232,196,135,0.6)}
+  .tag{display:inline-block;background:#ede4f5;color:#623491;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;margin-right:4px;letter-spacing:.3px}
+  .gold-accent{color:#b8860b;font-weight:700}
+  .progress-bar{height:6px;background:rgba(98,52,145,0.12);border-radius:3px;margin-top:6px;overflow:hidden}
+  .progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#623491,#e8c487)}
+
+  /* PAGE TABS */
+  .page-tabs{display:flex;gap:4px;margin-bottom:24px;position:relative}
+  .page-tab{padding:6px 16px;font-size:11px;font-weight:700;font-family:'Georgia',serif;cursor:pointer;border:none;border-radius:20px;transition:all .2s;color:#623491;background:rgba(98,52,145,0.06)}
+  .page-tab:hover{background:rgba(98,52,145,0.12)}
+  .page-tab.active{background:linear-gradient(135deg,#623491,#9b6fc4);color:#e8c487;box-shadow:0 2px 10px rgba(98,52,145,0.3)}
+
+  /* FORM INPUTS */
+  .form-label{display:block;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#9b6fc4;margin-bottom:6px;font-family:'Georgia',serif}
+  .form-input{width:100%;padding:11px 14px;border-radius:10px;border:1px solid rgba(98,52,145,0.15);font-family:'Georgia',serif;font-size:12.5px;color:#2d1a47;background:#faf8fc;outline:none;transition:border-color .2s}
+  .form-input:focus{border-color:#623491}
+  .form-select{width:100%;padding:11px 14px;border-radius:10px;border:1px solid rgba(98,52,145,0.15);font-family:'Georgia',serif;font-size:12.5px;color:#2d1a47;background:#faf8fc;outline:none}
+  .form-btn-primary{padding:10px 20px;border-radius:10px;background:linear-gradient(135deg,#623491,#7d4db5);color:#e8c487;font-family:'Georgia',serif;font-size:12px;font-weight:700;border:none;cursor:pointer;box-shadow:0 3px 12px rgba(98,52,145,0.25);transition:opacity .15s}
+  .form-btn-primary:hover{opacity:.85}
+  .form-btn-secondary{padding:10px 20px;border-radius:10px;background:rgba(98,52,145,0.06);color:#623491;font-family:'Georgia',serif;font-size:12px;font-weight:700;border:1px solid rgba(98,52,145,0.15);cursor:pointer;transition:all .15s}
+  .form-btn-secondary:hover{background:rgba(98,52,145,0.12)}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+
+  /* SEARCH BAR */
+  .search-bar{position:relative;max-width:320px}
+  .search-bar input{width:100%;padding:9px 14px 9px 36px;border-radius:10px;border:1px solid rgba(98,52,145,0.15);font-family:'Georgia',serif;font-size:12.5px;color:#2d1a47;background:#faf8fc;outline:none}
+  .search-bar::before{content:'🔍';position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:12px;opacity:.5}
+
+  /* ══════ VIEW SWITCHER ══════ */
+  .view-switcher{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#2d1a47;padding:6px;border-radius:30px;display:flex;gap:4px;z-index:200;box-shadow:0 4px 20px rgba(45,26,71,0.4)}
+  .view-switch-btn{padding:8px 20px;border:none;border-radius:24px;font-family:'Georgia',serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;color:rgba(232,196,135,0.6);background:transparent}
+  .view-switch-btn:hover{color:#e8c487}
+  .view-switch-btn.active{background:linear-gradient(135deg,#623491,#9b6fc4);color:#e8c487;box-shadow:0 2px 10px rgba(98,52,145,0.3)}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ VIEW SWITCHER ═══════════════════ -->
+<div class="view-switcher">
+  <button class="view-switch-btn active" onclick="switchView('login')">Login</button>
+  <button class="view-switch-btn" onclick="switchView('dashboard')">Dashboard</button>
+  <button class="view-switch-btn" onclick="switchView('clients')">Clients</button>
+  <button class="view-switch-btn" onclick="switchView('settings')">Settings</button>
+</div>
+
+<!-- ═══════════════════ LOGIN PAGE ═══════════════════ -->
+<div class="login-page active" id="view-login">
+  <div class="login-card-wrap">
+    <div class="login-logo">
+      <img src="https://trpnlkntvulkjerevngm.supabase.co/storage/v1/object/public/dashboard-assets/logos/1782362694767-Planet_Calm_Logo.png" alt="Planet Calm" onerror="this.parentElement.innerHTML='<div style=&quot;color:#e8c487;font-size:24px;font-weight:700&quot;>🐾</div>'">
+    </div>
+    <div class="login-title">Welcome Back</div>
+    <div class="login-sub">Calm-First Leadership Dashboard</div>
+    <div class="login-card">
+      <div class="login-field">
+        <label class="login-label">Email</label>
+        <input class="login-input" type="email" placeholder="you@example.com" value="stephanie@planetcalm.com">
+      </div>
+      <div class="login-field">
+        <label class="login-label">Password</label>
+        <input class="login-input" type="password" placeholder="Enter your password" value="••••••••••">
+      </div>
+      <button class="login-btn" onclick="switchView('dashboard')">Sign In</button>
+      <div class="login-links">
+        <a href="#">Forgot password?</a>
+        <a href="#">Create account</a>
+      </div>
+    </div>
+    <div class="login-footer">PLANET CALM &copy; 2026 &middot; Calm-First Leadership</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ DASHBOARD ═══════════════════ -->
+<div class="dashboard" id="view-dashboard">
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <img src="https://trpnlkntvulkjerevngm.supabase.co/storage/v1/object/public/dashboard-assets/logos/1782362694767-Planet_Calm_Logo.png" alt="Planet Calm" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <div class="sidebar-logo-text">Planet Calm</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Command</div>
+      <div class="nav-item active"><span class="nav-icon">🌿</span>Overview</div>
+      <div class="nav-item"><span class="nav-icon">🐾</span>Community Hub <span class="nav-badge">12</span></div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Growth</div>
+      <div class="nav-item"><span class="nav-icon">🗺️</span>Journey & Pipeline</div>
+      <div class="nav-item"><span class="nav-icon">✨</span>Client Portal</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Content & Revenue</div>
+      <div class="nav-item"><span class="nav-icon">📖</span>Content & Book Launch</div>
+      <div class="nav-item"><span class="nav-icon">💳</span>Payments & Finance</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Intelligence</div>
+      <div class="nav-item"><span class="nav-icon">🤖</span>AI Brain</div>
+      <div class="nav-item"><span class="nav-icon">📊</span>Reports & KPIs <span class="nav-badge">3</span></div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Settings</div>
+      <div class="nav-item"><span class="nav-icon">⚙️</span>Settings & Team</div>
+    </div>
+    <div class="sidebar-footer">
+      <div class="sidebar-footer-text">PLANET CALM &copy; 2026<br>Calm-First Leadership</div>
+    </div>
+  </nav>
+
+  <div class="topbar">
+    <div class="topbar-title">Mission Overview</div>
+    <div class="topbar-greeting">Welcome back, Stephanie ✦</div>
+    <div class="topbar-actions">
+      <div class="ai-chip">🤖 AI Brain</div>
+      <button class="topbar-btn">+ New Task</button>
+      <div class="avatar">S</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="view">
+      <!-- KPI ROW -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Total Revenue (LTM)</div>
+          <div class="kpi-val">$127,840</div>
+          <div class="kpi-trend up">↑ 18.4% vs prior year</div>
+          <div class="kpi-sub">Stripe + Shopify combined</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Active Community Members</div>
+          <div class="kpi-val">1,247</div>
+          <div class="kpi-trend up">↑ 94 this month</div>
+          <div class="kpi-sub">Heartbeat + Substack + Kajabi</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Book Pre-Sales ("What the BARK?")</div>
+          <div class="kpi-val">348</div>
+          <div class="kpi-trend up">↑ 62 since last week</div>
+          <div class="kpi-sub">Sept 2026 launch target: 2,000</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">BARKType Pipeline</div>
+          <div class="kpi-val">$84K</div>
+          <div class="kpi-trend">5 orgs in active cert talks</div>
+          <div class="kpi-sub">Best Friends pilot: stage 3</div>
+        </div>
+      </div>
+
+      <!-- COMMUNITY + BOOK LAUNCH -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="section-hd">
+            <div class="section-title">🐾 Community Pulse</div>
+            <div class="section-action">View All →</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+            <div style="background:linear-gradient(135deg,#f9f5fe,#ede4f5);border-radius:11px;padding:14px;text-align:center">
+              <div style="font-size:22px;font-weight:700;color:#623491">842</div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#9b6fc4">Peaceful Paws<br>Collective</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#fdf8ec,#fdf0d0);border-radius:11px;padding:14px;text-align:center">
+              <div style="font-size:22px;font-weight:700;color:#7a5500">405</div>
+              <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#9a6800">Progress Studio<br>Members</div>
+            </div>
+          </div>
+          <div style="padding:13px 0;border-bottom:1px solid rgba(98,52,145,0.08)">
+            <div style="font-size:12.5px;font-weight:700;color:#2d1a47">My rescue GSD finally walked calmly past another dog! 🥹 <span style="color:#e8c487;font-size:10px">🔥 HOT</span></div>
+            <div style="font-size:11px;color:#9b6fc4;font-style:italic">Posted by @MarisolV · 47 reactions · Peaceful Paws Collective</div>
+          </div>
+          <div style="padding:13px 0;border-bottom:1px solid rgba(98,52,145,0.08)">
+            <div style="font-size:12.5px;font-weight:700;color:#2d1a47">BARKType quiz unlocked something in me — week 3 update</div>
+            <div style="font-size:11px;color:#9b6fc4;font-style:italic">Posted by @TrevorK · 31 reactions · Progress Studio</div>
+          </div>
+          <div style="padding:13px 0">
+            <div style="font-size:12.5px;font-weight:700;color:#2d1a47">Anyone else reading the early chapter drops from Stephanie? 🐾</div>
+            <div style="font-size:11px;color:#9b6fc4;font-style:italic">Posted by @LinnaeR · 28 reactions · Book Pre-Sale Circle</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-hd">
+            <div class="section-title">📖 Book Launch Sequence — "What the BARK?"</div>
+            <span class="pill pill-amber">Sept 2026 Target</span>
+          </div>
+          <table>
+            <thead><tr><th>Phase</th><th>Status</th><th>Goal</th><th>Progress</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Quiz → Decoder Ebook</strong><br><span style="font-size:10.5px;color:#7a5ea0;font-style:italic">Free → $7</span></td><td><span class="pill pill-green">Live</span></td><td>2,400 leads</td><td><div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div><span style="font-size:10px;color:#623491;font-weight:700">72%</span></td></tr>
+              <tr><td><strong>Pre-Sale Campaign</strong><br><span style="font-size:10.5px;color:#7a5ea0;font-style:italic">$20 book</span></td><td><span class="pill pill-amber">In Progress</span></td><td>2,000 orders</td><td><div class="progress-bar"><div class="progress-fill" style="width:17%"></div></div><span style="font-size:10px;color:#623491;font-weight:700">17%</span></td></tr>
+              <tr><td><strong>AWIN Affiliate Reactivation</strong><br><span style="font-size:10.5px;color:#7a5ea0;font-style:italic">168 dormant</span></td><td><span class="pill pill-amber">Launching</span></td><td>120 active</td><td><div class="progress-bar"><div class="progress-fill" style="width:28%"></div></div><span style="font-size:10px;color:#623491;font-weight:700">28%</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- AI INSIGHTS -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="section-hd">
+            <div class="section-title">🔁 Silent Buyer Reactivation</div>
+            <span class="pill pill-gold">~550 Targets</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+            <div style="text-align:center;padding:12px;background:#f9f5fe;border-radius:10px"><div style="font-size:20px;font-weight:700;color:#623491">548</div><div style="font-size:10px;color:#9b6fc4;font-weight:700;letter-spacing:1px;text-transform:uppercase">Identified</div></div>
+            <div style="text-align:center;padding:12px;background:#fdf8ec;border-radius:10px"><div style="font-size:20px;font-weight:700;color:#9a6800">127</div><div style="font-size:10px;color:#9a6800;font-weight:700;letter-spacing:1px;text-transform:uppercase">Re-Engaged</div></div>
+            <div style="text-align:center;padding:12px;background:#e8f5ee;border-radius:10px"><div style="font-size:20px;font-weight:700;color:#1e7d47">43</div><div style="font-size:10px;color:#1e7d47;font-weight:700;letter-spacing:1px;text-transform:uppercase">Converted</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-hd">
+            <div class="section-title">🤖 AI Brain — Insights</div>
+            <span class="ai-chip">✦ Powered by AI</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <div style="background:linear-gradient(135deg,#f9f5fe,#ede4f5);border-radius:11px;padding:14px;border-left:3px solid #623491">
+              <div style="font-size:11.5px;font-weight:700;color:#2d1a47;margin-bottom:4px">🐾 Community Momentum Alert</div>
+              <div style="font-size:11.5px;color:#623491;font-style:italic;line-height:1.55">Members who post within 7 days of joining retain at 3.2× the rate.</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#fdf8ec,#fdf0d0);border-radius:11px;padding:14px;border-left:3px solid #e8c487">
+              <div style="font-size:11.5px;font-weight:700;color:#2d1a47;margin-bottom:4px">📖 Pre-Sale Momentum Window</div>
+              <div style="font-size:11.5px;color:#9a6800;font-style:italic;line-height:1.55">Your Substack open rate is 52%. An exclusive chapter drop could push pre-sales +80 units.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CLIENTS VIEW ═══════════════════ -->
+<div class="dashboard" id="view-clients">
+  <nav class="sidebar">
+    <div class="sidebar-logo"><img src="https://trpnlkntvulkjerevngm.supabase.co/storage/v1/object/public/dashboard-assets/logos/1782362694767-Planet_Calm_Logo.png" alt="Planet Calm" style="width:148px;display:block" onerror="this.outerHTML='<div style=color:#e8c487;font-size:18px;font-weight:700>Planet Calm</div>'"></div>
+    <div class="nav-section"><div class="nav-label">Command</div><div class="nav-item"><span class="nav-icon">🌿</span>Overview</div><div class="nav-item"><span class="nav-icon">🐾</span>Community Hub <span class="nav-badge">12</span></div></div>
+    <div class="nav-section"><div class="nav-label">Manage</div><div class="nav-item active"><span class="nav-icon">👥</span>Clients</div><div class="nav-item"><span class="nav-icon">🎓</span>Cohorts</div><div class="nav-item"><span class="nav-icon">🎯</span>Leads</div></div>
+    <div class="sidebar-footer"><div class="sidebar-footer-text">PLANET CALM &copy; 2026</div></div>
+  </nav>
+  <div class="topbar"><div class="topbar-title">Clients</div><div class="topbar-greeting">Welcome back, Stephanie ✦</div><div class="topbar-actions"><div class="ai-chip">🤖 AI Brain</div><button class="topbar-btn">+ New Task</button><div class="avatar">S</div></div></div>
+  <div class="main"><div class="view">
+    <!-- Stats -->
+    <div class="kpi-row">
+      <div class="kpi-card"><div class="kpi-label">Total Clients</div><div class="kpi-val">8</div><div class="kpi-sub">All tiers combined</div></div>
+      <div class="kpi-card"><div class="kpi-label">Total LTV</div><div class="kpi-val">$42,154</div><div class="kpi-sub">Lifetime value</div></div>
+      <div class="kpi-card"><div class="kpi-label">Silent Buyers</div><div class="kpi-val">2</div><div class="kpi-sub">90+ days inactive</div></div>
+      <div class="kpi-card"><div class="kpi-label">Active This Week</div><div class="kpi-val">6</div><div class="kpi-sub">Engaged recently</div></div>
+    </div>
+    <!-- Controls -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <div class="search-bar" style="flex:1"><input type="text" placeholder="Search clients..."></div>
+      <button class="page-tab active">All Tiers</button>
+      <button class="page-tab">Collective</button>
+      <button class="page-tab">Studio</button>
+      <button class="page-tab">Council</button>
+      <button class="page-tab">Wayfinder</button>
+      <button class="form-btn-primary" style="margin-left:auto;padding:8px 16px;font-size:11px">+ Add Client</button>
+    </div>
+    <!-- Table -->
+    <div class="card">
+      <table>
+        <thead><tr><th>Client</th><th>Email</th><th>Tier</th><th>LTV</th><th>Coach</th><th>Last Activity</th><th>Tags</th></tr></thead>
+        <tbody>
+          <tr><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">MV</div><strong>Marisol Vega</strong></div></td><td style="color:#7a5ea0">marisol@example.com</td><td><span class="pill pill-green">Collective</span></td><td class="gold-accent">$588</td><td style="color:#7a5ea0">Stephanie</td><td style="color:#7a5ea0">2 hours ago</td><td><span class="tag">active</span><span class="tag">dog-parent</span></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#2a9d5c,#52c880);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">TK</div><strong>Trevor Kim</strong></div></td><td style="color:#7a5ea0">trevor@example.com</td><td><span class="pill" style="background:#e4edf5;color:#1a5a8a">Studio</span></td><td class="gold-accent">$2,750</td><td style="color:#7a5ea0">Coach Jen</td><td style="color:#7a5ea0">1 day ago</td><td><span class="tag">active</span><span class="tag">professional</span></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#c0392b,#e05a50);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">PW</div><strong>Dr. Peter Wang</strong></div></td><td style="color:#7a5ea0">peter@example.com</td><td><span class="pill pill-purple">Council</span></td><td class="gold-accent">$6,000</td><td style="color:#7a5ea0">Stephanie</td><td style="color:#7a5ea0">3 hours ago</td><td><span class="tag">vip</span><span class="tag">speaking</span></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#9a6800,#d4a017);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">SF</div><strong>Sandra Flynn</strong></div></td><td style="color:#7a5ea0">sandra@example.com</td><td><span class="pill pill-gold">Wayfinder</span></td><td class="gold-accent">$25,000</td><td style="color:#7a5ea0">Stephanie</td><td style="color:#7a5ea0">6 hours ago</td><td><span class="tag">vip</span><span class="tag">wayfinder-alumni</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</div>
+
+<!-- ═══════════════════ SETTINGS VIEW ═══════════════════ -->
+<div class="dashboard" id="view-settings">
+  <nav class="sidebar">
+    <div class="sidebar-logo"><img src="https://trpnlkntvulkjerevngm.supabase.co/storage/v1/object/public/dashboard-assets/logos/1782362694767-Planet_Calm_Logo.png" alt="Planet Calm" style="width:148px;display:block" onerror="this.outerHTML='<div style=color:#e8c487;font-size:18px;font-weight:700>Planet Calm</div>'"></div>
+    <div class="nav-section"><div class="nav-label">Settings</div><div class="nav-item active"><span class="nav-icon">⚙️</span>Settings & Team</div></div>
+    <div class="sidebar-footer"><div class="sidebar-footer-text">PLANET CALM &copy; 2026</div></div>
+  </nav>
+  <div class="topbar"><div class="topbar-title">Settings & Team</div><div class="topbar-greeting">Welcome back, Stephanie ✦</div><div class="topbar-actions"><div class="ai-chip">🤖 AI Brain</div><button class="topbar-btn">+ New Task</button><div class="avatar">S</div></div></div>
+  <div class="main"><div class="view">
+    <!-- Tabs -->
+    <div class="page-tabs">
+      <button class="page-tab active">⚙️ General</button>
+      <button class="page-tab">👥 Team & Roles</button>
+      <button class="page-tab">🔗 Integrations</button>
+      <button class="page-tab">🔔 Notifications</button>
+      <button class="page-tab">🤖 AI Settings</button>
+      <button class="page-tab">🚀 Launch Config</button>
+    </div>
+
+    <div class="card" style="padding:28px">
+      <div style="font-size:14px;font-weight:700;color:#2d1a47;margin-bottom:20px">⚙️ General Settings</div>
+      <div class="form-row">
+        <div><div class="form-label">Dashboard Name</div><input class="form-input" value="Planet Calm"></div>
+        <div><div class="form-label">Primary URL</div><input class="form-input" value="app.planetcalm.com"></div>
+      </div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#9b6fc4;margin:20px 0 12px">⏱️ Threshold Settings</div>
+      <div class="form-row" style="grid-template-columns:1fr 1fr 1fr">
+        <div><div class="form-label">Silent Buyer (days)</div><input class="form-input" type="number" value="90"></div>
+        <div><div class="form-label">Stale Deal (days)</div><input class="form-input" type="number" value="14"></div>
+        <div><div class="form-label">Lapsed Affiliate (days)</div><input class="form-input" type="number" value="90"></div>
+      </div>
+      <div class="form-row">
+        <div><div class="form-label">Default Timezone</div><input class="form-input" value="America/Denver"></div>
+        <div></div>
+      </div>
+      <div style="margin-top:20px"><button class="form-btn-primary">💾 Save Settings</button></div>
+    </div>
+  </div></div>
+</div>
+
+<script>
+function switchView(view) {
+  document.querySelectorAll('.login-page, .dashboard').forEach(el => el.classList.remove('active'));
+  document.getElementById('view-' + view).classList.add('active');
+  document.querySelectorAll('.view-switch-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase().includes(view));
+  });
+}
+</script>
+</body>
+</html>

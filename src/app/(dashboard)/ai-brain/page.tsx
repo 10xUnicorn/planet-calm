@@ -17,16 +17,28 @@ export default function AIBrainPage() {
   return (
     <div>
       {/* Hero */}
-      <div className="rounded-[14px] p-6 mb-6 relative overflow-hidden"
-        style={{ background: 'linear-gradient(135deg,#2d1a47 0%,#623491 60%,#9b6fc4 100%)' }}>
-        <div className="absolute right-8 top-1/2 -translate-y-1/2 text-[48px] opacity-15">
+      <div className="mb-6" style={{
+        borderRadius: '14px',
+        padding: '24px',
+        background: 'linear-gradient(135deg,#2d1a47 0%,#623491 60%,#9b6fc4 100%)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        <div style={{
+          position: 'absolute',
+          right: '32px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          fontSize: '48px',
+          opacity: 0.15,
+        }}>
           🤖
         </div>
-        <div className="flex items-center gap-3 mb-2">
-          <h2 className="text-[18px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#e8c487' }}>🤖 AI Brain</h2>
+        <div className="flex items-center gap-3" style={{ marginBottom: '8px' }}>
+          <h2 style={{ fontFamily: 'Georgia, serif', color: '#e8c487', fontSize: '18px', fontWeight: 700 }}>🤖 AI Brain</h2>
           <span className="ai-chip">✦ Powered by AI</span>
         </div>
-        <p className="text-[12px]" style={{ color: 'rgba(255,255,255,0.75)', fontFamily: 'Georgia, serif' }}>
+        <p style={{ color: 'rgba(255,255,255,0.75)', fontFamily: 'Georgia, serif', fontSize: '12px' }}>
           Sequence generation, content drafting, reactivation intelligence, and BARKType analysis
         </p>
       </div>
@@ -35,13 +47,8 @@ export default function AIBrainPage() {
       <div className="flex gap-2 mb-6">
         {tabs.map(t => (
           <button key={t.key} onClick={() => setActiveTab(t.key)}
-            className="px-4 py-[9px] rounded-full text-[11.5px] font-bold cursor-pointer flex items-center gap-2 transition-all"
-            style={{
-              background: activeTab === t.key ? 'linear-gradient(135deg,#623491,#9b6fc4)' : 'rgba(98,52,145,0.08)',
-              color: activeTab === t.key ? '#e8c487' : '#623491',
-              fontFamily: 'Georgia, serif',
-              border: activeTab === t.key ? 'none' : '1px solid rgba(98,52,145,0.15)',
-            }}>
+            className={`flex items-center gap-2 ${activeTab === t.key ? 'page-tab page-tab-active' : 'page-tab'}`}
+            style={{ padding: '9px 16px', fontSize: '11.5px' }}>
             <t.icon size={13} /> {t.label}
           </button>
         ))}
@@ -49,15 +56,14 @@ export default function AIBrainPage() {
 
       {/* Sequence Builder */}
       {activeTab === 'sequences' && (
-        <div className="bg-white rounded-[14px] p-6"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+        <div className="card" style={{ padding: '24px' }}>
+          <div className="section-title" style={{ marginBottom: '16px' }}>
             ✨ Build an Email Sequence
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: '#9b6fc4' }}>Goal</label>
-              <select className="w-full px-3 py-2 rounded-[12px] text-[12px] outline-none" style={{ background: '#faf8fc', border: '1px solid rgba(98,52,145,0.15)', fontFamily: 'Georgia, serif' }}>
+              <label className="form-label">Goal</label>
+              <select className="form-select">
                 <option>Reactivate Silent Buyers</option>
                 <option>Re-engage Lapsed Affiliates</option>
                 <option>Onboard New Clients</option>
@@ -65,8 +71,8 @@ export default function AIBrainPage() {
               </select>
             </div>
             <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: '#9b6fc4' }}>Audience Segment</label>
-              <select className="w-full px-3 py-2 rounded-[12px] text-[12px] outline-none" style={{ background: '#faf8fc', border: '1px solid rgba(98,52,145,0.15)', fontFamily: 'Georgia, serif' }}>
+              <label className="form-label">Audience Segment</label>
+              <select className="form-select">
                 <option>Silent Buyers (90+ days)</option>
                 <option>Decoder Ebook Buyers</option>
                 <option>Chew Sub Lapsed</option>
@@ -74,21 +80,25 @@ export default function AIBrainPage() {
                 <option>New Collective Members</option>
               </select>
             </div>
-            <div className="col-span-2">
-              <label className="block text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: '#9b6fc4' }}>Additional Context</label>
-              <textarea className="w-full px-3 py-2 rounded-[12px] text-[12px] outline-none h-20 resize-none"
-                style={{ background: '#faf8fc', border: '1px solid rgba(98,52,145,0.15)', fontFamily: 'Georgia, serif' }}
+            <div style={{ gridColumn: 'span 2' }}>
+              <label className="form-label">Additional Context</label>
+              <textarea className="form-input" style={{ height: '80px', resize: 'none' }}
                 placeholder="E.g., Focus on book launch angle, mention BARKType quiz, use Calm-First language..." />
             </div>
           </div>
-          <button className="px-6 py-[10px] rounded-[12px] text-[12px] font-bold cursor-pointer flex items-center gap-2"
-            style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#e8c487', fontFamily: 'Georgia, serif', border: 'none' }}>
+          <button className="btn-primary flex items-center gap-2">
             <Wand2 size={14} /> Generate Sequence
           </button>
 
           {/* Demo Output */}
-          <div className="mt-6 p-4 rounded-[12px]" style={{ background: 'linear-gradient(135deg,#f9f5fe,#ede4f5)', border: '1px solid rgba(98,52,145,0.1)' }}>
-            <div className="flex items-center gap-[6px] text-[11px] font-bold mb-3" style={{ color: '#623491', fontFamily: 'Georgia, serif' }}>
+          <div style={{
+            marginTop: '24px',
+            padding: '16px',
+            borderRadius: '12px',
+            background: 'linear-gradient(135deg,#f9f5fe,#ede4f5)',
+            border: '1px solid rgba(98,52,145,0.1)',
+          }}>
+            <div style={{ color: '#623491', fontFamily: 'Georgia, serif', fontSize: '11px', fontWeight: 700, marginBottom: '12px' }}>
               ✨ Generated 5-Email Reactivation Sequence
             </div>
             {[
@@ -98,22 +108,29 @@ export default function AIBrainPage() {
               { day: 'Day 12', subject: "Stephanie's new book \u2014 early access for past members", status: 'Ready' },
               { day: 'Day 18', subject: 'Last chance: Rejoin Peaceful Paws at founding rate', status: 'Ready' },
             ].map((e, i) => (
-              <div key={i} className="flex items-center justify-between py-2"
-                style={{ borderBottom: i < 4 ? '1px solid rgba(98,52,145,0.06)' : 'none' }}>
+              <div key={i} className="flex items-center justify-between" style={{
+                padding: '8px 0',
+                borderBottom: i < 4 ? '1px solid rgba(98,52,145,0.06)' : 'none',
+              }}>
                 <div className="flex items-center gap-3">
-                  <span className="text-[10px] font-bold px-2 py-1 rounded" style={{ background: 'rgba(98,52,145,0.08)', color: '#623491' }}>{e.day}</span>
-                  <span className="text-[12px]" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{e.subject}</span>
+                  <span style={{
+                    fontSize: '10px',
+                    fontWeight: 700,
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    background: 'rgba(98,52,145,0.08)',
+                    color: '#623491',
+                  }}>{e.day}</span>
+                  <span style={{ fontFamily: 'Georgia, serif', color: '#2d1a47', fontSize: '12px' }}>{e.subject}</span>
                 </div>
                 <span className="pill pill-green">{e.status}</span>
               </div>
             ))}
-            <div className="flex gap-2 mt-3">
-              <button className="px-4 py-2 rounded-[12px] text-[11px] font-bold cursor-pointer flex items-center gap-2"
-                style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#e8c487', fontFamily: 'Georgia, serif', border: 'none' }}>
+            <div className="flex gap-2" style={{ marginTop: '12px' }}>
+              <button className="btn-primary flex items-center gap-2" style={{ padding: '8px 16px', fontSize: '11px' }}>
                 <CheckCircle size={12} /> Approve & Activate
               </button>
-              <button className="px-4 py-2 rounded-[12px] text-[11px] cursor-pointer"
-                style={{ background: 'rgba(98,52,145,0.08)', color: '#623491', fontFamily: 'Georgia, serif', border: '1px solid rgba(98,52,145,0.15)' }}>
+              <button className="btn-secondary" style={{ padding: '8px 16px', fontSize: '11px' }}>
                 Edit Emails
               </button>
             </div>
@@ -123,17 +140,14 @@ export default function AIBrainPage() {
 
       {/* Content Drafts */}
       {activeTab === 'drafts' && (
-        <div className="bg-white rounded-[14px] p-6"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>Content Drafting Assistant</div>
-          <div className="mb-4">
-            <label className="block text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: '#9b6fc4' }}>What do you need?</label>
-            <textarea className="w-full px-3 py-2 rounded-[12px] text-[12px] outline-none h-24 resize-none"
-              style={{ background: '#faf8fc', border: '1px solid rgba(98,52,145,0.15)', fontFamily: 'Georgia, serif' }}
+        <div className="card" style={{ padding: '24px' }}>
+          <div className="section-title" style={{ marginBottom: '16px' }}>Content Drafting Assistant</div>
+          <div style={{ marginBottom: '16px' }}>
+            <label className="form-label">What do you need?</label>
+            <textarea className="form-input" style={{ height: '96px', resize: 'none' }}
               placeholder="E.g., Write a Substack post about the connection between dog behavior and human leadership..." />
           </div>
-          <button className="px-6 py-[10px] rounded-[12px] text-[12px] font-bold cursor-pointer flex items-center gap-2"
-            style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#e8c487', fontFamily: 'Georgia, serif', border: 'none' }}>
+          <button className="btn-primary flex items-center gap-2">
             <Wand2 size={14} /> Generate Draft
           </button>
         </div>
@@ -141,25 +155,23 @@ export default function AIBrainPage() {
 
       {/* Reactivation */}
       {activeTab === 'reactivation' && (
-        <div className="bg-white rounded-[14px] p-6"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>Reactivation Intelligence</div>
+        <div className="card" style={{ padding: '24px' }}>
+          <div className="section-title" style={{ marginBottom: '16px' }}>Reactivation Intelligence</div>
           <div className="grid grid-cols-3 gap-4 mb-4">
-            <div className="p-4 rounded-[12px] text-center" style={{ background: '#f9f5fe', border: '1px solid rgba(98,52,145,0.1)' }}>
-              <div className="text-[24px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#623491' }}>548</div>
-              <div className="text-[10px] font-bold uppercase tracking-wider" style={{ color: '#9b6fc4' }}>Silent Buyers</div>
+            <div style={{ padding: '16px', borderRadius: '12px', textAlign: 'center', background: '#f9f5fe', border: '1px solid rgba(98,52,145,0.1)' }}>
+              <div style={{ fontFamily: 'Georgia, serif', color: '#623491', fontSize: '24px', fontWeight: 700 }}>548</div>
+              <div style={{ color: '#9b6fc4', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px' }}>Silent Buyers</div>
             </div>
-            <div className="p-4 rounded-[12px] text-center" style={{ background: '#fdf8ec', border: '1px solid rgba(232,196,135,0.3)' }}>
-              <div className="text-[24px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#9a6800' }}>~$12K</div>
-              <div className="text-[10px] font-bold uppercase tracking-wider" style={{ color: '#9a6800' }}>Recovery Potential</div>
+            <div style={{ padding: '16px', borderRadius: '12px', textAlign: 'center', background: '#fdf8ec', border: '1px solid rgba(232,196,135,0.3)' }}>
+              <div style={{ fontFamily: 'Georgia, serif', color: '#9a6800', fontSize: '24px', fontWeight: 700 }}>~$12K</div>
+              <div style={{ color: '#9a6800', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px' }}>Recovery Potential</div>
             </div>
-            <div className="p-4 rounded-[12px] text-center" style={{ background: '#e8f5ee', border: '1px solid rgba(42,157,92,0.2)' }}>
-              <div className="text-[24px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#1e7d47' }}>7.8%</div>
-              <div className="text-[10px] font-bold uppercase tracking-wider" style={{ color: '#1e7d47' }}>Conversion Rate</div>
+            <div style={{ padding: '16px', borderRadius: '12px', textAlign: 'center', background: '#e8f5ee', border: '1px solid rgba(42,157,92,0.2)' }}>
+              <div style={{ fontFamily: 'Georgia, serif', color: '#1e7d47', fontSize: '24px', fontWeight: 700 }}>7.8%</div>
+              <div style={{ color: '#1e7d47', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px' }}>Conversion Rate</div>
             </div>
           </div>
-          <button className="px-6 py-[10px] rounded-[12px] text-[12px] font-bold cursor-pointer flex items-center gap-2"
-            style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#e8c487', fontFamily: 'Georgia, serif', border: 'none' }}>
+          <button className="btn-primary flex items-center gap-2">
             <Wand2 size={14} /> Run Batch Reactivation (548 contacts)
           </button>
         </div>
@@ -167,15 +179,12 @@ export default function AIBrainPage() {
 
       {/* BARKType Analyzer */}
       {activeTab === 'analyzer' && (
-        <div className="bg-white rounded-[14px] p-6"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>BARKType Profile Analyzer</div>
-          <p className="text-[12px] italic mb-4" style={{ color: '#7a5ea0' }}>Input quiz responses to get BARKType profile with recommended content and sequence</p>
-          <textarea className="w-full px-3 py-2 rounded-[12px] text-[12px] outline-none h-24 resize-none mb-4"
-            style={{ background: '#faf8fc', border: '1px solid rgba(98,52,145,0.15)', fontFamily: 'Georgia, serif' }}
+        <div className="card" style={{ padding: '24px' }}>
+          <div className="section-title" style={{ marginBottom: '16px' }}>BARKType Profile Analyzer</div>
+          <p style={{ color: '#7a5ea0', fontSize: '12px', fontStyle: 'italic', marginBottom: '16px' }}>Input quiz responses to get BARKType profile with recommended content and sequence</p>
+          <textarea className="form-input" style={{ height: '96px', resize: 'none', marginBottom: '16px' }}
             placeholder="Paste quiz responses or describe the contact's behavior patterns..." />
-          <button className="px-6 py-[10px] rounded-[12px] text-[12px] font-bold cursor-pointer flex items-center gap-2"
-            style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#e8c487', fontFamily: 'Georgia, serif', border: 'none' }}>
+          <button className="btn-primary flex items-center gap-2">
             <Brain size={14} /> Analyze BARKType
           </button>
         </div>
@@ -183,15 +192,13 @@ export default function AIBrainPage() {
 
       {/* Usage Log */}
       {activeTab === 'usage' && (
-        <div className="bg-white rounded-[14px] p-6"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>AI Usage Log</div>
-          <table className="w-full">
+        <div className="card" style={{ padding: '24px' }}>
+          <div className="section-title" style={{ marginBottom: '16px' }}>AI Usage Log</div>
+          <table>
             <thead>
               <tr>
                 {['Timestamp', 'Type', 'Model', 'Tokens', 'Est. Cost'].map(h => (
-                  <th key={h} className="text-left text-[10px] font-bold tracking-[1.5px] uppercase pb-2 px-3"
-                    style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', borderBottom: '2px solid rgba(98,52,145,0.1)' }}>{h}</th>
+                  <th key={h}>{h}</th>
                 ))}
               </tr>
             </thead>
@@ -203,11 +210,11 @@ export default function AIBrainPage() {
                 { time: '2 days ago', type: 'BARKType Analysis', model: 'GPT-4', tokens: '1,840', cost: '$0.06' },
               ].map((r, i) => (
                 <tr key={i}>
-                  <td className="py-[11px] px-3 text-[12px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#7a5ea0' }}>{r.time}</td>
-                  <td className="py-[11px] px-3" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}><span className="tag">{r.type}</span></td>
-                  <td className="py-[11px] px-3 text-[12px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#623491' }}>{r.model}</td>
-                  <td className="py-[11px] px-3 text-[12px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>{r.tokens}</td>
-                  <td className="py-[11px] px-3 text-[12px] font-bold" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#b8860b' }}>{r.cost}</td>
+                  <td style={{ color: '#7a5ea0' }}>{r.time}</td>
+                  <td><span className="tag">{r.type}</span></td>
+                  <td style={{ color: '#623491' }}>{r.model}</td>
+                  <td>{r.tokens}</td>
+                  <td className="gold-accent">{r.cost}</td>
                 </tr>
               ))}
             </tbody>

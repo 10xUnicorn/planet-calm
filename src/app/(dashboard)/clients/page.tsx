@@ -20,81 +20,67 @@ export default function ClientsPage() {
   return (
     <div>
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '24px' }}>
         {[
           { label: 'Total Clients', value: demoClients.length.toString(), sub: 'All tiers combined' },
           { label: 'Total LTV', value: `$${totalLTV.toLocaleString()}`, sub: 'Lifetime value' },
           { label: 'Silent Buyers', value: silentCount.toString(), sub: '90+ days inactive' },
           { label: 'Active This Week', value: (demoClients.length - silentCount).toString(), sub: 'Engaged recently' },
         ].map(s => (
-          <div key={s.label} className="bg-white rounded-[14px] p-5 relative overflow-hidden"
-            style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-            <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: 'linear-gradient(90deg,#623491,#e8c487)' }} />
-            <div className="text-[10px] font-bold tracking-[1.8px] uppercase mb-2" style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>{s.label}</div>
-            <div className="text-[28px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{s.value}</div>
-            <div className="text-[10.5px] italic" style={{ color: '#9b6fc4' }}>{s.sub}</div>
+          <div key={s.label} className="kpi-card">
+            <div className="form-label" style={{ marginBottom: '8px' }}>{s.label}</div>
+            <div style={{ fontSize: '28px', fontWeight: 700, fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{s.value}</div>
+            <div style={{ fontSize: '10.5px', fontStyle: 'italic', color: '#9b6fc4' }}>{s.sub}</div>
           </div>
         ))}
       </div>
 
       {/* Controls */}
-      <div className="flex items-center gap-3 mb-4">
-        <div className="relative flex-1 max-w-sm">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#9b6fc4' }} />
-          <input type="text" placeholder="Search clients..." value={search} onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-[10px] rounded-[12px] text-[13px] outline-none"
-            style={{ border: '1px solid rgba(98,52,145,0.2)', fontFamily: 'Georgia, serif', color: '#2d1a47', background: '#faf8fc' }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+        <div className="search-bar" style={{ flex: 1 }}>
+          <Search size={14} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#9b6fc4', zIndex: 1 }} />
+          <input type="text" placeholder="Search clients..." value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
         {tiers.map(t => (
           <button key={t} onClick={() => setTierFilter(t)}
-            className="px-4 py-[8px] rounded-[12px] text-[11px] font-bold cursor-pointer"
-            style={{
-              background: tierFilter === t ? '#623491' : '#fff',
-              color: tierFilter === t ? '#e8c487' : '#623491',
-              fontFamily: 'Georgia, serif',
-              border: tierFilter === t ? '2px solid #623491' : '1px solid rgba(98,52,145,0.2)',
-            }}>
+            className={`page-tab ${tierFilter === t ? 'active' : ''}`}>
             {t === 'all' ? 'All Tiers' : t}
           </button>
         ))}
-        <button className="px-4 py-[8px] rounded-[12px] text-[11px] font-bold cursor-pointer flex items-center gap-2 ml-auto"
-          style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#e8c487', fontFamily: 'Georgia, serif', border: 'none', boxShadow: '0 4px 12px rgba(98,52,145,0.25)' }}>
+        <button className="btn-primary" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <UserPlus size={13} /> Add Client
         </button>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-[14px] p-5"
-        style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-        <table className="w-full">
+      <div className="card">
+        <table>
           <thead>
             <tr>
               {['Client', 'Email', 'Tier', 'LTV', 'Coach', 'Last Activity', 'Tags'].map(h => (
-                <th key={h} className="text-left text-[10px] font-bold tracking-[1.5px] uppercase pb-3 px-3"
-                  style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', borderBottom: '2px solid rgba(98,52,145,0.1)' }}>{h}</th>
+                <th key={h}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {filtered.map(c => (
-              <tr key={c.id} className="hover:bg-[rgba(232,196,135,0.08)] cursor-pointer">
-                <td className="py-3 px-3" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold"
-                      style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#fff' }}>
+              <tr key={c.id} style={{ cursor: 'pointer' }}>
+                <td>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 700, background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#fff' }}>
                       {c.name.split(' ').map(n => n[0]).join('')}
                     </div>
-                    <span className="text-[13px] font-bold" style={{ color: '#2d1a47', fontFamily: 'Georgia, serif' }}>{c.name}</span>
+                    <span style={{ fontSize: '13px', fontWeight: 700, color: '#2d1a47', fontFamily: 'Georgia, serif' }}>{c.name}</span>
                   </div>
                 </td>
-                <td className="py-3 px-3 text-[12.5px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#7a5ea0' }}>{c.email}</td>
-                <td className="py-3 px-3" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+                <td style={{ color: '#7a5ea0' }}>{c.email}</td>
+                <td>
                   <span className={`pill ${c.tier === 'Wayfinder' ? 'pill-gold' : c.tier === 'Council' ? 'pill-purple' : c.tier === 'Studio' ? 'pill-blue' : 'pill-green'}`}>{c.tier}</span>
                 </td>
-                <td className="py-3 px-3 text-[13px] font-bold" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#b8860b', fontFamily: 'Georgia, serif' }}>${c.ltv.toLocaleString()}</td>
-                <td className="py-3 px-3 text-[12.5px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#7a5ea0' }}>{c.coach || '—'}</td>
-                <td className="py-3 px-3 text-[12.5px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#7a5ea0' }}>{c.lastActivity}</td>
-                <td className="py-3 px-3" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+                <td className="gold-accent">${c.ltv.toLocaleString()}</td>
+                <td style={{ color: '#7a5ea0' }}>{c.coach || '—'}</td>
+                <td style={{ color: '#7a5ea0' }}>{c.lastActivity}</td>
+                <td>
                   {c.tags.map((t, i) => <span key={i} className="tag">{t}</span>)}
                 </td>
               </tr>

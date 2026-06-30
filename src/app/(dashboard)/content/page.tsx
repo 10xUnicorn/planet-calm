@@ -26,44 +26,54 @@ export default function ContentPage() {
   return (
     <div>
       {/* Book Launch Banner */}
-      <div className="rounded-[14px] p-6 mb-6 relative overflow-hidden"
-        style={{ background: 'linear-gradient(135deg,#2d1a47 0%,#623491 60%,#9b6fc4 100%)' }}>
-        <div className="absolute right-8 top-1/2 -translate-y-1/2 text-[48px] opacity-15">
+      <div className="mb-6" style={{
+        borderRadius: '14px',
+        padding: '24px',
+        background: 'linear-gradient(135deg,#2d1a47 0%,#623491 60%,#9b6fc4 100%)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        <div style={{
+          position: 'absolute',
+          right: '32px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          fontSize: '48px',
+          opacity: 0.15,
+        }}>
           📖
         </div>
-        <div className="flex items-center gap-2 mb-2">
-          <h2 className="text-[18px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#e8c487' }}>
+        <div className="flex items-center gap-2" style={{ marginBottom: '8px' }}>
+          <h2 style={{ fontFamily: 'Georgia, serif', color: '#e8c487', fontSize: '18px', fontWeight: 700 }}>
             📖 &quot;What the BARK?&quot; &mdash; Book Launch Content
           </h2>
           <span className="pill pill-amber">Sept 2026</span>
         </div>
-        <p className="text-[12px]" style={{ color: 'rgba(255,255,255,0.75)', fontFamily: 'Georgia, serif' }}>
+        <p style={{ color: 'rgba(255,255,255,0.75)', fontFamily: 'Georgia, serif', fontSize: '12px' }}>
           348 pre-sales &middot; 54% Substack growth &middot; Chapter previews releasing weekly
         </p>
       </div>
 
       {/* Controls */}
       <div className="flex items-center gap-3 mb-4">
-        <div className="relative flex-1 max-w-sm">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#9b6fc4' }} />
-          <input type="text" placeholder="Search content..." value={search} onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-[9px] rounded-xl text-[12.5px] outline-none"
-            style={{ border: '1px solid rgba(98,52,145,0.2)', fontFamily: 'Georgia, serif', color: '#2d1a47' }} />
+        <div className="search-bar" style={{ flex: 1 }}>
+          <Search size={14} style={{
+            color: '#9b6fc4',
+            position: 'absolute',
+            left: '12px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+          }} />
+          <input type="text" placeholder="Search content..." value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
         {types.map(t => (
           <button key={t} onClick={() => setTypeFilter(t)}
-            className="px-3 py-[7px] rounded-full text-[10.5px] font-bold cursor-pointer"
-            style={{
-              background: typeFilter === t ? '#623491' : 'rgba(98,52,145,0.08)',
-              color: typeFilter === t ? '#e8c487' : '#623491',
-              fontFamily: 'Georgia, serif',
-              border: typeFilter === t ? 'none' : '1px solid rgba(98,52,145,0.15)',
-            }}>
+            className={typeFilter === t ? 'page-tab page-tab-active' : 'page-tab'}
+            style={{ fontSize: '10.5px', padding: '7px 12px' }}>
             {t === 'all' ? 'All Types' : t.charAt(0).toUpperCase() + t.slice(1)}
           </button>
         ))}
-        <button className="px-4 py-[8px] rounded-full text-[11px] font-bold cursor-pointer flex items-center gap-2 ml-auto"
-          style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#e8c487', fontFamily: 'Georgia, serif', border: 'none' }}>
+        <button className="btn-primary flex items-center gap-2" style={{ marginLeft: 'auto', padding: '8px 16px', fontSize: '11px', borderRadius: '9999px' }}>
           <Plus size={13} /> Add Content
         </button>
       </div>
@@ -71,20 +81,19 @@ export default function ContentPage() {
       {/* Content Grid */}
       <div className="grid grid-cols-3 gap-4">
         {filtered.map(item => (
-          <div key={item.id} className="bg-white rounded-[14px] p-5 cursor-pointer transition-shadow hover:shadow-lg"
-            style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-            <div className="flex items-start justify-between mb-3">
-              <div className="p-2 rounded-lg text-[16px]" style={{ background: 'rgba(98,52,145,0.08)' }}>
+          <div key={item.id} className="card" style={{ cursor: 'pointer', transition: 'box-shadow .18s' }}>
+            <div className="flex items-start justify-between" style={{ marginBottom: '12px' }}>
+              <div style={{ padding: '8px', borderRadius: '8px', fontSize: '16px', background: 'rgba(98,52,145,0.08)' }}>
                 {typeIcons[item.type]}
               </div>
               <span className={`pill ${item.published ? 'pill-green' : 'pill-amber'}`}>
                 {item.published ? 'Published' : 'Draft'}
               </span>
             </div>
-            <div className="text-[13px] font-bold mb-2" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+            <div style={{ fontFamily: 'Georgia, serif', color: '#2d1a47', fontSize: '13px', fontWeight: 700, marginBottom: '8px' }}>
               {item.title}
             </div>
-            <div className="text-[10.5px] italic mb-3" style={{ color: '#7a5ea0' }}>
+            <div style={{ color: '#7a5ea0', fontSize: '10.5px', fontStyle: 'italic', marginBottom: '12px' }}>
               {item.collection}
             </div>
             <div className="flex flex-wrap gap-1">

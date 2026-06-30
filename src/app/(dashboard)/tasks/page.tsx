@@ -34,36 +34,27 @@ export default function TasksPage() {
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-6">
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
         {['all', 'pending', 'in_progress', 'completed'].map(f => (
           <button key={f} onClick={() => setFilter(f)}
-            className="px-3 py-[7px] rounded-full text-[10.5px] font-bold cursor-pointer"
-            style={{
-              background: filter === f ? '#623491' : 'rgba(98,52,145,0.08)',
-              color: filter === f ? '#e8c487' : '#623491',
-              fontFamily: 'Georgia, serif',
-              border: filter === f ? 'none' : '1px solid rgba(98,52,145,0.15)',
-            }}>
+            className={`page-tab ${filter === f ? 'active' : ''}`}>
             {f === 'all' ? 'All' : f === 'in_progress' ? 'In Progress' : f.charAt(0).toUpperCase() + f.slice(1)}
           </button>
         ))}
-        <button className="px-4 py-[8px] rounded-full text-[11px] font-bold cursor-pointer flex items-center gap-2 ml-auto"
-          style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#e8c487', fontFamily: 'Georgia, serif', border: 'none' }}>
+        <button className="btn-primary" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Plus size={13} /> Add Task
         </button>
       </div>
 
-      <div className="bg-white rounded-[14px] p-5"
-        style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+      <div className="card">
         {filtered.length === 0 && (
-          <div className="text-center py-8 text-[12px] italic" style={{ color: '#9b6fc4' }}>
+          <div style={{ textAlign: 'center', padding: '32px 0', fontSize: '12px', fontStyle: 'italic', color: '#9b6fc4' }}>
             No tasks match this filter
           </div>
         )}
         {filtered.map(t => (
-          <div key={t.id} className="flex items-center gap-4 py-3 cursor-pointer hover:bg-[rgba(232,196,135,0.08)] rounded-lg px-3"
-            style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
-            <button onClick={() => toggleStatus(t.id)} className="cursor-pointer" style={{ background: 'none', border: 'none', padding: 0 }}>
+          <div key={t.id} style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '12px', cursor: 'pointer', borderBottom: '1px solid rgba(98,52,145,0.06)', borderRadius: '8px', transition: 'background 0.18s' }}>
+            <button onClick={() => toggleStatus(t.id)} style={{ cursor: 'pointer', background: 'none', border: 'none', padding: 0 }}>
               {t.status === 'completed' ? (
                 <CheckCircle size={18} style={{ color: '#2a9d5c' }} />
               ) : t.status === 'in_progress' ? (
@@ -72,12 +63,18 @@ export default function TasksPage() {
                 <Circle size={18} style={{ color: '#9b6fc4' }} />
               )}
             </button>
-            <div className="flex-1">
-              <div className={`text-[12.5px] font-bold ${t.status === 'completed' ? 'line-through opacity-50' : ''}`}
-                style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{t.title}</div>
-              <div className="flex gap-2 mt-1">
+            <div style={{ flex: 1 }}>
+              <div style={{
+                fontSize: '12.5px',
+                fontWeight: 700,
+                fontFamily: 'Georgia, serif',
+                color: '#2d1a47',
+                textDecoration: t.status === 'completed' ? 'line-through' : 'none',
+                opacity: t.status === 'completed' ? 0.5 : 1,
+              }}>{t.title}</div>
+              <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
                 <span className="tag">{t.module}</span>
-                <span className="text-[10px]" style={{ color: '#7a5ea0' }}>{t.assigned} · Due {t.due}</span>
+                <span style={{ fontSize: '10px', color: '#7a5ea0' }}>{t.assigned} · Due {t.due}</span>
               </div>
             </div>
             <span className={`pill ${t.priority === 'high' ? 'pill-red' : t.priority === 'medium' ? 'pill-amber' : 'pill-purple'}`}>

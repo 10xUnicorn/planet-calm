@@ -20,39 +20,36 @@ const reviewQueue = [
 export default function WorksheetsPage() {
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div className="text-[12px]" style={{ color: '#7a5ea0', fontFamily: 'Georgia, serif' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+        <div style={{ fontSize: '12px', color: '#7a5ea0', fontFamily: 'Georgia, serif' }}>
           {reviewQueue.length} pending reviews &middot; {worksheets.length} templates
         </div>
-        <button className="px-4 py-2 rounded-[12px] text-[11px] font-bold cursor-pointer flex items-center gap-2"
-          style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#e8c487', fontFamily: 'Georgia, serif', border: 'none' }}>
+        <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Plus size={13} /> Create Template
         </button>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '24px' }}>
         {/* Templates */}
-        <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+        <div className="card">
+          <div className="section-title" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
             📝 Worksheet Templates
           </div>
           {worksheets.map(w => (
-            <div key={w.id} className="flex items-center justify-between py-3 cursor-pointer"
-              style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+            <div key={w.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', cursor: 'pointer', borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
               <div>
-                <div className="text-[12.5px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{w.title}</div>
-                <div className="flex gap-2 mt-1">
+                <div style={{ fontSize: '12.5px', fontWeight: 700, fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{w.title}</div>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
                   <span className="tag">{w.tier}</span>
-                  <span className="text-[10px]" style={{ color: '#9b6fc4' }}>{w.submissions} submissions</span>
+                  <span style={{ fontSize: '10px', color: '#9b6fc4' }}>{w.submissions} submissions</span>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="flex items-center gap-1 text-[10px]" style={{ color: '#2a9d5c' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10px', color: '#2a9d5c' }}>
                   <CheckCircle size={11} /> {w.reviewed}
                 </span>
                 {w.pending > 0 && (
-                  <span className="flex items-center gap-1 text-[10px]" style={{ color: '#9a6800' }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10px', color: '#9a6800' }}>
                     <Clock size={11} /> {w.pending}
                   </span>
                 )}
@@ -62,24 +59,21 @@ export default function WorksheetsPage() {
         </div>
 
         {/* Review Queue */}
-        <div className="bg-white rounded-[14px] p-5"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="flex items-center gap-2 text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+        <div className="card">
+          <div className="section-title" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
             📋 Coach Review Queue
           </div>
           {reviewQueue.map(r => (
-            <div key={r.id} className="flex items-center justify-between py-3 cursor-pointer hover:bg-[rgba(232,196,135,0.08)] rounded-lg px-2"
-              style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+            <div key={r.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 8px', cursor: 'pointer', borderBottom: '1px solid rgba(98,52,145,0.06)', borderRadius: '8px', transition: 'background 0.18s' }}>
               <div>
-                <div className="text-[12.5px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{r.client}</div>
-                <div className="text-[11px] italic" style={{ color: '#7a5ea0' }}>{r.worksheet}</div>
-                <div className="flex gap-2 mt-1">
+                <div style={{ fontSize: '12.5px', fontWeight: 700, fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{r.client}</div>
+                <div style={{ fontSize: '11px', fontStyle: 'italic', color: '#7a5ea0' }}>{r.worksheet}</div>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
                   <span className="tag">{r.tier}</span>
-                  <span className="text-[10px]" style={{ color: '#9b6fc4' }}>{r.submitted}</span>
+                  <span style={{ fontSize: '10px', color: '#9b6fc4' }}>{r.submitted}</span>
                 </div>
               </div>
-              <button className="flex items-center gap-1 px-3 py-[6px] rounded-[12px] text-[10.5px] font-bold cursor-pointer"
-                style={{ background: 'rgba(98,52,145,0.08)', color: '#623491', fontFamily: 'Georgia, serif', border: '1px solid rgba(98,52,145,0.15)' }}>
+              <button className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '6px 12px', fontSize: '10.5px' }}>
                 <Eye size={11} /> Review
               </button>
             </div>

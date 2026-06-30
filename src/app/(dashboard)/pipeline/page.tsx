@@ -28,24 +28,18 @@ export default function PipelinePage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <div className="text-[10px] font-bold tracking-[1.8px] uppercase mb-1"
-            style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>
+          <div style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', fontSize: '10px', fontWeight: 700, letterSpacing: '1.8px', textTransform: 'uppercase', marginBottom: '4px' }}>
             Pipeline Value
           </div>
-          <div className="text-[28px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+          <div style={{ fontFamily: 'Georgia, serif', color: '#2d1a47', fontSize: '28px', fontWeight: 700 }}>
             ${pipelineValue.toLocaleString()}
           </div>
         </div>
         <div className="flex gap-2">
           {['all', 'individual', 'barktype'].map((v) => (
             <button key={v} onClick={() => setView(v as typeof view)}
-              className="px-4 py-2 rounded-full text-[11.5px] font-bold transition-all cursor-pointer"
-              style={{
-                background: view === v ? 'linear-gradient(135deg,#623491,#9b6fc4)' : 'rgba(98,52,145,0.08)',
-                color: view === v ? '#e8c487' : '#623491',
-                border: view === v ? 'none' : '1px solid rgba(98,52,145,0.15)',
-                fontFamily: 'Georgia, serif',
-              }}>
+              className={view === v ? 'page-tab page-tab-active' : 'page-tab'}
+              style={{ padding: '8px 16px', fontSize: '11.5px' }}>
               {v === 'all' ? 'All Deals' : v === 'individual' ? 'Individual' : 'BARKType Orgs'}
             </button>
           ))}
@@ -57,37 +51,53 @@ export default function PipelinePage() {
         {stages.map((stage) => {
           const stageDeals = filteredDeals.filter(d => d.stage === stage.key)
           return (
-            <div key={stage.key} className="bg-white rounded-[14px] p-[14px]"
-              style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-              <div className="text-[10px] font-bold tracking-[1.5px] uppercase mb-[10px] pb-2"
-                style={{
-                  color: '#9b6fc4',
-                  fontFamily: 'Georgia, serif',
-                  borderBottom: `2px solid ${stage.borderColor}`,
-                }}>
+            <div key={stage.key} className="card" style={{ padding: '14px' }}>
+              <div style={{
+                color: '#9b6fc4',
+                fontFamily: 'Georgia, serif',
+                fontSize: '10px',
+                fontWeight: 700,
+                letterSpacing: '1.5px',
+                textTransform: 'uppercase',
+                marginBottom: '10px',
+                paddingBottom: '8px',
+                borderBottom: `2px solid ${stage.borderColor}`,
+              }}>
                 {stage.label}
-                <span className="ml-2 text-[9px] px-[5px] py-[1px] rounded-full"
-                  style={{ background: 'rgba(98,52,145,0.08)', color: '#623491' }}>
+                <span style={{
+                  marginLeft: '8px',
+                  fontSize: '9px',
+                  padding: '1px 5px',
+                  borderRadius: '9999px',
+                  background: 'rgba(98,52,145,0.08)',
+                  color: '#623491',
+                }}>
                   {stageDeals.length}
                 </span>
               </div>
               <div className="flex flex-col gap-2">
                 {stageDeals.map((deal) => (
-                  <div key={deal.id} className="rounded-[10px] p-[10px] cursor-pointer transition-shadow hover:shadow-md"
-                    style={{ background: '#f9f5fe', border: '1px solid rgba(98,52,145,0.1)' }}>
-                    <div className="text-[12px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+                  <div key={deal.id} style={{
+                    borderRadius: '10px',
+                    padding: '10px',
+                    cursor: 'pointer',
+                    background: '#f9f5fe',
+                    border: '1px solid rgba(98,52,145,0.1)',
+                    transition: 'box-shadow .18s',
+                  }}>
+                    <div style={{ fontFamily: 'Georgia, serif', color: '#2d1a47', fontSize: '12px', fontWeight: 700 }}>
                       {deal.name}
                     </div>
-                    <div className="text-[10.5px] italic mt-[2px]" style={{ color: '#7a5ea0' }}>
+                    <div style={{ color: '#7a5ea0', fontSize: '10.5px', fontStyle: 'italic', marginTop: '2px' }}>
                       {deal.offer}
                     </div>
-                    <div className="text-[11px] font-bold mt-1" style={{ fontFamily: 'Georgia, serif', color: '#623491' }}>
+                    <div style={{ fontFamily: 'Georgia, serif', color: '#623491', fontSize: '11px', fontWeight: 700, marginTop: '4px' }}>
                       {deal.value}
                     </div>
                   </div>
                 ))}
                 {stageDeals.length === 0 && (
-                  <div className="text-center py-6 text-[11px] italic" style={{ color: '#9b6fc4' }}>
+                  <div style={{ textAlign: 'center', padding: '24px 0', fontSize: '11px', fontStyle: 'italic', color: '#9b6fc4' }}>
                     No deals
                   </div>
                 )}

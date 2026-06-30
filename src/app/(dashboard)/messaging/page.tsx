@@ -57,32 +57,33 @@ export default function MessagingPage() {
   }
 
   return (
-    <div className="grid gap-4" style={{ gridTemplateColumns: '320px 1fr', height: 'calc(100vh - 120px)' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '16px', height: 'calc(100vh - 120px)' }}>
       {/* Thread List */}
-      <div className="bg-white rounded-[14px] overflow-hidden flex flex-col"
-        style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-        <div className="p-4 flex items-center justify-between" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
-          <div className="text-[13px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>Messages</div>
-          <button className="p-2 rounded-full cursor-pointer" style={{ background: 'rgba(98,52,145,0.08)' }}>
+      <div className="card" style={{ padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+          <div className="section-title">Messages</div>
+          <button style={{ padding: '8px', borderRadius: '50%', cursor: 'pointer', background: 'rgba(98,52,145,0.08)', border: 'none' }}>
             <Users size={14} style={{ color: '#623491' }} />
           </button>
         </div>
-        <div className="flex-1 overflow-y-auto">
+        <div style={{ flex: 1, overflowY: 'auto' }}>
           {demoThreads.map(t => (
             <div key={t.id} onClick={() => setActiveThread(t.id)}
-              className="px-4 py-3 cursor-pointer transition-all"
               style={{
+                padding: '12px 16px',
+                cursor: 'pointer',
+                transition: 'all 0.18s',
                 background: activeThread === t.id ? 'rgba(232,196,135,0.15)' : 'transparent',
                 borderLeft: activeThread === t.id ? '3px solid #e8c487' : '3px solid transparent',
                 borderBottom: '1px solid rgba(98,52,145,0.06)',
               }}>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-[12.5px] font-bold" style={{ color: '#2d1a47', fontFamily: 'Georgia, serif' }}>{t.name}</span>
-                <span className="text-[10px]" style={{ color: '#9b6fc4' }}>{t.time}</span>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                <span style={{ fontSize: '12.5px', fontWeight: 700, color: '#2d1a47', fontFamily: 'Georgia, serif' }}>{t.name}</span>
+                <span style={{ fontSize: '10px', color: '#9b6fc4' }}>{t.time}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-[11px] truncate flex-1" style={{ color: '#7a5ea0' }}>{t.preview}</span>
-                {t.unread && <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: '#e8c487' }} />}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '11px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1, color: '#7a5ea0' }}>{t.preview}</span>
+                {t.unread && <span style={{ width: '8px', height: '8px', borderRadius: '50%', flexShrink: 0, background: '#e8c487' }} />}
               </div>
             </div>
           ))}
@@ -90,41 +91,41 @@ export default function MessagingPage() {
       </div>
 
       {/* Chat Area */}
-      <div className="bg-white rounded-[14px] overflow-hidden flex flex-col"
-        style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
+      <div className="card" style={{ padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
         {/* Header */}
-        <div className="p-4 flex items-center gap-3" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
-          <div className="w-9 h-9 rounded-full flex items-center justify-center text-[12px] font-bold text-white"
-            style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)' }}>
+        <div style={{ padding: '16px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+          <div style={{ width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 700, color: '#fff', background: 'linear-gradient(135deg,#623491,#9b6fc4)' }}>
             {currentThread.initials}
           </div>
           <div>
-            <div className="text-[13px] font-bold" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{currentThread.name}</div>
-            <div className="text-[10px]" style={{ color: '#9b6fc4' }}>{currentThread.tier} · Online</div>
+            <div style={{ fontSize: '13px', fontWeight: 700, fontFamily: 'Georgia, serif', color: '#2d1a47' }}>{currentThread.name}</div>
+            <div style={{ fontSize: '10px', color: '#9b6fc4' }}>{currentThread.tier} · Online</div>
           </div>
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-3">
+        <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {currentMessages.map((m, i) => (
-            <div key={i} className={`flex ${m.fromMe ? 'justify-end' : 'justify-start'}`}>
-              <div className="max-w-[70%] rounded-[12px] px-4 py-3"
-                style={{
-                  background: m.fromMe ? 'linear-gradient(135deg,#623491,#9b6fc4)' : '#f9f5fe',
-                  color: m.fromMe ? '#fff' : '#2d1a47',
-                  border: m.fromMe ? 'none' : '1px solid rgba(98,52,145,0.1)',
-                }}>
-                <div className="text-[12.5px] leading-[1.6]" style={{ fontFamily: 'Georgia, serif' }}>{m.text}</div>
-                <div className="text-[9px] mt-1 text-right" style={{ color: m.fromMe ? 'rgba(255,255,255,0.6)' : '#9b6fc4' }}>{m.time}</div>
+            <div key={i} style={{ display: 'flex', justifyContent: m.fromMe ? 'flex-end' : 'flex-start' }}>
+              <div style={{
+                maxWidth: '70%',
+                borderRadius: '12px',
+                padding: '12px 16px',
+                background: m.fromMe ? 'linear-gradient(135deg,#623491,#9b6fc4)' : '#f9f5fe',
+                color: m.fromMe ? '#fff' : '#2d1a47',
+                border: m.fromMe ? 'none' : '1px solid rgba(98,52,145,0.1)',
+              }}>
+                <div style={{ fontSize: '12.5px', lineHeight: 1.6, fontFamily: 'Georgia, serif' }}>{m.text}</div>
+                <div style={{ fontSize: '9px', marginTop: '4px', textAlign: 'right', color: m.fromMe ? 'rgba(255,255,255,0.6)' : '#9b6fc4' }}>{m.time}</div>
               </div>
             </div>
           ))}
         </div>
 
         {/* Composer */}
-        <div className="p-4" style={{ borderTop: '1px solid rgba(98,52,145,0.06)' }}>
-          <form onSubmit={(e) => { e.preventDefault(); handleSend() }} className="flex items-center gap-2">
-            <button type="button" className="p-2 rounded-full cursor-pointer" style={{ background: 'rgba(98,52,145,0.08)' }}>
+        <div style={{ padding: '16px', borderTop: '1px solid rgba(98,52,145,0.06)' }}>
+          <form onSubmit={(e) => { e.preventDefault(); handleSend() }} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <button type="button" style={{ padding: '8px', borderRadius: '50%', cursor: 'pointer', background: 'rgba(98,52,145,0.08)', border: 'none' }}>
               <Paperclip size={14} style={{ color: '#623491' }} />
             </button>
             <input
@@ -132,11 +133,10 @@ export default function MessagingPage() {
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="Type a message..."
-              className="flex-1 px-4 py-[9px] rounded-xl text-[12.5px] outline-none"
-              style={{ border: '1px solid rgba(98,52,145,0.2)', fontFamily: 'Georgia, serif', color: '#2d1a47' }}
+              className="form-input"
+              style={{ flex: 1 }}
             />
-            <button type="submit" className="p-2 rounded-full cursor-pointer"
-              style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)' }}>
+            <button type="submit" style={{ padding: '8px', borderRadius: '50%', cursor: 'pointer', background: 'linear-gradient(135deg,#623491,#9b6fc4)', border: 'none' }}>
               <Send size={14} style={{ color: '#e8c487' }} />
             </button>
           </form>

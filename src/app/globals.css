@@ -18,15 +18,48 @@
   --color-border-accent: rgba(232, 196, 135, 0.18);
 }
 
+/* ══════════════════════════════════════════════════════
+   BASE OVERRIDES — Tailwind preflight strips borders,
+   resets fonts, etc. We restore the mockup defaults.
+   ══════════════════════════════════════════════════════ */
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'Georgia', serif;
-  background: var(--color-bg);
-  color: var(--color-text);
+  font-family: 'Georgia', serif !important;
+  background: #f5eef8 !important;
+  color: #2d1a47;
   min-height: 100vh;
   font-size: 13px;
 }
+
+/* Force Georgia on everything — Tailwind preflight sets sans-serif */
+*, *::before, *::after {
+  font-family: inherit;
+}
+
+/* Restore table border-collapse that Tailwind may override */
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #9b6fc4;
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 2px solid rgba(98,52,145,0.1);
+  font-family: 'Georgia', serif;
+}
+tbody td {
+  padding: 11px 12px;
+  border-bottom: 1px solid rgba(98,52,145,0.06);
+  font-size: 12.5px;
+  color: #2d1a47;
+  vertical-align: middle;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: rgba(232,196,135,0.08); }
 
 /* ── Focus & Keyboard Navigation ── */
 *:focus-visible {
@@ -34,40 +67,27 @@ body {
   outline-offset: 2px;
   border-radius: 4px;
 }
+*:focus:not(:focus-visible) { outline: none; }
 
-/* Remove default outline for mouse users */
-*:focus:not(:focus-visible) {
-  outline: none;
-}
+/* ── Global Transitions ── */
+a, button, [role="button"] { cursor: pointer; transition: all .18s; }
+input, select, textarea { transition: border-color .2s, box-shadow .2s; }
 
-/* ── Global Interactive Transitions ── */
-a, button, [role="button"], input, select, textarea {
-  transition: all 200ms ease;
-}
-
-a, button, [role="button"] {
-  cursor: pointer;
-}
-
-/* ── Input Focus Styles ── */
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid #623491;
-  outline-offset: 1px;
-  border-color: #623491;
-  box-shadow: 0 0 0 3px rgba(98, 52, 145, 0.15);
+/* ── Input Focus ── */
+input:focus, select:focus, textarea:focus {
+  border-color: #623491 !important;
+  box-shadow: 0 0 0 3px rgba(98, 52, 145, 0.1);
 }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb { background: var(--color-primary-lighter); border-radius: 3px; }
+::-webkit-scrollbar-track { background: #f5eef8; }
+::-webkit-scrollbar-thumb { background: #c4a8e0; border-radius: 3px; }
 
-/* ── Status Pills ── */
+/* ══════ STATUS PILLS ══════ */
 .pill {
   display: inline-block;
-  padding: 4px 12px;
+  padding: 3px 10px;
   border-radius: 20px;
   font-size: 10.5px;
   font-weight: 700;
@@ -82,7 +102,7 @@ textarea:focus-visible {
 .pill-blue { background: #e4edf5; color: #1a5a8a; }
 .pill-gold { background: linear-gradient(135deg, #fdf0d0, #f5e0a0); color: #7a5500; border: 1px solid rgba(232, 196, 135, 0.6); }
 
-/* ── Tags ── */
+/* ══════ TAGS ══════ */
 .tag {
   display: inline-block;
   background: #ede4f5;
@@ -95,7 +115,7 @@ textarea:focus-visible {
   letter-spacing: .3px;
 }
 
-/* ── AI Chip ── */
+/* ══════ AI CHIP ══════ */
 .ai-chip {
   display: inline-flex;
   align-items: center;
@@ -103,46 +123,185 @@ textarea:focus-visible {
   background: linear-gradient(135deg, #2d1a47, #623491);
   color: #e8c487;
   font-size: 10.5px;
-  padding: 5px 12px;
+  padding: 4px 10px;
   border-radius: 20px;
   font-weight: 700;
   font-family: 'Georgia', serif;
   text-decoration: none;
   cursor: pointer;
-  border: 1px solid rgba(232, 196, 135, 0.25);
 }
 .ai-chip:hover {
   background: linear-gradient(135deg, #3a2258, #7442a8);
-  border-color: rgba(232, 196, 135, 0.45);
 }
 
-/* ── Sidebar Nav Hover ── */
-.sidebar-nav-link:hover {
-  background: rgba(232, 196, 135, 0.08) !important;
-  color: #e8c487 !important;
+/* ══════ TOPBAR BUTTON ══════ */
+.topbar-btn {
+  background: rgba(98,52,145,0.08);
+  border: 1px solid rgba(98,52,145,0.18);
+  color: #623491;
+  font-size: 11.5px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Georgia', serif;
 }
-
-/* ── Topbar Button Hover States ── */
 .topbar-btn:hover {
-  background: rgba(98, 52, 145, 0.14) !important;
-  border-color: rgba(98, 52, 145, 0.3) !important;
+  background: #623491;
+  color: #e8c487;
 }
 
-.topbar-icon-btn:hover {
-  background: rgba(98, 52, 145, 0.08) !important;
-}
-
-.topbar-avatar:hover {
-  opacity: 0.85;
-  box-shadow: 0 3px 12px rgba(98, 52, 145, 0.35) !important;
-}
-
-/* ── Progress Bar ── */
-.progress-bar { height: 6px; background: rgba(98, 52, 145, 0.12); border-radius: 3px; margin-top: 6px; overflow: hidden; }
+/* ══════ PROGRESS BAR ══════ */
+.progress-bar { height: 6px; background: rgba(98,52,145,0.12); border-radius: 3px; margin-top: 6px; overflow: hidden; }
 .progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #623491, #e8c487); }
 
-/* ── Gold Accent ── */
+/* ══════ MISC ══════ */
 .gold-accent { color: #b8860b; font-weight: 700; }
 
-/* ── KPI Card Gradient Top ── */
-.kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #623491, #e8c487); }
+/* ══════ CARD ══════ */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid rgba(98,52,145,0.1);
+  box-shadow: 0 2px 16px rgba(98,52,145,0.06);
+}
+
+/* ══════ KPI CARD ══════ */
+.kpi-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 22px;
+  border: 1px solid rgba(98,52,145,0.1);
+  box-shadow: 0 2px 16px rgba(98,52,145,0.06);
+  position: relative;
+  overflow: hidden;
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #623491, #e8c487);
+}
+
+/* ══════ SECTION HEADERS ══════ */
+.section-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2d1a47;
+  letter-spacing: .3px;
+}
+.section-action {
+  font-size: 11.5px;
+  color: #623491;
+  cursor: pointer;
+  font-family: 'Georgia', serif;
+  text-decoration: underline;
+  text-decoration-color: rgba(98,52,145,0.3);
+}
+
+/* ══════ FORM COMPONENTS (from approved mockup) ══════ */
+.form-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #9b6fc4;
+  margin-bottom: 6px;
+  font-family: 'Georgia', serif;
+}
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(98,52,145,0.15);
+  font-family: 'Georgia', serif;
+  font-size: 12.5px;
+  color: #2d1a47;
+  background: #faf8fc;
+  outline: none;
+}
+.form-input:focus { border-color: #623491; }
+.form-select {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(98,52,145,0.15);
+  font-family: 'Georgia', serif;
+  font-size: 12.5px;
+  color: #2d1a47;
+  background: #faf8fc;
+  outline: none;
+}
+
+/* ══════ SEARCH BAR ══════ */
+.search-bar {
+  position: relative;
+  max-width: 320px;
+}
+.search-bar input {
+  width: 100%;
+  padding: 9px 14px 9px 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(98,52,145,0.15);
+  font-family: 'Georgia', serif;
+  font-size: 12.5px;
+  color: #2d1a47;
+  background: #faf8fc;
+  outline: none;
+}
+
+/* ══════ PAGE TABS ══════ */
+.page-tab {
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Georgia', serif;
+  cursor: pointer;
+  border: none;
+  border-radius: 20px;
+  color: #623491;
+  background: rgba(98,52,145,0.06);
+  transition: all .2s;
+}
+.page-tab:hover { background: rgba(98,52,145,0.12); }
+.page-tab.active, .page-tab-active {
+  background: linear-gradient(135deg, #623491, #9b6fc4);
+  color: #e8c487;
+  box-shadow: 0 2px 10px rgba(98,52,145,0.3);
+}
+
+/* ══════ BUTTONS ══════ */
+.btn-primary {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #623491, #7d4db5);
+  color: #e8c487;
+  font-family: 'Georgia', serif;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(98,52,145,0.25);
+}
+.btn-primary:hover { opacity: .85; }
+.btn-secondary {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: rgba(98,52,145,0.06);
+  color: #623491;
+  font-family: 'Georgia', serif;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid rgba(98,52,145,0.15);
+  cursor: pointer;
+}
+.btn-secondary:hover { background: rgba(98,52,145,0.12); }

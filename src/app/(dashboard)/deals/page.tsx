@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Plus, Tag, Percent, DollarSign } from 'lucide-react'
+import { Plus, Percent, DollarSign } from 'lucide-react'
 
 const demoDeals = [
   { id: '1', name: 'Founding Council Discount', type: 'percent', value: 20, products: ['Calm Council'], start: '2026-06-01', end: '2026-08-31', limit: 10, used: 3, active: true },
@@ -16,92 +16,85 @@ export default function DealsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div className="text-[12px]" style={{ color: '#7a5ea0', fontFamily: 'Georgia, serif' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+        <div style={{ fontSize: '12px', color: '#7a5ea0', fontFamily: 'Georgia, serif' }}>
           {demoDeals.filter(d => d.active).length} active deals · {demoDeals.reduce((s, d) => s + d.used, 0)} total redemptions
         </div>
-        <button onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 rounded-full text-[11px] font-bold cursor-pointer flex items-center gap-2"
-          style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#e8c487', fontFamily: 'Georgia, serif', border: 'none' }}>
+        <button onClick={() => setShowForm(!showForm)} className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Plus size={13} /> Create Deal
         </button>
       </div>
 
       {showForm && (
-        <div className="bg-white rounded-[14px] p-6 mb-6"
-          style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-          <div className="text-[14px] font-bold mb-4" style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>New Deal</div>
-          <div className="grid grid-cols-2 gap-4">
+        <div className="card" style={{ marginBottom: '24px' }}>
+          <div className="section-title" style={{ marginBottom: '16px' }}>New Deal</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: '#9b6fc4' }}>Deal Name</label>
-              <input className="w-full px-3 py-2 rounded-lg text-[12px] outline-none" style={{ border: '1px solid rgba(98,52,145,0.2)', fontFamily: 'Georgia, serif' }} placeholder="e.g. Summer Launch Special" />
+              <label className="form-label">Deal Name</label>
+              <input className="form-input" placeholder="e.g. Summer Launch Special" />
             </div>
             <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: '#9b6fc4' }}>Discount Type</label>
-              <select className="w-full px-3 py-2 rounded-lg text-[12px] outline-none" style={{ border: '1px solid rgba(98,52,145,0.2)', fontFamily: 'Georgia, serif' }}>
+              <label className="form-label">Discount Type</label>
+              <select className="form-select">
                 <option>Percentage</option>
                 <option>Flat Amount</option>
               </select>
             </div>
             <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: '#9b6fc4' }}>Value</label>
-              <input type="number" className="w-full px-3 py-2 rounded-lg text-[12px] outline-none" style={{ border: '1px solid rgba(98,52,145,0.2)', fontFamily: 'Georgia, serif' }} placeholder="20" />
+              <label className="form-label">Value</label>
+              <input type="number" className="form-input" placeholder="20" />
             </div>
             <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: '#9b6fc4' }}>Usage Limit</label>
-              <input type="number" className="w-full px-3 py-2 rounded-lg text-[12px] outline-none" style={{ border: '1px solid rgba(98,52,145,0.2)', fontFamily: 'Georgia, serif' }} placeholder="100" />
+              <label className="form-label">Usage Limit</label>
+              <input type="number" className="form-input" placeholder="100" />
             </div>
           </div>
-          <div className="flex gap-2 mt-4">
-            <button className="px-4 py-2 rounded-full text-[11px] font-bold cursor-pointer"
-              style={{ background: 'linear-gradient(135deg,#623491,#9b6fc4)', color: '#e8c487', fontFamily: 'Georgia, serif', border: 'none' }}>
+          <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
+            <button className="btn-primary">
               Create & Sync to Stripe
             </button>
-            <button onClick={() => setShowForm(false)} className="px-4 py-2 rounded-full text-[11px] cursor-pointer"
-              style={{ background: 'rgba(98,52,145,0.08)', color: '#623491', fontFamily: 'Georgia, serif', border: '1px solid rgba(98,52,145,0.15)' }}>
+            <button onClick={() => setShowForm(false)} className="btn-secondary">
               Cancel
             </button>
           </div>
         </div>
       )}
 
-      <div className="bg-white rounded-[14px] p-5"
-        style={{ border: '1px solid rgba(98,52,145,0.1)', boxShadow: '0 2px 16px rgba(98,52,145,0.06)' }}>
-        <table className="w-full">
+      <div className="card">
+        <table>
           <thead>
             <tr>
               {['Deal', 'Type', 'Value', 'Products', 'Period', 'Usage', 'Status'].map(h => (
-                <th key={h} className="text-left text-[10px] font-bold tracking-[1.5px] uppercase pb-2 px-3"
-                  style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif', borderBottom: '2px solid rgba(98,52,145,0.1)' }}>{h}</th>
+                <th key={h}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {demoDeals.map((deal) => (
-              <tr key={deal.id} className="hover:bg-[rgba(232,196,135,0.08)] cursor-pointer">
-                <td className="py-[11px] px-3 text-[12.5px] font-bold" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#2d1a47' }}>
+              <tr key={deal.id} style={{ cursor: 'pointer' }}>
+                <td style={{ fontWeight: 700, color: '#2d1a47' }}>
                   {deal.name}
                 </td>
-                <td className="py-[11px] px-3" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
-                  <span className="flex items-center gap-1 text-[11px]" style={{ color: '#623491' }}>
+                <td>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#623491' }}>
                     {deal.type === 'percent' ? <Percent size={11} /> : <DollarSign size={11} />}
                     {deal.type === 'percent' ? 'Percent' : 'Flat'}
                   </span>
                 </td>
-                <td className="py-[11px] px-3 text-[12.5px] font-bold" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#623491' }}>
+                <td style={{ fontWeight: 700, color: '#623491' }}>
                   {deal.type === 'percent' ? `${deal.value}%` : `$${deal.value}`}
                 </td>
-                <td className="py-[11px] px-3" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+                <td>
                   {deal.products.map((p, i) => <span key={i} className="tag">{p}</span>)}
                 </td>
-                <td className="py-[11px] px-3 text-[11px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)', color: '#7a5ea0' }}>
+                <td style={{ fontSize: '11px', color: '#7a5ea0' }}>
                   {deal.start} — {deal.end || 'Ongoing'}
                 </td>
-                <td className="py-[11px] px-3 text-[12px]" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
-                  <span className="font-bold" style={{ color: '#623491' }}>{deal.used}</span>
+                <td style={{ fontSize: '12px' }}>
+                  <span style={{ fontWeight: 700, color: '#623491' }}>{deal.used}</span>
                   <span style={{ color: '#9b6fc4' }}>/{deal.limit || '∞'}</span>
                 </td>
-                <td className="py-[11px] px-3" style={{ borderBottom: '1px solid rgba(98,52,145,0.06)' }}>
+                <td>
                   <span className={`pill ${deal.active ? 'pill-green' : 'pill-red'}`}>
                     {deal.active ? 'Active' : 'Expired'}
                   </span>

@@ -33,124 +33,104 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4"
-      style={{ background: 'linear-gradient(160deg, #f5eef8 0%, #ede4f5 40%, #fdf8ec 100%)' }}>
-      <div className="w-full max-w-[400px]">
+    <div style={{
+      minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
+      background: 'linear-gradient(160deg, #f5eef8 0%, #ede4f5 40%, #fdf8ec 100%)', padding: '0 16px',
+    }}>
+      <div style={{ width: '100%', maxWidth: 400 }}>
         {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="w-[130px] h-[130px] mx-auto mb-5 rounded-full flex items-center justify-center overflow-hidden"
-            style={{ background: '#2d1a47', boxShadow: '0 8px 40px rgba(45,26,71,0.35)' }}>
+        <div style={{ textAlign: 'center', marginBottom: 24 }}>
+          <div style={{
+            width: 130, height: 130, margin: '0 auto 20px', borderRadius: '50%',
+            background: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            overflow: 'hidden', boxShadow: '0 8px 40px rgba(45,26,71,0.15)',
+          }}>
             <img
               src="https://trpnlkntvulkjerevngm.supabase.co/storage/v1/object/public/dashboard-assets/logos/1782362694767-Planet_Calm_Logo.png"
               alt="Planet Calm"
-              className="w-[110px] h-[110px] object-contain"
-              style={{ mixBlendMode: 'lighten' }}
+              style={{ width: 120, height: 120, objectFit: 'contain' }}
               onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
             />
           </div>
-          <h1 className="text-[28px] font-bold tracking-[-0.5px]"
-            style={{ fontFamily: 'Georgia, serif', color: '#2d1a47' }}>
+          <div style={{ fontFamily: 'Georgia, serif', fontSize: 28, fontWeight: 700, color: '#2d1a47', letterSpacing: '-.5px' }}>
             Welcome Back
-          </h1>
-          <p className="text-[13px] italic mt-2"
-            style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>
+          </div>
+          <div style={{ fontFamily: 'Georgia, serif', fontSize: 13, color: '#9b6fc4', fontStyle: 'italic', marginTop: 6 }}>
             Calm-First Leadership Dashboard
-          </p>
+          </div>
         </div>
 
-        {/* Form Card */}
-        <div className="rounded-[20px] p-8"
-          style={{
-            background: '#ffffff',
-            border: '1px solid #d6c8e4',
-            boxShadow: '0 8px 40px rgba(98,52,145,0.12), 0 2px 6px rgba(98,52,145,0.06)',
-          }}>
+        {/* Card */}
+        <div style={{
+          background: '#fff', borderRadius: 20, padding: 32,
+          border: '1px solid rgba(98,52,145,0.12)',
+          boxShadow: '0 8px 40px rgba(98,52,145,0.1), 0 2px 8px rgba(98,52,145,0.05)',
+        }}>
           {error && typeof error === 'string' && error.length > 0 && (
-            <div className="mb-5 p-3 rounded-[12px] text-[12.5px]"
-              style={{ background: '#fde8e8', color: '#c0392b', fontFamily: 'Georgia, serif', border: '1px solid #f5c6c6' }}>
-              {error}
-            </div>
+            <div style={{
+              marginBottom: 20, padding: 12, borderRadius: 12,
+              background: '#fde8e8', color: '#c0392b', fontSize: '12.5px', fontFamily: 'Georgia, serif',
+            }}>{error}</div>
           )}
 
           <form onSubmit={handleLogin}>
-            <div className="mb-5">
-              <label className="block text-[10px] font-bold uppercase tracking-[1.8px] mb-2"
-                style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>
-                Email
-              </label>
+            <div style={{ marginBottom: 20 }}>
+              <label style={{
+                display: 'block', fontSize: 10, fontWeight: 700, letterSpacing: '1.8px',
+                textTransform: 'uppercase' as const, color: '#9b6fc4', marginBottom: 8, fontFamily: 'Georgia, serif',
+              }}>Email</label>
               <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full px-4 py-[13px] rounded-[12px] text-[14px] outline-none"
-                style={{
-                  border: '2px solid #d6c8e4',
-                  fontFamily: 'Georgia, serif',
-                  color: '#2d1a47',
-                  background: '#faf8fc',
-                }}
-                onFocus={(e) => { e.target.style.borderColor = '#623491'; e.target.style.boxShadow = '0 0 0 3px rgba(98,52,145,0.12)' }}
-                onBlur={(e) => { e.target.style.borderColor = '#d6c8e4'; e.target.style.boxShadow = 'none' }}
+                type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
                 placeholder="you@example.com"
-              />
-            </div>
-
-            <div className="mb-7">
-              <label className="block text-[10px] font-bold uppercase tracking-[1.8px] mb-2"
-                style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>
-                Password
-              </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full px-4 py-[13px] rounded-[12px] text-[14px] outline-none"
                 style={{
-                  border: '2px solid #d6c8e4',
-                  fontFamily: 'Georgia, serif',
-                  color: '#2d1a47',
-                  background: '#faf8fc',
+                  width: '100%', padding: '13px 16px', borderRadius: 12,
+                  border: '1.5px solid rgba(98,52,145,0.18)', fontFamily: 'Georgia, serif',
+                  fontSize: 14, color: '#2d1a47', background: '#faf8fc', outline: 'none',
                 }}
-                onFocus={(e) => { e.target.style.borderColor = '#623491'; e.target.style.boxShadow = '0 0 0 3px rgba(98,52,145,0.12)' }}
-                onBlur={(e) => { e.target.style.borderColor = '#d6c8e4'; e.target.style.boxShadow = 'none' }}
-                placeholder="Enter your password"
               />
             </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-[14px] rounded-[12px] text-[14px] font-bold cursor-pointer disabled:opacity-60"
-              style={{
-                background: 'linear-gradient(135deg, #623491, #7d4db5)',
-                color: '#e8c487',
-                fontFamily: 'Georgia, serif',
-                border: 'none',
-                letterSpacing: '.5px',
-                boxShadow: '0 6px 20px rgba(98,52,145,0.35)',
-              }}>
+            <div style={{ marginBottom: 28 }}>
+              <label style={{
+                display: 'block', fontSize: 10, fontWeight: 700, letterSpacing: '1.8px',
+                textTransform: 'uppercase' as const, color: '#9b6fc4', marginBottom: 8, fontFamily: 'Georgia, serif',
+              }}>Password</label>
+              <input
+                type="password" value={password} onChange={(e) => setPassword(e.target.value)} required
+                placeholder="Enter your password"
+                style={{
+                  width: '100%', padding: '13px 16px', borderRadius: 12,
+                  border: '1.5px solid rgba(98,52,145,0.18)', fontFamily: 'Georgia, serif',
+                  fontSize: 14, color: '#2d1a47', background: '#faf8fc', outline: 'none',
+                }}
+              />
+            </div>
+            <button type="submit" disabled={loading} style={{
+              width: '100%', padding: 14, borderRadius: 12,
+              background: 'linear-gradient(135deg, #623491, #7d4db5)',
+              color: '#e8c487', fontFamily: 'Georgia, serif', fontSize: 14, fontWeight: 700,
+              border: 'none', cursor: 'pointer', letterSpacing: '.5px',
+              boxShadow: '0 6px 20px rgba(98,52,145,0.35)',
+              opacity: loading ? 0.6 : 1,
+            }}>
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
-          <div className="flex justify-between mt-5 text-[12px]" style={{ fontFamily: 'Georgia, serif' }}>
-            <Link href="/reset-password" className="hover:opacity-70"
-              style={{ color: '#623491', textDecoration: 'none', borderBottom: '1px solid #c4a8e0' }}>
-              Forgot password?
-            </Link>
-            <Link href="/register" className="hover:opacity-70"
-              style={{ color: '#623491', textDecoration: 'none', borderBottom: '1px solid #c4a8e0' }}>
-              Create account
-            </Link>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 20 }}>
+            <Link href="/reset-password" style={{
+              fontSize: 12, color: '#623491', textDecoration: 'none',
+              borderBottom: '1px solid rgba(98,52,145,0.25)', fontFamily: 'Georgia, serif',
+            }}>Forgot password?</Link>
+            <Link href="/register" style={{
+              fontSize: 12, color: '#623491', textDecoration: 'none',
+              borderBottom: '1px solid rgba(98,52,145,0.25)', fontFamily: 'Georgia, serif',
+            }}>Create account</Link>
           </div>
         </div>
 
-        <p className="text-center mt-6 text-[10px] tracking-wider"
-          style={{ color: '#9b6fc4', fontFamily: 'Georgia, serif' }}>
+        <div style={{ textAlign: 'center', marginTop: 24, fontSize: 10, color: '#9b6fc4', letterSpacing: '1px', fontFamily: 'Georgia, serif' }}>
           PLANET CALM &copy; 2026 &middot; Calm-First Leadership
-        </p>
+        </div>
       </div>
     </div>
   )
