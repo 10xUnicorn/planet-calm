@@ -101,8 +101,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           )}
         </div>
 
-        {/* Nav Groups */}
-        <div className="flex-1 overflow-y-auto">
+        {/* Nav Groups — scrollable region */}
+        <div className="sidebar-scroll">
           {navGroups.map((group) => (
             <div key={group.label} style={{ padding: '14px 0 4px' }}>
               <div style={{

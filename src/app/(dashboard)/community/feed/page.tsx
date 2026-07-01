@@ -135,6 +135,7 @@ export default function CommunityFeedPage() {
       const { data } = await supabase
         .from('community_spaces')
         .select('id, name, emoji, description')
+        .eq('is_archived', false)
         .order('sort_order', { ascending: true })
       if (data) setSpaces(data)
     }

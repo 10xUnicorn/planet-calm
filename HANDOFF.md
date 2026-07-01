@@ -7,6 +7,11 @@
 **Vercel:** daniel-8142s-projects/planet-calm
 **Knight Ops Build ID:** 245fc5e2-db73-4a48-bd1c-d52e175617a1
 
+> **📚 SOURCE OF TRUTH — Heartbeat KB:** `Knight Ops/Planet Calm KB/` in the Obsidian vault. Live Heartbeat community fully cataloged 2026-07-01 (6 sections, 7 channels, 4 courses, 3 recurring events, member/matching fields). See `Heartbeat-vs-Dashboard-Gap-Analysis.md` for the prioritized build backlog.
+
+## Changelog
+- **2026-07-01:** Fixed sidebar scroll bug (`.sidebar-nav` bounded to `height:100vh` + `.sidebar-scroll` child with `min-height:0`). Bottom nav items (AI Brain, Reports & KPIs, My Account, Settings) are now reachable. Built Heartbeat KB in Obsidian vault.
+
 ---
 
 ## Stack

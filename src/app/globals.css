@@ -313,14 +313,32 @@ input:focus, select:focus, textarea:focus {
 /* ── Sidebar base (desktop) ── */
 .sidebar-nav {
   width: 240px;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
+/* Inner scroll region — must have min-height:0 so it can shrink and scroll
+   inside the bounded flex column instead of growing past the viewport */
+.sidebar-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(232,196,135,0.35) transparent;
+}
+.sidebar-scroll::-webkit-scrollbar { width: 6px; }
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: rgba(232,196,135,0.3);
+  border-radius: 6px;
+}
+.sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
 
 /* ── Backdrop (hidden on desktop) ── */
 .sidebar-backdrop {
