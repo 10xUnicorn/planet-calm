@@ -13,6 +13,13 @@ const navGroups = [
     ],
   },
   {
+    label: 'Community',
+    items: [
+      { label: 'Feed', href: '/community/feed', icon: '🐾' },
+      { label: 'Members', href: '/community/members', icon: '👥' },
+    ],
+  },
+  {
     label: 'Growth',
     items: [
       { label: 'Journey & Pipeline', href: '/pipeline', icon: '🗺️' },
@@ -22,8 +29,16 @@ const navGroups = [
   {
     label: 'Content & Revenue',
     items: [
+      { label: 'Courses (Admin)', href: '/courses', icon: '📚' },
       { label: 'Content & Book Launch', href: '/content', icon: '📖' },
       { label: 'Payments & Finance', href: '/payments', icon: '💳' },
+    ],
+  },
+  {
+    label: 'Connect',
+    items: [
+      { label: 'Events', href: '/events', icon: '📅' },
+      { label: 'Messaging', href: '/messaging', icon: '💬' },
     ],
   },
   {
@@ -31,6 +46,13 @@ const navGroups = [
     items: [
       { label: 'AI Brain', href: '/ai-brain', icon: '🤖' },
       { label: 'Reports & KPIs', href: '/kpis', icon: '📊', badge: 3 },
+    ],
+  },
+  {
+    label: 'My Account',
+    items: [
+      { label: 'My Resources', href: '/resources', icon: '🌿' },
+      { label: 'My Pets', href: '/pets', icon: '🐕' },
     ],
   },
   {
