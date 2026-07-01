@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { createClient } from '@/lib/supabase-browser'
+import Composer from '@/components/Composer'
+import { tokenizeMentions, mediaKind, type MentionTarget } from '@/lib/community'
 
 /* ── Types ── */
 interface Post {
@@ -16,6 +18,7 @@ interface Post {
   space: { name: string; emoji: string } | null
   reactions: Reaction[]
   reply_count: number
+  children?: Post[]
 }
 
 interface Reaction {
@@ -107,19 +110,15 @@ export default function CommunityFeedPage() {
 
   const [posts, setPosts] = useState<Post[]>([])
   const [spaces, setSpaces] = useState<Space[]>([])
+  const [mentionTargets, setMentionTargets] = useState<MentionTarget[]>([])
   const [activeSpace, setActiveSpace] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [userId, setUserId] = useState<string | null>(null)
 
-  // Composer state
-  const [composerText, setComposerText] = useState('')
-  const [composerSpace, setComposerSpace] = useState<string>('')
-  const [posting, setPosting] = useState(false)
-
   // Reply view
   const [viewingPost, setViewingPost] = useState<Post | null>(null)
   const [replies, setReplies] = useState<Post[]>([])
-  const [replyText, setReplyText] = useState('')
+  const [replyingTo, setReplyingTo] = useState<string | null>(null)
   const [loadingReplies, setLoadingReplies] = useState(false)
 
   // Get current user
@@ -129,17 +128,33 @@ export default function CommunityFeedPage() {
     })
   }, [supabase.auth])
 
-  // Fetch spaces
+  // Fetch spaces + members → mention targets
   useEffect(() => {
-    async function fetchSpaces() {
-      const { data } = await supabase
-        .from('community_spaces')
-        .select('id, name, emoji, description')
-        .eq('is_archived', false)
-        .order('sort_order', { ascending: true })
-      if (data) setSpaces(data)
+    async function fetchSpacesAndMembers() {
+      const [{ data: sp }, { data: mem }] = await Promise.all([
+        supabase
+          .from('community_spaces')
+          .select('id, name, emoji, description')
+          .eq('is_archived', false)
+          .order('sort_order', { ascending: true }),
+        supabase
+          .from('profiles')
+          .select('id, first_name, last_name')
+          .limit(500),
+      ])
+      if (sp) setSpaces(sp)
+
+      const targets: MentionTarget[] = []
+      for (const m of mem || []) {
+        const label = `${m.first_name || ''} ${m.last_name || ''}`.trim()
+        if (label) targets.push({ id: m.id, label, type: 'member', emoji: '👤' })
+      }
+      for (const s of sp || []) {
+        targets.push({ id: s.id, label: s.name, type: 'space', emoji: s.emoji })
+      }
+      setMentionTargets(targets)
     }
-    fetchSpaces()
+    fetchSpacesAndMembers()
   }, [supabase])
 
   // Fetch posts
@@ -195,20 +210,15 @@ export default function CommunityFeedPage() {
   }, [fetchPosts])
 
   // Create post
-  async function handlePost() {
-    if (!composerText.trim() || !userId) return
-    setPosting(true)
+  async function handlePost(content: string, mediaUrls: string[], spaceId: string | null) {
+    if (!userId) return
     const { error } = await supabase.from('community_posts').insert({
       author_id: userId,
-      content: composerText.trim(),
-      space_id: composerSpace || null,
+      content,
+      media_urls: mediaUrls.length ? mediaUrls : null,
+      space_id: spaceId,
     })
-    if (!error) {
-      setComposerText('')
-      setComposerSpace('')
-      fetchPosts()
-    }
-    setPosting(false)
+    if (!error) fetchPosts()
   }
 
   // Toggle reaction
@@ -230,49 +240,71 @@ export default function CommunityFeedPage() {
     fetchPosts()
   }
 
-  // View replies
-  async function openReplies(post: Post) {
+  const selectCols = `
+    id, author_id, space_id, parent_id, content, media_urls, created_at,
+    author:profiles!community_posts_author_id_fkey(first_name, last_name, role, avatar_url),
+    reactions:community_reactions(id, user_id, post_id, emoji)
+  `
+
+  function shape(p: any): Post {
+    return {
+      ...p,
+      author: Array.isArray(p.author) ? p.author[0] || null : p.author,
+      space: null,
+      reactions: p.reactions || [],
+      reply_count: 0,
+    }
+  }
+
+  // View replies (2 levels: replies + sub-replies)
+  const openReplies = useCallback(async (post: Post) => {
     setViewingPost(post)
     setLoadingReplies(true)
-    const { data } = await supabase
+    setReplyingTo(null)
+
+    // level 1
+    const { data: lvl1 } = await supabase
       .from('community_posts')
-      .select(`
-        id, author_id, space_id, parent_id, content, media_urls, created_at,
-        author:profiles!community_posts_author_id_fkey(first_name, last_name, role, avatar_url),
-        reactions:community_reactions(id, user_id, post_id, emoji)
-      `)
+      .select(selectCols)
       .eq('parent_id', post.id)
       .order('created_at', { ascending: true })
 
-    if (data) {
-      const formatted: Post[] = data.map((p: any) => ({
-        ...p,
-        author: Array.isArray(p.author) ? p.author[0] || null : p.author,
-        space: null,
-        reactions: p.reactions || [],
-        reply_count: 0,
-      }))
-      setReplies(formatted)
-    }
-    setLoadingReplies(false)
-  }
+    const level1: Post[] = (lvl1 || []).map(shape)
 
-  // Post reply
-  async function handleReply() {
-    if (!replyText.trim() || !userId || !viewingPost) return
-    setPosting(true)
+    // level 2 (sub-replies to any level-1 reply)
+    if (level1.length) {
+      const { data: lvl2 } = await supabase
+        .from('community_posts')
+        .select(selectCols)
+        .in('parent_id', level1.map(r => r.id))
+        .order('created_at', { ascending: true })
+      const byParent: Record<string, Post[]> = {}
+      for (const c of (lvl2 || []).map(shape)) {
+        if (!c.parent_id) continue
+        ;(byParent[c.parent_id] ||= []).push(c)
+      }
+      for (const r of level1) r.children = byParent[r.id] || []
+    }
+
+    setReplies(level1)
+    setLoadingReplies(false)
+  }, [supabase])
+
+  // Post a reply or sub-reply (parentId = the post/reply being answered)
+  async function handleReply(content: string, mediaUrls: string[], parentId: string) {
+    if (!userId || !viewingPost) return
     const { error } = await supabase.from('community_posts').insert({
       author_id: userId,
-      content: replyText.trim(),
-      parent_id: viewingPost.id,
+      content,
+      media_urls: mediaUrls.length ? mediaUrls : null,
+      parent_id: parentId,
       space_id: viewingPost.space_id,
     })
     if (!error) {
-      setReplyText('')
+      setReplyingTo(null)
       openReplies(viewingPost)
       fetchPosts()
     }
-    setPosting(false)
   }
 
   return (
@@ -376,7 +408,7 @@ export default function CommunityFeedPage() {
               textTransform: 'uppercase',
               marginBottom: 12,
             }}>
-              Replies ({replies.length})
+              Replies ({replies.reduce((n, r) => n + 1 + (r.children?.length || 0), 0)})
             </div>
 
             {loadingReplies ? (
@@ -389,35 +421,58 @@ export default function CommunityFeedPage() {
               </div>
             ) : (
               replies.map(r => (
-                <PostCard
-                  key={r.id}
-                  post={r}
-                  userId={userId}
-                  onReact={toggleReaction}
-                  onViewReplies={() => {}}
-                  isReply
-                />
+                <div key={r.id}>
+                  <PostCard
+                    post={r}
+                    userId={userId}
+                    onReact={toggleReaction}
+                    onViewReplies={() => {}}
+                    onReply={() => setReplyingTo(replyingTo === r.id ? null : r.id)}
+                    isReply
+                  />
+                  {/* Sub-replies (level 2) */}
+                  {r.children && r.children.length > 0 && (
+                    <div style={{ borderLeft: '2px solid rgba(98,52,145,0.1)', marginLeft: 15, paddingLeft: 16 }}>
+                      {r.children.map(c => (
+                        <PostCard
+                          key={c.id}
+                          post={c}
+                          userId={userId}
+                          onReact={toggleReaction}
+                          onViewReplies={() => {}}
+                          onReply={() => setReplyingTo(replyingTo === r.id ? null : r.id)}
+                          isReply
+                        />
+                      ))}
+                    </div>
+                  )}
+                  {/* Inline sub-reply composer */}
+                  {replyingTo === r.id && (
+                    <div style={{ margin: '4px 0 12px 16px' }}>
+                      <Composer
+                        userId={userId}
+                        mode="reply"
+                        mentionTargets={mentionTargets}
+                        placeholder={`Reply to ${r.author?.first_name || 'this thread'}…`}
+                        submitLabel="Reply"
+                        onSubmit={(content, media) => handleReply(content, media, r.id)}
+                      />
+                    </div>
+                  )}
+                </div>
               ))
             )}
 
-            {/* Reply composer */}
+            {/* Root reply composer */}
             <div style={{ marginTop: 16 }}>
-              <textarea
-                className="form-input"
-                value={replyText}
-                onChange={e => setReplyText(e.target.value)}
-                placeholder="Write a reply..."
-                rows={2}
-                style={{ resize: 'vertical', marginBottom: 8 }}
+              <Composer
+                userId={userId}
+                mode="reply"
+                mentionTargets={mentionTargets}
+                placeholder="Write a reply…"
+                submitLabel="Reply"
+                onSubmit={(content, media) => handleReply(content, media, viewingPost.id)}
               />
-              <button
-                className="btn-primary"
-                onClick={handleReply}
-                disabled={posting || !replyText.trim()}
-                style={{ opacity: posting || !replyText.trim() ? 0.5 : 1 }}
-              >
-                {posting ? 'Posting...' : 'Reply'}
-              </button>
             </div>
           </div>
         </div>
@@ -428,35 +483,15 @@ export default function CommunityFeedPage() {
             <div className="section-title" style={{ marginBottom: 12 }}>
               New Post
             </div>
-            <textarea
-              className="form-input"
-              value={composerText}
-              onChange={e => setComposerText(e.target.value)}
-              placeholder="Share a win, ask a question, or spark a conversation..."
-              rows={3}
-              style={{ resize: 'vertical', marginBottom: 12 }}
+            <Composer
+              userId={userId}
+              mode="post"
+              spaces={spaces}
+              mentionTargets={mentionTargets}
+              initialSpaceId={activeSpace || ''}
+              submitLabel="Post"
+              onSubmit={handlePost}
             />
-            <div className="flex items-center gap-3">
-              <select
-                className="form-select"
-                value={composerSpace}
-                onChange={e => setComposerSpace(e.target.value)}
-                style={{ maxWidth: 220 }}
-              >
-                <option value="">Choose a space (optional)</option>
-                {spaces.map(s => (
-                  <option key={s.id} value={s.id}>{s.emoji} {s.name}</option>
-                ))}
-              </select>
-              <button
-                className="btn-primary"
-                onClick={handlePost}
-                disabled={posting || !composerText.trim()}
-                style={{ opacity: posting || !composerText.trim() ? 0.5 : 1 }}
-              >
-                {posting ? 'Posting...' : 'Post'}
-              </button>
-            </div>
           </div>
 
           {/* Posts List */}
@@ -501,6 +536,7 @@ function PostCard({
   userId,
   onReact,
   onViewReplies,
+  onReply,
   isThreadView = false,
   isReply = false,
 }: {
@@ -508,6 +544,7 @@ function PostCard({
   userId: string | null
   onReact: (postId: string, emoji: string) => void
   onViewReplies: () => void
+  onReply?: () => void
   isThreadView?: boolean
   isReply?: boolean
 }) {
@@ -571,7 +608,7 @@ function PostCard({
             </span>
           </div>
 
-          {/* Content */}
+          {/* Content (with @mention highlighting) */}
           <div style={{
             fontFamily: 'Georgia, serif',
             color: '#2d1a47',
@@ -580,26 +617,43 @@ function PostCard({
             marginTop: 6,
             whiteSpace: 'pre-wrap',
           }}>
-            {post.content}
+            {tokenizeMentions(post.content).map((part, i) =>
+              part.mention ? (
+                <span key={i} style={{ color: '#623491', fontWeight: 700, background: 'rgba(98,52,145,0.08)', borderRadius: 4, padding: '0 3px' }}>
+                  {part.text}
+                </span>
+              ) : (
+                <span key={i}>{part.text}</span>
+              )
+            )}
           </div>
 
-          {/* Media */}
+          {/* Media (image / video / gif) */}
           {post.media_urls && post.media_urls.length > 0 && (
             <div className="flex gap-2 flex-wrap" style={{ marginTop: 10 }}>
-              {post.media_urls.map((url, i) => (
-                <img
-                  key={i}
-                  src={url}
-                  alt=""
-                  style={{
-                    borderRadius: 10,
-                    maxWidth: 240,
-                    maxHeight: 180,
-                    objectFit: 'cover',
-                    border: '1px solid rgba(98,52,145,0.1)',
-                  }}
-                />
-              ))}
+              {post.media_urls.map((url, i) =>
+                mediaKind(url) === 'video' ? (
+                  <video
+                    key={i}
+                    src={url}
+                    controls
+                    style={{ borderRadius: 10, maxWidth: 280, maxHeight: 220, border: '1px solid rgba(98,52,145,0.1)' }}
+                  />
+                ) : (
+                  <img
+                    key={i}
+                    src={url}
+                    alt=""
+                    style={{
+                      borderRadius: 10,
+                      maxWidth: 240,
+                      maxHeight: 200,
+                      objectFit: 'cover',
+                      border: '1px solid rgba(98,52,145,0.1)',
+                    }}
+                  />
+                )
+              )}
             </div>
           )}
 
@@ -674,6 +728,25 @@ function PostCard({
                 }}
               >
                 💬 {post.reply_count} {post.reply_count === 1 ? 'reply' : 'replies'}
+              </button>
+            )}
+
+            {/* Reply to this comment (threaded) */}
+            {isReply && onReply && (
+              <button
+                onClick={onReply}
+                style={{
+                  marginLeft: 'auto',
+                  background: 'none',
+                  border: 'none',
+                  color: '#623491',
+                  fontSize: 10.5,
+                  fontFamily: 'Georgia, serif',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                }}
+              >
+                ↳ Reply
               </button>
             )}
           </div>
