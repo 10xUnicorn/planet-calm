@@ -27,7 +27,11 @@ const pageTitles: Record<string, string> = {
   '/reports': 'Reports',
 }
 
-export default function Topbar() {
+interface TopbarProps {
+  onToggleSidebar: () => void
+}
+
+export default function Topbar({ onToggleSidebar }: TopbarProps) {
   const pathname = usePathname()
   const router = useRouter()
   const title = pageTitles[pathname] || 'Dashboard'
@@ -53,21 +57,35 @@ export default function Topbar() {
   }
 
   return (
-    <div style={{
-      position: 'fixed', top: 0, left: 240, right: 0, height: 62,
+    <div className="topbar" style={{
+      position: 'fixed', top: 0, right: 0, height: 62,
       background: 'rgba(245,238,248,0.96)', backdropFilter: 'blur(8px)',
       borderBottom: '1px solid rgba(98,52,145,0.1)',
       display: 'flex', alignItems: 'center', padding: '0 28px', zIndex: 90, gap: 16,
     }}>
+      {/* Hamburger — mobile only */}
+      <button
+        className="hamburger-btn"
+        onClick={onToggleSidebar}
+        aria-label="Toggle navigation menu"
+        type="button"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2d1a47" strokeWidth="2.5" strokeLinecap="round">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+
       <div style={{ fontFamily: 'Georgia, serif', fontSize: 21, fontWeight: 700, color: '#2d1a47', flex: 1, letterSpacing: '-.2px' }}>
         {title}
       </div>
-      <div style={{ fontSize: '12.5px', color: '#7a5ea0', fontFamily: 'Georgia, serif', fontStyle: 'italic' }}>
+      <div className="topbar-welcome" style={{ fontSize: '12.5px', color: '#7a5ea0', fontFamily: 'Georgia, serif', fontStyle: 'italic' }}>
         {userName ? `Welcome back, ${userName} ✦` : ''}
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <Link href="/ai-brain" className="ai-chip" style={{ textDecoration: 'none' }}>🤖 AI Brain</Link>
-        <Link href="/tasks" className="topbar-btn" style={{
+        <Link href="/ai-brain" className="ai-chip topbar-hide-mobile" style={{ textDecoration: 'none' }}>🤖 AI Brain</Link>
+        <Link href="/tasks" className="topbar-btn topbar-hide-mobile" style={{
           background: 'rgba(98,52,145,0.08)', border: '1px solid rgba(98,52,145,0.18)',
           color: '#623491', fontSize: '11.5px', padding: '6px 14px', borderRadius: 20,
           cursor: 'pointer', fontFamily: 'Georgia, serif', textDecoration: 'none',

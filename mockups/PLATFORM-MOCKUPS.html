@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planet Calm — Complete Platform Mockups</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia',serif;background:#1a1a2e;color:#2d1a47;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+
+/* ══════ MOCKUP SHELL ══════ */
+.mockup-nav{position:fixed;top:0;left:0;right:0;background:#2d1a47;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap;z-index:1000;align-items:center;border-bottom:2px solid #e8c487}
+.mockup-nav-title{color:#e8c487;font-size:14px;font-weight:700;margin-right:16px;white-space:nowrap}
+.mockup-nav-group{display:flex;gap:4px;flex-wrap:wrap}
+.mockup-nav-label{color:rgba(232,196,135,0.5);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 8px;align-self:center}
+.mn-btn{padding:5px 12px;border:none;border-radius:16px;font-family:'Georgia',serif;font-size:10.5px;font-weight:700;cursor:pointer;color:rgba(232,196,135,0.6);background:rgba(232,196,135,0.08);transition:all .2s;white-space:nowrap}
+.mn-btn:hover{color:#e8c487;background:rgba(232,196,135,0.15)}
+.mn-btn.active{background:linear-gradient(135deg,#623491,#9b6fc4);color:#e8c487;box-shadow:0 2px 8px rgba(98,52,145,0.4)}
+
+.mockup-wrap{margin-top:70px;padding:20px;width:100%;display:flex;justify-content:center}
+.view{display:none}
+.view.active{display:block}
+
+/* ══════ DESKTOP FRAME ══════ */
+.desktop-frame{width:1200px;min-height:700px;background:#f5eef8;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);position:relative}
+.desktop-frame .sidebar{width:220px;min-height:700px;background:#2d1a47;position:absolute;top:0;left:0;bottom:0;padding:16px 0}
+.desktop-frame .topbar{position:absolute;top:0;left:220px;right:0;height:52px;background:rgba(245,238,248,0.96);border-bottom:1px solid rgba(98,52,145,0.1);display:flex;align-items:center;padding:0 20px;gap:12px}
+.desktop-frame .main{margin-left:220px;padding:68px 24px 24px}
+
+/* ══════ MOBILE FRAME ══════ */
+.mobile-frame{width:375px;min-height:812px;background:#f5eef8;border-radius:40px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);position:relative;border:3px solid #333}
+.mobile-frame::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:28px;background:#333;border-radius:0 0 16px 16px;z-index:10}
+.mobile-status{height:48px;background:linear-gradient(135deg,#2d1a47,#623491);display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px}
+.mobile-status span{color:#e8c487;font-size:10px;font-weight:700}
+.mobile-header{background:#2d1a47;padding:12px 20px 14px;display:flex;align-items:center;justify-content:space-between}
+.mobile-header h1{color:#e8c487;font-size:18px;font-weight:700}
+.mobile-header-icons{display:flex;gap:12px}
+.mobile-header-icon{width:28px;height:28px;border-radius:50%;background:rgba(232,196,135,0.15);color:#e8c487;display:flex;align-items:center;justify-content:center;font-size:12px}
+.mobile-body{padding:16px;min-height:600px;overflow-y:auto}
+.mobile-tabs{position:absolute;bottom:0;left:0;right:0;height:70px;background:#fff;border-top:1px solid rgba(98,52,145,0.1);display:flex;justify-content:space-around;align-items:center;padding:0 8px 8px}
+.mobile-tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9px;color:#9b6fc4;cursor:pointer;padding:6px 0}
+.mobile-tab.active{color:#623491;font-weight:700}
+.mobile-tab .tab-icon{font-size:18px}
+
+/* ══════ SHARED COMPONENTS ══════ */
+.nav-item-m{display:flex;align-items:center;gap:8px;padding:8px 18px;color:rgba(255,255,255,0.7);font-size:11.5px;cursor:pointer;border-left:3px solid transparent}
+.nav-item-m.active{color:#e8c487;background:rgba(232,196,135,0.15);border-left-color:#e8c487;font-weight:700}
+.nav-label-m{font-size:8.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:rgba(232,196,135,0.45);padding:12px 18px 4px}
+.nav-icon-m{font-size:12px;width:16px;text-align:center}
+
+.card-m{background:#fff;border-radius:14px;padding:16px;border:1px solid rgba(98,52,145,0.1);box-shadow:0 2px 16px rgba(98,52,145,0.06);margin-bottom:12px}
+.pill-m{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700}
+.pill-m-green{background:#e8f5ee;color:#1e7d47}
+.pill-m-purple{background:#ede4f5;color:#623491}
+.pill-m-gold{background:linear-gradient(135deg,#fdf0d0,#f5e0a0);color:#7a5500}
+.pill-m-amber{background:#fdf3dc;color:#9a6800}
+.tag-m{display:inline-block;background:#ede4f5;color:#623491;font-size:9px;padding:2px 7px;border-radius:8px;font-weight:700;margin-right:3px}
+
+.avatar-m{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;flex-shrink:0}
+
+/* ══════ FEED POST ══════ */
+.feed-post{background:#fff;border-radius:14px;padding:16px;border:1px solid rgba(98,52,145,0.1);box-shadow:0 2px 12px rgba(98,52,145,0.05);margin-bottom:12px}
+.feed-post-header{display:flex;gap:10px;margin-bottom:10px}
+.feed-post-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+.feed-post-name{font-size:13px;font-weight:700;color:#2d1a47}
+.feed-post-meta{font-size:10.5px;color:#9b6fc4;font-style:italic}
+.feed-post-body{font-size:13px;line-height:1.6;color:#2d1a47;margin-bottom:12px}
+.feed-post-img{width:100%;border-radius:10px;background:linear-gradient(135deg,#ede4f5,#fdf8ec);height:180px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;font-size:40px}
+.feed-post-actions{display:flex;gap:16px;padding-top:10px;border-top:1px solid rgba(98,52,145,0.06)}
+.feed-action{font-size:11px;color:#9b6fc4;cursor:pointer;display:flex;align-items:center;gap:4px}
+.feed-action.liked{color:#623491;font-weight:700}
+
+/* ══════ MAP ══════ */
+.map-container{width:100%;height:400px;border-radius:14px;background:linear-gradient(135deg,#d4e8d0,#b8d4c8);position:relative;overflow:hidden;margin-bottom:12px}
+.map-pin{position:absolute;font-size:24px;cursor:pointer;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));transition:transform .2s}
+.map-pin:hover{transform:scale(1.3)}
+.map-popup{position:absolute;background:#fff;border-radius:12px;padding:12px;box-shadow:0 4px 20px rgba(0,0,0,0.15);width:200px;z-index:5}
+
+/* ══════ PET CARD ══════ */
+.pet-card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid rgba(98,52,145,0.1);box-shadow:0 2px 16px rgba(98,52,145,0.06);margin-bottom:12px}
+.pet-card-header{height:140px;background:linear-gradient(135deg,#fdf8ec,#f5eef8);display:flex;align-items:center;justify-content:center;font-size:60px;position:relative}
+.pet-card-badge{position:absolute;top:10px;right:10px}
+.pet-card-body{padding:16px}
+.pet-card-name{font-size:18px;font-weight:700;color:#2d1a47}
+.pet-card-breed{font-size:12px;color:#9b6fc4;font-style:italic}
+.pet-card-stats{display:flex;gap:12px;margin-top:10px}
+.pet-stat{text-align:center;flex:1}
+.pet-stat-val{font-size:16px;font-weight:700;color:#623491}
+.pet-stat-label{font-size:9px;color:#9b6fc4;text-transform:uppercase;letter-spacing:1px}
+
+/* ══════ MESSAGE ══════ */
+.msg-item{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid rgba(98,52,145,0.06)}
+.msg-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+.msg-content{flex:1}
+.msg-name{font-size:13px;font-weight:700;color:#2d1a47}
+.msg-preview{font-size:12px;color:#7a5ea0;margin-top:2px}
+.msg-time{font-size:10px;color:#9b6fc4}
+.msg-unread{width:8px;height:8px;border-radius:50%;background:#e8c487;flex-shrink:0;align-self:center}
+
+/* ══════ COURSE CARD ══════ */
+.course-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid rgba(98,52,145,0.1);box-shadow:0 2px 12px rgba(98,52,145,0.06);margin-bottom:12px}
+.course-thumb{height:120px;background:linear-gradient(135deg,#2d1a47,#623491);display:flex;align-items:center;justify-content:center;color:#e8c487;font-size:32px}
+.course-body{padding:14px}
+.course-title{font-size:14px;font-weight:700;color:#2d1a47;margin-bottom:4px}
+.course-meta{font-size:11px;color:#9b6fc4;font-style:italic}
+.course-progress{height:4px;background:rgba(98,52,145,0.12);border-radius:2px;margin-top:10px;overflow:hidden}
+.course-progress-fill{height:100%;background:linear-gradient(90deg,#623491,#e8c487);border-radius:2px}
+
+/* ══════ UPSELL CARD ══════ */
+.upsell-card{background:linear-gradient(135deg,#2d1a47,#623491);border-radius:14px;padding:16px;margin-bottom:12px;position:relative;overflow:hidden}
+.upsell-card::after{content:'✦';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:40px;opacity:.1;color:#e8c487}
+.upsell-title{color:#e8c487;font-size:14px;font-weight:700;margin-bottom:4px}
+.upsell-desc{color:rgba(255,255,255,0.75);font-size:11px;font-style:italic;line-height:1.5;margin-bottom:12px}
+.upsell-btn{background:#e8c487;color:#2d1a47;border:none;padding:8px 20px;border-radius:10px;font-family:'Georgia',serif;font-size:11px;font-weight:700;cursor:pointer}
+
+/* ══════ EVENT CARD ══════ */
+.event-card{background:#fff;border-radius:14px;padding:16px;border:1px solid rgba(98,52,145,0.1);box-shadow:0 2px 12px rgba(98,52,145,0.05);margin-bottom:10px;display:flex;gap:14px}
+.event-date-box{width:50px;text-align:center;flex-shrink:0}
+.event-date-month{font-size:10px;font-weight:700;color:#9b6fc4;text-transform:uppercase;letter-spacing:1px}
+.event-date-day{font-size:24px;font-weight:700;color:#623491}
+.event-title{font-size:13px;font-weight:700;color:#2d1a47}
+.event-meta{font-size:11px;color:#9b6fc4;font-style:italic;margin-top:2px}
+.event-rsvp{margin-top:8px}
+.event-rsvp-btn{background:linear-gradient(135deg,#623491,#7d4db5);color:#e8c487;border:none;padding:5px 14px;border-radius:8px;font-size:10px;font-weight:700;cursor:pointer;font-family:'Georgia',serif}
+
+/* ══════ LEADERBOARD ══════ */
+.lb-item{display:flex;align-items:center;gap:12px;padding:12px;border-bottom:1px solid rgba(98,52,145,0.06)}
+.lb-rank{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.lb-rank-1{background:linear-gradient(135deg,#fdf0d0,#e8c487);color:#7a5500}
+.lb-rank-2{background:#e4edf5;color:#1a5a8a}
+.lb-rank-3{background:#fde8e8;color:#c0392b}
+.lb-rank-n{background:#ede4f5;color:#623491}
+.lb-name{font-size:13px;font-weight:700;color:#2d1a47}
+.lb-points{font-size:12px;color:#623491;font-weight:700;margin-left:auto}
+.lb-badges{display:flex;gap:3px;margin-top:2px}
+.lb-badge{font-size:12px}
+
+/* ══════ DESKTOP SPECIFIC ══════ */
+.desktop-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.desktop-kpi-card{background:#fff;border-radius:12px;padding:14px 16px;border:1px solid rgba(98,52,145,0.1);box-shadow:0 2px 12px rgba(98,52,145,0.05);position:relative;overflow:hidden}
+.desktop-kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#623491,#e8c487)}
+.dkpi-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#9b6fc4;margin-bottom:6px}
+.dkpi-val{font-size:22px;font-weight:700;color:#2d1a47}
+.dkpi-trend{font-size:10px;color:#2a9d5c;margin-top:3px}
+</style>
+</head>
+<body>
+
+<!-- ══════ NAVIGATION ══════ -->
+<div class="mockup-nav">
+  <div class="mockup-nav-title">🐾 Planet Calm Mockups</div>
+  <span class="mockup-nav-label">Desktop</span>
+  <div class="mockup-nav-group">
+    <button class="mn-btn active" onclick="show('desktop-admin')">Admin Dashboard</button>
+    <button class="mn-btn" onclick="show('desktop-portal')">Client Portal</button>
+  </div>
+  <span class="mockup-nav-label">Mobile App</span>
+  <div class="mockup-nav-group">
+    <button class="mn-btn" onclick="show('mobile-home')">Home</button>
+    <button class="mn-btn" onclick="show('mobile-feed')">Feed</button>
+    <button class="mn-btn" onclick="show('mobile-map')">Pet Map</button>
+    <button class="mn-btn" onclick="show('mobile-pet')">Pet Profile</button>
+    <button class="mn-btn" onclick="show('mobile-msgs')">Messages</button>
+    <button class="mn-btn" onclick="show('mobile-events')">Events</button>
+    <button class="mn-btn" onclick="show('mobile-courses')">Courses</button>
+    <button class="mn-btn" onclick="show('mobile-members')">Members</button>
+    <button class="mn-btn" onclick="show('mobile-leaderboard')">Leaderboard</button>
+  </div>
+  <span class="mockup-nav-label">Portal</span>
+  <div class="mockup-nav-group">
+    <button class="mn-btn" onclick="show('portal-resources')">Resources</button>
+    <button class="mn-btn" onclick="show('portal-course')">Course Player</button>
+    <button class="mn-btn" onclick="show('admin-courses')">Admin: Courses</button>
+    <button class="mn-btn" onclick="show('admin-builder')">Admin: Builder</button>
+    <button class="mn-btn" onclick="show('mobile-leona')">Leona Chat</button>
+  </div>
+</div>
+
+<div class="mockup-wrap">
+
+<!-- ═══════════════════════════════════════════════════════
+     1. DESKTOP — ADMIN DASHBOARD
+     ═══════════════════════════════════════════════════════ -->
+<div class="view active" id="desktop-admin">
+  <div class="desktop-frame">
+    <div class="sidebar">
+      <div style="padding:14px 18px 12px;border-bottom:1px solid rgba(232,196,135,0.18)">
+        <div style="color:#e8c487;font-size:15px;font-weight:700">🐾 Planet Calm</div>
+        <div style="color:rgba(232,196,135,0.4);font-size:9px;margin-top:2px">Admin Dashboard</div>
+      </div>
+      <div class="nav-label-m">Command</div>
+      <div class="nav-item-m active"><span class="nav-icon-m">🌿</span>Overview</div>
+      <div class="nav-item-m"><span class="nav-icon-m">🐾</span>Community Hub</div>
+      <div class="nav-label-m">Growth</div>
+      <div class="nav-item-m"><span class="nav-icon-m">🗺️</span>Pipeline</div>
+      <div class="nav-item-m"><span class="nav-icon-m">✨</span>Client Portal</div>
+      <div class="nav-label-m">Content</div>
+      <div class="nav-item-m"><span class="nav-icon-m">📖</span>Content</div>
+      <div class="nav-item-m"><span class="nav-icon-m">💳</span>Payments</div>
+      <div class="nav-label-m">Intelligence</div>
+      <div class="nav-item-m"><span class="nav-icon-m">🤖</span>AI Brain</div>
+      <div class="nav-item-m"><span class="nav-icon-m">📊</span>Reports</div>
+      <div class="nav-label-m">Manage</div>
+      <div class="nav-item-m"><span class="nav-icon-m">👥</span>Clients</div>
+      <div class="nav-item-m"><span class="nav-icon-m">🎯</span>Leads</div>
+      <div class="nav-item-m"><span class="nav-icon-m">⚙️</span>Settings</div>
+    </div>
+    <div class="topbar">
+      <div style="font-size:16px;font-weight:700;color:#2d1a47;flex:1">Mission Overview</div>
+      <div style="font-size:11px;color:#7a5ea0;font-style:italic">Welcome back, Stephanie ✦</div>
+      <div style="display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#2d1a47,#623491);color:#e8c487;font-size:10px;padding:4px 10px;border-radius:16px;font-weight:700">🤖 AI Brain</div>
+      <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);color:#e8c487;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid #e8c487">S</div>
+    </div>
+    <div class="main">
+      <div class="desktop-kpi">
+        <div class="desktop-kpi-card"><div class="dkpi-label">Total Revenue (LTM)</div><div class="dkpi-val">$127,840</div><div class="dkpi-trend">↑ 18.4% vs prior year</div></div>
+        <div class="desktop-kpi-card"><div class="dkpi-label">Active Members</div><div class="dkpi-val">1,247</div><div class="dkpi-trend">↑ 94 this month</div></div>
+        <div class="desktop-kpi-card"><div class="dkpi-label">Book Pre-Sales</div><div class="dkpi-val">348</div><div class="dkpi-trend">↑ 62 this week</div></div>
+        <div class="desktop-kpi-card"><div class="dkpi-label">BARKType Pipeline</div><div class="dkpi-val">$84K</div><div class="dkpi-trend">5 orgs active</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="card-m">
+          <div style="display:flex;justify-content:space-between;margin-bottom:10px"><div style="font-size:13px;font-weight:700;color:#2d1a47">🐾 Community Pulse</div><div style="font-size:10px;color:#623491;cursor:pointer">View All →</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+            <div style="background:linear-gradient(135deg,#f9f5fe,#ede4f5);border-radius:10px;padding:10px;text-align:center"><div style="font-size:18px;font-weight:700;color:#623491">842</div><div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#9b6fc4">Collective</div></div>
+            <div style="background:linear-gradient(135deg,#fdf8ec,#fdf0d0);border-radius:10px;padding:10px;text-align:center"><div style="font-size:18px;font-weight:700;color:#7a5500">405</div><div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#9a6800">Studio</div></div>
+          </div>
+          <div style="font-size:11.5px;font-weight:700;color:#2d1a47;padding:8px 0;border-bottom:1px solid rgba(98,52,145,0.06)">My rescue GSD finally walked calmly! 🥹 <span style="color:#e8c487;font-size:9px">🔥 HOT</span></div>
+          <div style="font-size:11.5px;font-weight:700;color:#2d1a47;padding:8px 0">BARKType quiz unlocked something — week 3</div>
+        </div>
+        <div class="card-m">
+          <div style="display:flex;justify-content:space-between;margin-bottom:10px"><div style="font-size:13px;font-weight:700;color:#2d1a47">🤖 AI Brain — Insights</div><div style="display:inline-flex;gap:3px;background:linear-gradient(135deg,#2d1a47,#623491);color:#e8c487;font-size:9px;padding:3px 8px;border-radius:12px;font-weight:700">✦ Powered by AI</div></div>
+          <div style="background:linear-gradient(135deg,#f9f5fe,#ede4f5);border-radius:10px;padding:10px;border-left:3px solid #623491;margin-bottom:8px"><div style="font-size:10.5px;font-weight:700;color:#2d1a47;margin-bottom:3px">🐾 Community Momentum</div><div style="font-size:10.5px;color:#623491;font-style:italic;line-height:1.5">38 new members haven't posted yet — nudge from Stephanie.</div></div>
+          <div style="background:linear-gradient(135deg,#fdf8ec,#fdf0d0);border-radius:10px;padding:10px;border-left:3px solid #e8c487"><div style="font-size:10.5px;font-weight:700;color:#2d1a47;margin-bottom:3px">📖 Pre-Sale Window</div><div style="font-size:10.5px;color:#9a6800;font-style:italic;line-height:1.5">Chapter drop could push pre-sales +80 units.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     2. DESKTOP — CLIENT PORTAL
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="desktop-portal">
+  <div class="desktop-frame">
+    <div class="sidebar">
+      <div style="padding:14px 18px 12px;border-bottom:1px solid rgba(232,196,135,0.18)">
+        <div style="color:#e8c487;font-size:15px;font-weight:700">🐾 Planet Calm</div>
+        <div style="color:rgba(232,196,135,0.4);font-size:9px;margin-top:2px">Member Portal</div>
+      </div>
+      <div class="nav-label-m">My Journey</div>
+      <div class="nav-item-m active"><span class="nav-icon-m">🏠</span>Home</div>
+      <div class="nav-item-m"><span class="nav-icon-m">🐾</span>Community</div>
+      <div class="nav-item-m"><span class="nav-icon-m">📚</span>Resources</div>
+      <div class="nav-label-m">Connect</div>
+      <div class="nav-item-m"><span class="nav-icon-m">💬</span>Messages</div>
+      <div class="nav-item-m"><span class="nav-icon-m">📅</span>Events</div>
+      <div class="nav-item-m"><span class="nav-icon-m">🤖</span>Ask Leona</div>
+      <div class="nav-label-m">Account</div>
+      <div class="nav-item-m"><span class="nav-icon-m">👤</span>My Profile</div>
+      <div class="nav-item-m"><span class="nav-icon-m">🐾</span>My Pets</div>
+      <div class="nav-item-m"><span class="nav-icon-m">⚙️</span>Settings</div>
+    </div>
+    <div class="topbar">
+      <div style="font-size:16px;font-weight:700;color:#2d1a47;flex:1">Welcome Home, Marisol ✦</div>
+      <span class="pill-m pill-m-green">Collective Member</span>
+      <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">MV</div>
+    </div>
+    <div class="main">
+      <!-- Progress + Next Step -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px">
+        <div class="card-m"><div style="font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#9b6fc4;margin-bottom:6px">Your Progress</div><div style="height:5px;background:rgba(98,52,145,0.12);border-radius:3px;margin-bottom:4px"><div style="height:100%;width:68%;background:linear-gradient(90deg,#623491,#e8c487);border-radius:3px"></div></div><div style="font-size:10px;font-weight:700;color:#623491">68% — Learning Path</div></div>
+        <div class="card-m"><div style="font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#9b6fc4;margin-bottom:6px">Next Step</div><div style="font-size:12px;font-weight:700;color:#2d1a47">Complete Worksheet 3 — Calm Anchoring</div></div>
+        <div class="card-m"><div style="font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#9b6fc4;margin-bottom:6px">Upcoming</div><div style="font-size:12px;font-weight:700;color:#2d1a47">Studio Group Call — July 5</div></div>
+      </div>
+      <!-- Community Feed Preview -->
+      <div class="card-m" style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px"><div style="font-size:13px;font-weight:700;color:#2d1a47">🐾 Community Feed</div><div style="font-size:10px;color:#623491;cursor:pointer">View All →</div></div>
+        <div style="font-size:11.5px;font-weight:700;color:#2d1a47;padding:8px 0;border-bottom:1px solid rgba(98,52,145,0.06)">My rescue GSD finally walked calmly past another dog! 🥹 <span style="color:#e8c487;font-size:9px">🔥</span></div>
+        <div style="font-size:11.5px;font-weight:700;color:#2d1a47;padding:8px 0">Anyone reading the early chapter drops? 🐾</div>
+      </div>
+      <!-- Resources (consolidated Content + Worksheets + Courses) -->
+      <div class="card-m" style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px"><div style="font-size:13px;font-weight:700;color:#2d1a47">📚 Resources</div><div style="font-size:10px;color:#623491;cursor:pointer">View All →</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+          <div style="background:linear-gradient(135deg,#f9f5fe,#ede4f5);border-radius:10px;padding:12px;text-align:center;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:4px">🎓</div>
+            <div style="font-size:10px;font-weight:700;color:#623491">Courses</div>
+            <div style="font-size:9px;color:#9b6fc4;margin-top:2px">2 in progress</div>
+          </div>
+          <div style="background:linear-gradient(135deg,#fdf8ec,#fdf0d0);border-radius:10px;padding:12px;text-align:center;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:4px">📝</div>
+            <div style="font-size:10px;font-weight:700;color:#9a6800">Worksheets</div>
+            <div style="font-size:9px;color:#9b6fc4;margin-top:2px">1 pending</div>
+          </div>
+          <div style="background:linear-gradient(135deg,#e8f5ee,#d4f0e2);border-radius:10px;padding:12px;text-align:center;cursor:pointer">
+            <div style="font-size:18px;margin-bottom:4px">📖</div>
+            <div style="font-size:10px;font-weight:700;color:#1e7d47">Content</div>
+            <div style="font-size:9px;color:#9b6fc4;margin-top:2px">3 new</div>
+          </div>
+        </div>
+      </div>
+      <!-- Upsell -->
+      <div class="upsell-card">
+        <div class="upsell-title">✨ Ready for the next level?</div>
+        <div class="upsell-desc">Upgrade to Peaceful Progress Studio for 1:1 coaching, worksheets, and direct messaging with your coach.</div>
+        <button class="upsell-btn">Explore Studio — $275/mo</button>
+      </div>
+      <!-- Leona floating button -->
+      <div style="position:absolute;bottom:20px;right:20px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(98,52,145,0.4);z-index:50;font-size:20px;transition:transform .2s" title="Ask Leona" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        🤖
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     3. MOBILE APP — HOME
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="mobile-home">
+  <div class="mobile-frame">
+    <div class="mobile-status"><span>Planet Calm</span></div>
+    <div class="mobile-header">
+      <h1>🐾 Home</h1>
+      <div class="mobile-header-icons">
+        <div class="mobile-header-icon">🔔</div>
+        <div class="mobile-header-icon">👤</div>
+      </div>
+    </div>
+    <div class="mobile-body" style="padding-bottom:80px">
+      <!-- Greeting -->
+      <div style="background:linear-gradient(135deg,#fdf8ec,#f5eef8);border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid rgba(232,196,135,0.3)">
+        <div style="font-size:16px;font-weight:700;color:#2d1a47">Good morning, Marisol ✦</div>
+        <div style="font-size:11px;color:#7a5ea0;font-style:italic;margin-top:4px">"Calm is not the absence of challenge — it is the mastery of response."</div>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <span class="pill-m pill-m-green">Collective</span>
+          <span class="tag-m">🐕 Max</span>
+          <span class="tag-m">🐈 Luna</span>
+        </div>
+      </div>
+      <!-- Journey Progress -->
+      <div class="card-m">
+        <div style="font-size:12px;font-weight:700;color:#2d1a47;margin-bottom:8px">📍 Your Journey</div>
+        <div style="height:6px;background:rgba(98,52,145,0.12);border-radius:3px;margin-bottom:6px"><div style="height:100%;width:68%;background:linear-gradient(90deg,#623491,#e8c487);border-radius:3px"></div></div>
+        <div style="display:flex;justify-content:space-between"><span style="font-size:10px;font-weight:700;color:#623491">68% Complete</span><span style="font-size:10px;color:#9b6fc4">Next: Worksheet 3</span></div>
+      </div>
+      <!-- Quick Actions -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
+        <div class="card-m" style="text-align:center;padding:14px"><div style="font-size:20px;margin-bottom:4px">🐾</div><div style="font-size:11px;font-weight:700;color:#2d1a47">Community</div></div>
+        <div class="card-m" style="text-align:center;padding:14px"><div style="font-size:20px;margin-bottom:4px">💬</div><div style="font-size:11px;font-weight:700;color:#2d1a47">Messages</div></div>
+        <div class="card-m" style="text-align:center;padding:14px"><div style="font-size:20px;margin-bottom:4px">📚</div><div style="font-size:11px;font-weight:700;color:#2d1a47">Resources</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
+        <div class="card-m" style="text-align:center;padding:14px"><div style="font-size:20px;margin-bottom:4px">📅</div><div style="font-size:11px;font-weight:700;color:#2d1a47">Events</div></div>
+        <div class="card-m" style="text-align:center;padding:14px"><div style="font-size:20px;margin-bottom:4px">🗺️</div><div style="font-size:11px;font-weight:700;color:#2d1a47">Pet Map</div></div>
+        <div class="card-m" style="text-align:center;padding:14px"><div style="font-size:20px;margin-bottom:4px">🤖</div><div style="font-size:11px;font-weight:700;color:#2d1a47">Ask Leona</div></div>
+      </div>
+      <!-- Feed Preview -->
+      <div style="font-size:12px;font-weight:700;color:#2d1a47;margin-bottom:8px">🐾 Latest from the Pack</div>
+      <div class="feed-post">
+        <div class="feed-post-header">
+          <div class="feed-post-avatar">TK</div>
+          <div><div class="feed-post-name">Trevor K.</div><div class="feed-post-meta">Progress Studio · 2h ago</div></div>
+        </div>
+        <div class="feed-post-body">BARKType quiz unlocked something in me. Week 3 and my dog is noticeably calmer on walks. The structured approach just works. 🌿</div>
+        <div class="feed-post-actions">
+          <span class="feed-action liked">🐾 31</span>
+          <span class="feed-action">💬 8</span>
+          <span class="feed-action">↗ Share</span>
+        </div>
+      </div>
+      <!-- Upsell -->
+      <div class="upsell-card">
+        <div class="upsell-title">📖 Pre-Order "What the BARK?"</div>
+        <div class="upsell-desc">Stephanie's new book on Calm-First Leadership. Early reader bonuses included.</div>
+        <button class="upsell-btn">Pre-Order — $20</button>
+      </div>
+    </div>
+    <!-- Leona floating button -->
+    <div style="position:absolute;bottom:80px;right:16px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(98,52,145,0.4);z-index:50;font-size:18px" title="Ask Leona">🤖</div>
+    <div class="mobile-tabs">
+      <div class="mobile-tab active"><div class="tab-icon">🏠</div>Home</div>
+      <div class="mobile-tab"><div class="tab-icon">🐾</div>Feed</div>
+      <div class="mobile-tab"><div class="tab-icon">🗺️</div>Map</div>
+      <div class="mobile-tab"><div class="tab-icon">💬</div>Chat</div>
+      <div class="mobile-tab"><div class="tab-icon">👤</div>Me</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     4. MOBILE APP — COMMUNITY FEED
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="mobile-feed">
+  <div class="mobile-frame">
+    <div class="mobile-status"><span>Planet Calm</span></div>
+    <div class="mobile-header">
+      <h1>🐾 Community</h1>
+      <div class="mobile-header-icons"><div class="mobile-header-icon">✏️</div></div>
+    </div>
+    <!-- Space tabs -->
+    <div style="background:#2d1a47;padding:0 16px 10px;display:flex;gap:6px;overflow-x:auto">
+      <span style="padding:5px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(232,196,135,0.2);color:#e8c487">All</span>
+      <span style="padding:5px 12px;border-radius:14px;font-size:10px;color:rgba(255,255,255,0.5)">#calm-wins</span>
+      <span style="padding:5px 12px;border-radius:14px;font-size:10px;color:rgba(255,255,255,0.5)">#puppy-diaries</span>
+      <span style="padding:5px 12px;border-radius:14px;font-size:10px;color:rgba(255,255,255,0.5)">#book-club</span>
+    </div>
+    <div class="mobile-body" style="padding-bottom:80px">
+      <!-- Announcement -->
+      <div style="background:linear-gradient(135deg,#2d1a47,#623491);border-radius:12px;padding:14px;margin-bottom:12px">
+        <div style="font-size:10px;font-weight:700;color:#e8c487;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">📢 Announcement</div>
+        <div style="font-size:13px;color:#fff;font-weight:700;margin-bottom:4px">Book Club starts next week!</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.7);font-style:italic">Join us for "What the BARK?" chapter discussions every Tuesday.</div>
+      </div>
+      <!-- Posts -->
+      <div class="feed-post">
+        <div class="feed-post-header">
+          <div class="feed-post-avatar" style="background:linear-gradient(135deg,#2a9d5c,#52c880)">MV</div>
+          <div><div class="feed-post-name">Marisol V. <span class="pill-m pill-m-green" style="font-size:8px;padding:1px 6px">Collective</span></div><div class="feed-post-meta">#calm-wins · 30m ago</div></div>
+        </div>
+        <div class="feed-post-body">My rescue GSD finally walked calmly past another dog! 🥹 After 3 weeks of the calm anchoring exercise, he didn't even pull. I'm crying.</div>
+        <div class="feed-post-img">🐕</div>
+        <div class="feed-post-actions">
+          <span class="feed-action liked">🐾 47</span>
+          <span class="feed-action">❤️ 12</span>
+          <span class="feed-action">💬 8</span>
+          <span class="feed-action">↗</span>
+        </div>
+      </div>
+      <div class="feed-post">
+        <div class="feed-post-header">
+          <div class="feed-post-avatar" style="background:linear-gradient(135deg,#9a6800,#d4a017)">PW</div>
+          <div><div class="feed-post-name">Dr. Peter W. <span class="pill-m pill-m-purple" style="font-size:8px;padding:1px 6px">Council</span></div><div class="feed-post-meta">#professional-corner · 2h ago</div></div>
+        </div>
+        <div class="feed-post-body">Applied the Calm-First framework with a reactive Border Collie patient today. The owner was skeptical but by the end of our session, both human and dog were visibly more settled. This work matters. 🌿</div>
+        <div class="feed-post-actions">
+          <span class="feed-action">🐾 19</span>
+          <span class="feed-action">💬 4</span>
+          <span class="feed-action">↗</span>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-tabs">
+      <div class="mobile-tab"><div class="tab-icon">🏠</div>Home</div>
+      <div class="mobile-tab active"><div class="tab-icon">🐾</div>Feed</div>
+      <div class="mobile-tab"><div class="tab-icon">🗺️</div>Map</div>
+      <div class="mobile-tab"><div class="tab-icon">💬</div>Chat</div>
+      <div class="mobile-tab"><div class="tab-icon">👤</div>Me</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     5. MOBILE APP — PET MAP
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="mobile-map">
+  <div class="mobile-frame">
+    <div class="mobile-status"><span>Planet Calm</span></div>
+    <div class="mobile-header">
+      <h1>🗺️ Pet Map</h1>
+      <div class="mobile-header-icons"><div class="mobile-header-icon">🔍</div></div>
+    </div>
+    <div style="position:relative">
+      <div class="map-container" style="height:520px;border-radius:0">
+        <!-- Map pins -->
+        <div class="map-pin" style="top:120px;left:80px">🐾</div>
+        <div class="map-pin" style="top:200px;left:180px">🐾</div>
+        <div class="map-pin" style="top:160px;left:260px">🐾</div>
+        <div class="map-pin" style="top:280px;left:140px">🐾</div>
+        <div class="map-pin" style="top:340px;left:220px">🐾</div>
+        <div class="map-pin" style="top:100px;left:300px">🐱</div>
+        <div class="map-pin" style="top:400px;left:100px">🐾</div>
+        <div class="map-pin" style="top:250px;left:50px">🐾</div>
+        <!-- Popup -->
+        <div class="map-popup" style="top:160px;left:120px">
+          <div style="display:flex;gap:10px;align-items:center">
+            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#fdf8ec,#ede4f5);display:flex;align-items:center;justify-content:center;font-size:20px">🐕</div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:#2d1a47">Max</div>
+              <div style="font-size:10px;color:#9b6fc4;font-style:italic">German Shepherd · Denver, CO</div>
+            </div>
+          </div>
+          <div style="font-size:10px;color:#7a5ea0;margin-top:8px">Owner: Marisol V.</div>
+          <div style="margin-top:8px"><button style="background:linear-gradient(135deg,#623491,#7d4db5);color:#e8c487;border:none;padding:5px 12px;border-radius:8px;font-size:10px;font-weight:700;cursor:pointer;width:100%;font-family:Georgia,serif">View Profile</button></div>
+        </div>
+      </div>
+      <!-- Filter bar -->
+      <div style="position:absolute;top:10px;left:10px;right:10px;display:flex;gap:6px">
+        <span style="padding:6px 12px;border-radius:20px;font-size:10px;font-weight:700;background:rgba(255,255,255,0.95);color:#623491;box-shadow:0 2px 8px rgba(0,0,0,0.1)">🐕 Dogs</span>
+        <span style="padding:6px 12px;border-radius:20px;font-size:10px;font-weight:700;background:rgba(255,255,255,0.7);color:#7a5ea0;box-shadow:0 2px 8px rgba(0,0,0,0.1)">🐱 Cats</span>
+        <span style="padding:6px 12px;border-radius:20px;font-size:10px;font-weight:700;background:rgba(255,255,255,0.7);color:#7a5ea0;box-shadow:0 2px 8px rgba(0,0,0,0.1)">All</span>
+      </div>
+      <!-- Count badge -->
+      <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(45,26,71,0.9);color:#e8c487;padding:6px 16px;border-radius:20px;font-size:11px;font-weight:700">🐾 247 pets on the map</div>
+    </div>
+    <div class="mobile-tabs">
+      <div class="mobile-tab"><div class="tab-icon">🏠</div>Home</div>
+      <div class="mobile-tab"><div class="tab-icon">🐾</div>Feed</div>
+      <div class="mobile-tab active"><div class="tab-icon">🗺️</div>Map</div>
+      <div class="mobile-tab"><div class="tab-icon">💬</div>Chat</div>
+      <div class="mobile-tab"><div class="tab-icon">👤</div>Me</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     6. MOBILE APP — PET PROFILE
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="mobile-pet">
+  <div class="mobile-frame">
+    <div class="mobile-status"><span>Planet Calm</span></div>
+    <div class="mobile-header"><h1>← My Pets › Max</h1><div class="mobile-header-icons"><div class="mobile-header-icon">✏️</div></div></div>
+    <div class="mobile-body" style="padding-bottom:80px">
+      <div class="pet-card">
+        <div class="pet-card-header">🐕<div class="pet-card-badge"><span class="pill-m pill-m-green">Healthy</span></div></div>
+        <div class="pet-card-body">
+          <div class="pet-card-name">Max</div>
+          <div class="pet-card-breed">German Shepherd · Male · 3 years old</div>
+          <div class="pet-card-stats">
+            <div class="pet-stat"><div class="pet-stat-val">47</div><div class="pet-stat-label">Posts</div></div>
+            <div class="pet-stat"><div class="pet-stat-val">🐾</div><div class="pet-stat-label">BARKType</div></div>
+            <div class="pet-stat"><div class="pet-stat-val">Denver</div><div class="pet-stat-label">Location</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-m">
+        <div style="font-size:12px;font-weight:700;color:#2d1a47;margin-bottom:8px">🐾 Max's Story</div>
+        <div style="font-size:12px;color:#7a5ea0;line-height:1.6;font-style:italic">Rescued from a shelter at 8 months old. He was reactive, scared of other dogs, and wouldn't walk on a leash without pulling. Stephanie's Calm-First approach changed everything. Today he walks calmly, greets other dogs with curiosity instead of fear, and even does off-leash work at the park.</div>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:#2d1a47;margin-bottom:8px">📸 Gallery</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px">
+        <div style="height:100px;border-radius:8px;background:linear-gradient(135deg,#fdf8ec,#ede4f5);display:flex;align-items:center;justify-content:center;font-size:24px">🐕</div>
+        <div style="height:100px;border-radius:8px;background:linear-gradient(135deg,#e8f5ee,#d4f0e2);display:flex;align-items:center;justify-content:center;font-size:24px">🌿</div>
+        <div style="height:100px;border-radius:8px;background:linear-gradient(135deg,#ede4f5,#f9f5fe);display:flex;align-items:center;justify-content:center;font-size:24px">🐾</div>
+      </div>
+      <div class="card-m">
+        <div style="font-size:11px;color:#9b6fc4;margin-bottom:4px">🎂 Birthday: March 15, 2023</div>
+        <div style="font-size:11px;color:#9b6fc4;margin-bottom:4px">🏠 Adopted from: Denver Dumb Friends League</div>
+        <div style="font-size:11px;color:#9b6fc4">🐾 BARKType: The Calm Anchor</div>
+      </div>
+    </div>
+    <div class="mobile-tabs">
+      <div class="mobile-tab"><div class="tab-icon">🏠</div>Home</div>
+      <div class="mobile-tab"><div class="tab-icon">🐾</div>Feed</div>
+      <div class="mobile-tab"><div class="tab-icon">🗺️</div>Map</div>
+      <div class="mobile-tab"><div class="tab-icon">💬</div>Chat</div>
+      <div class="mobile-tab active"><div class="tab-icon">👤</div>Me</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     7. MOBILE APP — MESSAGES
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="mobile-msgs">
+  <div class="mobile-frame">
+    <div class="mobile-status"><span>Planet Calm</span></div>
+    <div class="mobile-header"><h1>💬 Messages</h1><div class="mobile-header-icons"><div class="mobile-header-icon">✏️</div></div></div>
+    <div class="mobile-body" style="padding-bottom:80px">
+      <div class="msg-item"><div class="msg-avatar" style="background:linear-gradient(135deg,#c0392b,#e05a50)">S</div><div class="msg-content"><div style="display:flex;justify-content:space-between"><div class="msg-name">Stephanie Frank</div><div class="msg-time">10m</div></div><div class="msg-preview">Great progress with Max! Keep practicing the calm anchoring exercise...</div></div><div class="msg-unread"></div></div>
+      <div class="msg-item"><div class="msg-avatar" style="background:linear-gradient(135deg,#2a9d5c,#52c880)">CJ</div><div class="msg-content"><div style="display:flex;justify-content:space-between"><div class="msg-name">Coach Jen</div><div class="msg-time">2h</div></div><div class="msg-preview">Your worksheet feedback is ready! Really impressed with your progress...</div></div><div class="msg-unread"></div></div>
+      <div class="msg-item"><div class="msg-avatar" style="background:linear-gradient(135deg,#9a6800,#d4a017)">TK</div><div class="msg-content"><div style="display:flex;justify-content:space-between"><div class="msg-name">Trevor K.</div><div class="msg-time">1d</div></div><div class="msg-preview">Hey! Saw your post about Max walking calmly. Amazing! Any tips for...</div></div></div>
+      <div class="msg-item"><div class="msg-avatar" style="background:linear-gradient(135deg,#1a5a8a,#3a8ac4)">PW</div><div class="msg-content"><div style="display:flex;justify-content:space-between"><div class="msg-name">Dr. Peter W.</div><div class="msg-time">2d</div></div><div class="msg-preview">Would love to connect about the BARKType framework for my clinic...</div></div></div>
+      <div class="msg-item"><div class="msg-avatar" style="background:linear-gradient(135deg,#623491,#9b6fc4)">BC</div><div class="msg-content"><div style="display:flex;justify-content:space-between"><div class="msg-name">Book Club Group</div><div class="msg-time">3d</div></div><div class="msg-preview">Linnae: Chapter 2 discussion was so good! Who else had the aha moment about...</div></div></div>
+    </div>
+    <div class="mobile-tabs">
+      <div class="mobile-tab"><div class="tab-icon">🏠</div>Home</div>
+      <div class="mobile-tab"><div class="tab-icon">🐾</div>Feed</div>
+      <div class="mobile-tab"><div class="tab-icon">🗺️</div>Map</div>
+      <div class="mobile-tab active"><div class="tab-icon">💬</div>Chat</div>
+      <div class="mobile-tab"><div class="tab-icon">👤</div>Me</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     8. MOBILE APP — EVENTS
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="mobile-events">
+  <div class="mobile-frame">
+    <div class="mobile-status"><span>Planet Calm</span></div>
+    <div class="mobile-header"><h1>📅 Events</h1><div class="mobile-header-icons"><div class="mobile-header-icon">📆</div></div></div>
+    <div class="mobile-body" style="padding-bottom:80px">
+      <div style="font-size:12px;font-weight:700;color:#2d1a47;margin-bottom:10px">Upcoming</div>
+      <div class="event-card">
+        <div class="event-date-box"><div class="event-date-month">Jul</div><div class="event-date-day">5</div></div>
+        <div style="flex:1"><div class="event-title">Studio Group Call</div><div class="event-meta">🖥️ Virtual · 10:00 AM PT · 45 min</div><div style="font-size:10px;color:#9b6fc4;margin-top:4px">23 attending</div><div class="event-rsvp"><button class="event-rsvp-btn">✓ Going</button></div></div>
+      </div>
+      <div class="event-card">
+        <div class="event-date-box"><div class="event-date-month">Jul</div><div class="event-date-day">8</div></div>
+        <div style="flex:1"><div class="event-title">📖 Book Club — Chapter 3</div><div class="event-meta">🖥️ Virtual · 7:00 PM PT · 60 min</div><div style="font-size:10px;color:#9b6fc4;margin-top:4px">42 attending</div><div class="event-rsvp"><button class="event-rsvp-btn">RSVP</button></div></div>
+      </div>
+      <div class="event-card">
+        <div class="event-date-box"><div class="event-date-month">Jul</div><div class="event-date-day">12</div></div>
+        <div style="flex:1"><div class="event-title">🐾 Calm Council Gathering</div><div class="event-meta">📍 Denver, CO · All day</div><div style="font-size:10px;color:#9b6fc4;margin-top:4px">6 attending · <span style="color:#623491;font-weight:700">Council Only</span></div><div class="event-rsvp"><button style="background:rgba(98,52,145,0.08);color:#623491;border:1px solid rgba(98,52,145,0.15);padding:5px 14px;border-radius:8px;font-size:10px;font-weight:700;cursor:pointer;font-family:Georgia,serif">🔒 Upgrade to Join</button></div></div>
+      </div>
+      <div class="event-card">
+        <div class="event-date-box"><div class="event-date-month">Jul</div><div class="event-date-day">15</div></div>
+        <div style="flex:1"><div class="event-title">BARKType Foundations — Session 3</div><div class="event-meta">🖥️ Virtual · 1:00 PM PT · 90 min</div><div style="font-size:10px;color:#9b6fc4;margin-top:4px">12 attending · Best Friends Pilot</div><div class="event-rsvp"><button class="event-rsvp-btn">RSVP</button></div></div>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:#2d1a47;margin:16px 0 10px">Past Events</div>
+      <div class="event-card" style="opacity:.6">
+        <div class="event-date-box"><div class="event-date-month">Jun</div><div class="event-date-day">28</div></div>
+        <div style="flex:1"><div class="event-title">Open Office Hours w/ Stephanie</div><div class="event-meta">Recording available</div></div>
+      </div>
+    </div>
+    <div class="mobile-tabs">
+      <div class="mobile-tab"><div class="tab-icon">🏠</div>Home</div>
+      <div class="mobile-tab"><div class="tab-icon">🐾</div>Feed</div>
+      <div class="mobile-tab"><div class="tab-icon">🗺️</div>Map</div>
+      <div class="mobile-tab"><div class="tab-icon">💬</div>Chat</div>
+      <div class="mobile-tab"><div class="tab-icon">👤</div>Me</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     9. MOBILE APP — COURSES
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="mobile-courses">
+  <div class="mobile-frame">
+    <div class="mobile-status"><span>Planet Calm</span></div>
+    <div class="mobile-header"><h1>🎓 Courses</h1></div>
+    <div class="mobile-body" style="padding-bottom:80px">
+      <div class="course-card">
+        <div class="course-thumb">🐾 BARKType</div>
+        <div class="course-body">
+          <div class="course-title">BARKType Foundations</div>
+          <div class="course-meta">8 modules · 24 lessons · Certificate</div>
+          <div class="course-progress"><div class="course-progress-fill" style="width:35%"></div></div>
+          <div style="display:flex;justify-content:space-between;margin-top:4px"><span style="font-size:10px;color:#623491;font-weight:700">35% complete</span><span style="font-size:10px;color:#9b6fc4">Module 3 next</span></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background:linear-gradient(135deg,#623491,#9b6fc4)">🌿 Calm-First</div>
+        <div class="course-body">
+          <div class="course-title">Calm-First Morning Routine</div>
+          <div class="course-meta">5 modules · 12 lessons</div>
+          <div class="course-progress"><div class="course-progress-fill" style="width:100%"></div></div>
+          <div style="margin-top:4px"><span style="font-size:10px;color:#2a9d5c;font-weight:700">✓ Completed</span></div>
+        </div>
+      </div>
+      <div class="course-card" style="opacity:.7">
+        <div class="course-thumb" style="background:linear-gradient(135deg,#9a6800,#d4a017)">🏆 Practitioner</div>
+        <div class="course-body">
+          <div class="course-title">BARKType Practitioner Certification</div>
+          <div class="course-meta">12 modules · 36 lessons · Advanced Certificate</div>
+          <div style="margin-top:8px"><span style="padding:4px 10px;border-radius:8px;font-size:10px;font-weight:700;background:rgba(98,52,145,0.08);color:#623491">🔒 Requires Foundations Cert</span></div>
+        </div>
+      </div>
+      <!-- Upsell -->
+      <div class="upsell-card">
+        <div class="upsell-title">✨ Unlock All Courses</div>
+        <div class="upsell-desc">Upgrade to Progress Studio for unlimited course access, worksheets, and 1:1 coaching.</div>
+        <button class="upsell-btn">Upgrade — $275/mo</button>
+      </div>
+    </div>
+    <div class="mobile-tabs">
+      <div class="mobile-tab"><div class="tab-icon">🏠</div>Home</div>
+      <div class="mobile-tab"><div class="tab-icon">🐾</div>Feed</div>
+      <div class="mobile-tab"><div class="tab-icon">🗺️</div>Map</div>
+      <div class="mobile-tab"><div class="tab-icon">💬</div>Chat</div>
+      <div class="mobile-tab"><div class="tab-icon">👤</div>Me</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     10. MOBILE APP — MEMBER DIRECTORY
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="mobile-members">
+  <div class="mobile-frame">
+    <div class="mobile-status"><span>Planet Calm</span></div>
+    <div class="mobile-header"><h1>👥 Members</h1><div class="mobile-header-icons"><div class="mobile-header-icon">🔍</div></div></div>
+    <div style="background:#2d1a47;padding:0 16px 10px;display:flex;gap:6px">
+      <span style="padding:5px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(232,196,135,0.2);color:#e8c487">All</span>
+      <span style="padding:5px 12px;border-radius:14px;font-size:10px;color:rgba(255,255,255,0.5)">Collective</span>
+      <span style="padding:5px 12px;border-radius:14px;font-size:10px;color:rgba(255,255,255,0.5)">Studio</span>
+      <span style="padding:5px 12px;border-radius:14px;font-size:10px;color:rgba(255,255,255,0.5)">Council</span>
+      <span style="padding:5px 12px;border-radius:14px;font-size:10px;color:rgba(255,255,255,0.5)">BARKType</span>
+    </div>
+    <div class="mobile-body" style="padding-bottom:80px">
+      <div style="font-size:10px;color:#9b6fc4;margin-bottom:10px">1,247 members</div>
+      <div class="card-m" style="display:flex;gap:12px;align-items:center">
+        <div class="avatar-m" style="width:44px;height:44px;background:linear-gradient(135deg,#623491,#9b6fc4);font-size:14px">MV</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:#2d1a47">Marisol Vega</div><div style="font-size:10px;color:#7a5ea0;font-style:italic">Dog mom · Denver, CO</div><div style="display:flex;gap:4px;margin-top:4px"><span class="pill-m pill-m-green" style="font-size:8px;padding:2px 6px">Collective</span><span class="tag-m">🐕 Max</span></div></div>
+      </div>
+      <div class="card-m" style="display:flex;gap:12px;align-items:center">
+        <div class="avatar-m" style="width:44px;height:44px;background:linear-gradient(135deg,#2a9d5c,#52c880);font-size:14px">TK</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:#2d1a47">Trevor Kim <span style="font-size:10px;color:#e8c487">🏆</span></div><div style="font-size:10px;color:#7a5ea0;font-style:italic">Dog trainer · Portland, OR</div><div style="display:flex;gap:4px;margin-top:4px"><span class="pill-m" style="font-size:8px;padding:2px 6px;background:#e4edf5;color:#1a5a8a">Studio</span><span class="tag-m">BARKType Certified</span></div></div>
+      </div>
+      <div class="card-m" style="display:flex;gap:12px;align-items:center">
+        <div class="avatar-m" style="width:44px;height:44px;background:linear-gradient(135deg,#c0392b,#e05a50);font-size:14px">PW</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:#2d1a47">Dr. Peter Wang</div><div style="font-size:10px;color:#7a5ea0;font-style:italic">Veterinary Behaviorist · SF</div><div style="display:flex;gap:4px;margin-top:4px"><span class="pill-m pill-m-purple" style="font-size:8px;padding:2px 6px">Council</span><span class="tag-m">Speaker</span></div></div>
+      </div>
+      <div class="card-m" style="display:flex;gap:12px;align-items:center">
+        <div class="avatar-m" style="width:44px;height:44px;background:linear-gradient(135deg,#9a6800,#d4a017);font-size:14px">SF</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:#2d1a47">Sandra Flynn</div><div style="font-size:10px;color:#7a5ea0;font-style:italic">Wayfinder Alumni · Austin, TX</div><div style="display:flex;gap:4px;margin-top:4px"><span class="pill-m pill-m-gold" style="font-size:8px;padding:2px 6px">Wayfinder</span></div></div>
+      </div>
+    </div>
+    <div class="mobile-tabs">
+      <div class="mobile-tab"><div class="tab-icon">🏠</div>Home</div>
+      <div class="mobile-tab"><div class="tab-icon">🐾</div>Feed</div>
+      <div class="mobile-tab"><div class="tab-icon">🗺️</div>Map</div>
+      <div class="mobile-tab"><div class="tab-icon">💬</div>Chat</div>
+      <div class="mobile-tab"><div class="tab-icon">👤</div>Me</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     11. MOBILE APP — LEADERBOARD
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="mobile-leaderboard">
+  <div class="mobile-frame">
+    <div class="mobile-status"><span>Planet Calm</span></div>
+    <div class="mobile-header"><h1>🏆 Leaderboard</h1></div>
+    <div style="background:#2d1a47;padding:0 16px 10px;display:flex;gap:6px">
+      <span style="padding:5px 12px;border-radius:14px;font-size:10px;font-weight:700;background:rgba(232,196,135,0.2);color:#e8c487">This Month</span>
+      <span style="padding:5px 12px;border-radius:14px;font-size:10px;color:rgba(255,255,255,0.5)">All Time</span>
+      <span style="padding:5px 12px;border-radius:14px;font-size:10px;color:rgba(255,255,255,0.5)">This Week</span>
+    </div>
+    <div class="mobile-body" style="padding-bottom:80px">
+      <!-- Your rank -->
+      <div class="card-m" style="background:linear-gradient(135deg,#fdf8ec,#f5eef8);border:1px solid rgba(232,196,135,0.3)">
+        <div style="font-size:10px;font-weight:700;color:#9b6fc4;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Your Rank</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="lb-rank lb-rank-n" style="width:36px;height:36px;font-size:14px">#12</div>
+          <div><div style="font-size:14px;font-weight:700;color:#2d1a47">Marisol V.</div><div style="font-size:10px;color:#9b6fc4">342 points this month</div></div>
+          <div style="margin-left:auto;font-size:16px;font-weight:700;color:#623491">342 pts</div>
+        </div>
+      </div>
+      <!-- Rankings -->
+      <div class="card-m" style="padding:0">
+        <div class="lb-item">
+          <div class="lb-rank lb-rank-1">🥇</div>
+          <div class="avatar-m" style="width:36px;height:36px;background:linear-gradient(135deg,#2a9d5c,#52c880);font-size:12px">TK</div>
+          <div><div class="lb-name">Trevor K.</div><div class="lb-badges">🏆 🐾 ⭐ 📖</div></div>
+          <div class="lb-points">1,240</div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank lb-rank-2">🥈</div>
+          <div class="avatar-m" style="width:36px;height:36px;background:linear-gradient(135deg,#c0392b,#e05a50);font-size:12px">PW</div>
+          <div><div class="lb-name">Dr. Peter W.</div><div class="lb-badges">🏆 🌿 ✦</div></div>
+          <div class="lb-points">980</div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank lb-rank-3">🥉</div>
+          <div class="avatar-m" style="width:36px;height:36px;background:linear-gradient(135deg,#1a5a8a,#3a8ac4);font-size:12px">LR</div>
+          <div><div class="lb-name">Linnae R.</div><div class="lb-badges">📖 🐾</div></div>
+          <div class="lb-points">870</div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank lb-rank-n">4</div>
+          <div class="avatar-m" style="width:36px;height:36px;background:linear-gradient(135deg,#9a6800,#d4a017);font-size:12px">RN</div>
+          <div><div class="lb-name">Rachel N.</div><div class="lb-badges">✦ 🐾</div></div>
+          <div class="lb-points">720</div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank lb-rank-n">5</div>
+          <div class="avatar-m" style="width:36px;height:36px;background:linear-gradient(135deg,#623491,#9b6fc4);font-size:12px">SF</div>
+          <div><div class="lb-name">Sandra F.</div><div class="lb-badges">🌿</div></div>
+          <div class="lb-points">650</div>
+        </div>
+      </div>
+      <!-- Point guide -->
+      <div class="card-m">
+        <div style="font-size:12px;font-weight:700;color:#2d1a47;margin-bottom:8px">How to Earn Points</div>
+        <div style="font-size:11px;color:#7a5ea0;line-height:1.8">
+          🐾 Post in feed: <span style="color:#623491;font-weight:700">5 pts</span><br>
+          💬 Comment: <span style="color:#623491;font-weight:700">2 pts</span><br>
+          📅 RSVP to event: <span style="color:#623491;font-weight:700">3 pts</span><br>
+          🎓 Complete lesson: <span style="color:#623491;font-weight:700">10 pts</span><br>
+          📝 Submit worksheet: <span style="color:#623491;font-weight:700">15 pts</span><br>
+          🏆 Earn badge: <span style="color:#623491;font-weight:700">25 pts</span>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-tabs">
+      <div class="mobile-tab"><div class="tab-icon">🏠</div>Home</div>
+      <div class="mobile-tab"><div class="tab-icon">🐾</div>Feed</div>
+      <div class="mobile-tab"><div class="tab-icon">🗺️</div>Map</div>
+      <div class="mobile-tab"><div class="tab-icon">💬</div>Chat</div>
+      <div class="mobile-tab"><div class="tab-icon">👤</div>Me</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     12. DESKTOP — CLIENT PORTAL: RESOURCES
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="portal-resources">
+  <div class="desktop-frame">
+    <div class="sidebar">
+      <div style="padding:14px 18px 12px;border-bottom:1px solid rgba(232,196,135,0.18)"><div style="color:#e8c487;font-size:15px;font-weight:700">🐾 Planet Calm</div><div style="color:rgba(232,196,135,0.4);font-size:9px;margin-top:2px">Member Portal</div></div>
+      <div class="nav-label-m">My Journey</div>
+      <div class="nav-item-m"><span class="nav-icon-m">🏠</span>Home</div>
+      <div class="nav-item-m"><span class="nav-icon-m">🐾</span>Community</div>
+      <div class="nav-item-m active"><span class="nav-icon-m">📚</span>Resources</div>
+      <div class="nav-label-m">Connect</div>
+      <div class="nav-item-m"><span class="nav-icon-m">💬</span>Messages</div>
+      <div class="nav-item-m"><span class="nav-icon-m">📅</span>Events</div>
+      <div class="nav-item-m"><span class="nav-icon-m">🤖</span>Ask Leona</div>
+      <div class="nav-label-m">Account</div>
+      <div class="nav-item-m"><span class="nav-icon-m">👤</span>My Profile</div>
+      <div class="nav-item-m"><span class="nav-icon-m">🐾</span>My Pets</div>
+      <div class="nav-item-m"><span class="nav-icon-m">⚙️</span>Settings</div>
+    </div>
+    <div class="topbar">
+      <div style="font-size:16px;font-weight:700;color:#2d1a47;flex:1">Resources</div>
+      <span class="pill-m pill-m-green">Collective Member</span>
+      <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">MV</div>
+    </div>
+    <div class="main">
+      <!-- Sub-tabs for Resources -->
+      <div style="display:flex;gap:6px;margin-bottom:20px">
+        <span style="padding:6px 16px;border-radius:20px;font-size:11px;font-weight:700;background:linear-gradient(135deg,#623491,#9b6fc4);color:#e8c487;box-shadow:0 2px 10px rgba(98,52,145,0.3);cursor:pointer">🎓 Courses</span>
+        <span style="padding:6px 16px;border-radius:20px;font-size:11px;font-weight:700;background:rgba(98,52,145,0.06);color:#623491;cursor:pointer">📝 Worksheets</span>
+        <span style="padding:6px 16px;border-radius:20px;font-size:11px;font-weight:700;background:rgba(98,52,145,0.06);color:#623491;cursor:pointer">📖 Content Library</span>
+        <span style="padding:6px 16px;border-radius:20px;font-size:11px;font-weight:700;background:rgba(98,52,145,0.06);color:#623491;cursor:pointer">🏆 Certificates</span>
+      </div>
+      <!-- Course grid -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+        <!-- Course 1 — In Progress -->
+        <div class="card-m" style="padding:0;overflow:hidden">
+          <div style="height:110px;background:linear-gradient(135deg,#2d1a47,#623491);display:flex;align-items:center;justify-content:center;position:relative">
+            <span style="font-size:36px">🐾</span>
+            <div style="position:absolute;top:8px;right:8px"><span class="pill-m pill-m-amber" style="font-size:8px;padding:2px 8px">In Progress</span></div>
+          </div>
+          <div style="padding:14px">
+            <div style="font-size:13px;font-weight:700;color:#2d1a47;margin-bottom:3px">BARKType Foundations</div>
+            <div style="font-size:10px;color:#9b6fc4;font-style:italic;margin-bottom:8px">8 modules · 24 lessons · Certificate</div>
+            <div style="height:4px;background:rgba(98,52,145,0.12);border-radius:2px;margin-bottom:4px"><div style="height:100%;width:35%;background:linear-gradient(90deg,#623491,#e8c487);border-radius:2px"></div></div>
+            <div style="display:flex;justify-content:space-between"><span style="font-size:9px;font-weight:700;color:#623491">35% complete</span><span style="font-size:9px;color:#9b6fc4">Module 3</span></div>
+            <button style="width:100%;margin-top:10px;padding:7px;border-radius:8px;background:linear-gradient(135deg,#623491,#7d4db5);color:#e8c487;border:none;font-size:11px;font-weight:700;cursor:pointer;font-family:Georgia,serif">Continue Learning</button>
+          </div>
+        </div>
+        <!-- Course 2 — Completed -->
+        <div class="card-m" style="padding:0;overflow:hidden">
+          <div style="height:110px;background:linear-gradient(135deg,#623491,#9b6fc4);display:flex;align-items:center;justify-content:center;position:relative">
+            <span style="font-size:36px">🌿</span>
+            <div style="position:absolute;top:8px;right:8px"><span class="pill-m pill-m-green" style="font-size:8px;padding:2px 8px">✓ Completed</span></div>
+          </div>
+          <div style="padding:14px">
+            <div style="font-size:13px;font-weight:700;color:#2d1a47;margin-bottom:3px">Calm-First Morning Routine</div>
+            <div style="font-size:10px;color:#9b6fc4;font-style:italic;margin-bottom:8px">5 modules · 12 lessons</div>
+            <div style="height:4px;background:rgba(98,52,145,0.12);border-radius:2px;margin-bottom:4px"><div style="height:100%;width:100%;background:#2a9d5c;border-radius:2px"></div></div>
+            <div style="font-size:9px;font-weight:700;color:#2a9d5c">✓ Certificate Earned</div>
+            <button style="width:100%;margin-top:10px;padding:7px;border-radius:8px;background:rgba(98,52,145,0.06);color:#623491;border:1px solid rgba(98,52,145,0.15);font-size:11px;font-weight:700;cursor:pointer;font-family:Georgia,serif">📜 View Certificate</button>
+          </div>
+        </div>
+        <!-- Course 3 — Locked -->
+        <div class="card-m" style="padding:0;overflow:hidden;opacity:.7">
+          <div style="height:110px;background:linear-gradient(135deg,#9a6800,#d4a017);display:flex;align-items:center;justify-content:center;position:relative">
+            <span style="font-size:36px">🏆</span>
+            <div style="position:absolute;top:8px;right:8px"><span style="font-size:8px;padding:2px 8px;border-radius:12px;background:rgba(0,0,0,0.3);color:#fff;font-weight:700">🔒 Locked</span></div>
+          </div>
+          <div style="padding:14px">
+            <div style="font-size:13px;font-weight:700;color:#2d1a47;margin-bottom:3px">BARKType Practitioner</div>
+            <div style="font-size:10px;color:#9b6fc4;font-style:italic;margin-bottom:8px">12 modules · 36 lessons · Advanced Cert</div>
+            <div style="font-size:10px;color:#623491;font-weight:700;padding:6px 10px;background:rgba(98,52,145,0.06);border-radius:6px;text-align:center">Requires BARKType Foundations Certificate</div>
+            <button style="width:100%;margin-top:10px;padding:7px;border-radius:8px;background:rgba(98,52,145,0.06);color:#623491;border:1px solid rgba(98,52,145,0.15);font-size:11px;font-weight:700;cursor:pointer;font-family:Georgia,serif">View Requirements</button>
+          </div>
+        </div>
+        <!-- Course 4 — Available -->
+        <div class="card-m" style="padding:0;overflow:hidden">
+          <div style="height:110px;background:linear-gradient(135deg,#2a9d5c,#52c880);display:flex;align-items:center;justify-content:center">
+            <span style="font-size:36px">📖</span>
+          </div>
+          <div style="padding:14px">
+            <div style="font-size:13px;font-weight:700;color:#2d1a47;margin-bottom:3px">"What the BARK?" Companion</div>
+            <div style="font-size:10px;color:#9b6fc4;font-style:italic;margin-bottom:8px">3 modules · 9 lessons · Book exercises</div>
+            <button style="width:100%;margin-top:10px;padding:7px;border-radius:8px;background:linear-gradient(135deg,#623491,#7d4db5);color:#e8c487;border:none;font-size:11px;font-weight:700;cursor:pointer;font-family:Georgia,serif">Start Course</button>
+          </div>
+        </div>
+        <!-- Course 5 — Tier-gated -->
+        <div class="card-m" style="padding:0;overflow:hidden;opacity:.7">
+          <div style="height:110px;background:linear-gradient(135deg,#623491,#2d1a47);display:flex;align-items:center;justify-content:center;position:relative">
+            <span style="font-size:36px">✨</span>
+            <div style="position:absolute;top:8px;right:8px"><span style="font-size:8px;padding:2px 8px;border-radius:12px;background:rgba(0,0,0,0.3);color:#fff;font-weight:700">Studio+</span></div>
+          </div>
+          <div style="padding:14px">
+            <div style="font-size:13px;font-weight:700;color:#2d1a47;margin-bottom:3px">Advanced Calm Leadership</div>
+            <div style="font-size:10px;color:#9b6fc4;font-style:italic;margin-bottom:8px">6 modules · 18 lessons · Studio tier</div>
+            <div class="upsell-card" style="margin:0;padding:10px;border-radius:8px">
+              <div style="font-size:10px;color:#e8c487;font-weight:700;margin-bottom:4px">✨ Upgrade to access</div>
+              <button class="upsell-btn" style="width:100%;font-size:10px;padding:6px">Studio — $275/mo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Leona float -->
+    <div style="position:absolute;bottom:20px;right:20px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(98,52,145,0.4);z-index:50;font-size:20px">🤖</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     13. DESKTOP — COURSE PLAYER
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="portal-course">
+  <div class="desktop-frame">
+    <div class="sidebar" style="background:#1e1235">
+      <div style="padding:14px 18px 12px;border-bottom:1px solid rgba(232,196,135,0.12)"><div style="color:#e8c487;font-size:13px;font-weight:700">← Back to Resources</div></div>
+      <div style="padding:14px 18px 8px"><div style="color:#e8c487;font-size:14px;font-weight:700">🐾 BARKType Foundations</div><div style="color:rgba(232,196,135,0.5);font-size:10px;margin-top:3px;font-style:italic">35% complete · 8h remaining</div></div>
+      <!-- Curriculum outline -->
+      <div style="padding:6px 0">
+        <div style="padding:8px 18px;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgba(232,196,135,0.4)">Module 1 — Foundations</div>
+        <div style="padding:6px 18px 6px 28px;font-size:11px;color:rgba(255,255,255,0.5)">✅ What is Calm-First?</div>
+        <div style="padding:6px 18px 6px 28px;font-size:11px;color:rgba(255,255,255,0.5)">✅ Understanding Your Dog</div>
+        <div style="padding:6px 18px 6px 28px;font-size:11px;color:rgba(255,255,255,0.5)">✅ The BARKType Framework</div>
+        <div style="padding:8px 18px;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgba(232,196,135,0.4)">Module 2 — Assessment</div>
+        <div style="padding:6px 18px 6px 28px;font-size:11px;color:rgba(255,255,255,0.5)">✅ BARKType Quiz Deep-Dive</div>
+        <div style="padding:6px 18px 6px 28px;font-size:11px;color:rgba(255,255,255,0.5)">✅ Reading Your Results</div>
+        <div style="padding:6px 18px 6px 28px;font-size:11px;color:#e8c487;font-weight:700;background:rgba(232,196,135,0.1);border-left:2px solid #e8c487">📝 Quiz: Assessment Mastery</div>
+        <div style="padding:8px 18px;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgba(232,196,135,0.4)">Module 3 — Application</div>
+        <div style="padding:6px 18px 6px 28px;font-size:11px;color:rgba(255,255,255,0.5)">🔓 Calm Anchoring Techniques</div>
+        <div style="padding:6px 18px 6px 28px;font-size:11px;color:rgba(255,255,255,0.4)">🔒 Walk Leadership</div>
+        <div style="padding:6px 18px 6px 28px;font-size:11px;color:rgba(255,255,255,0.4)">🔒 Reactivity Protocols</div>
+        <div style="padding:6px 18px 6px 28px;font-size:11px;color:rgba(255,255,255,0.4)">🔒 📤 Assignment: Implementation Plan</div>
+      </div>
+    </div>
+    <div class="topbar" style="left:220px">
+      <div style="font-size:14px;font-weight:700;color:#2d1a47;flex:1">Module 2 › Quiz: Assessment Mastery</div>
+      <div style="display:flex;gap:8px">
+        <button style="padding:5px 12px;border-radius:8px;background:rgba(98,52,145,0.06);color:#623491;border:1px solid rgba(98,52,145,0.15);font-size:10px;font-weight:700;cursor:pointer;font-family:Georgia,serif">← Previous</button>
+        <button style="padding:5px 12px;border-radius:8px;background:linear-gradient(135deg,#623491,#7d4db5);color:#e8c487;border:none;font-size:10px;font-weight:700;cursor:pointer;font-family:Georgia,serif">Next →</button>
+      </div>
+    </div>
+    <div class="main">
+      <!-- Quiz view -->
+      <div class="card-m" style="max-width:680px;margin:0 auto">
+        <div style="text-align:center;margin-bottom:20px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#9b6fc4;margin-bottom:6px">📝 Quiz</div>
+          <div style="font-size:18px;font-weight:700;color:#2d1a47">Assessment Mastery</div>
+          <div style="font-size:11px;color:#9b6fc4;font-style:italic;margin-top:4px">5 questions · 80% to pass · 2 retries remaining</div>
+        </div>
+        <!-- Question -->
+        <div style="background:#f9f5fe;border-radius:12px;padding:18px;margin-bottom:14px">
+          <div style="font-size:10px;font-weight:700;color:#9b6fc4;margin-bottom:8px">Question 3 of 5</div>
+          <div style="font-size:14px;font-weight:700;color:#2d1a47;margin-bottom:14px">Which BARKType profile is most associated with calm leadership in high-stress environments?</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;border:1px solid rgba(98,52,145,0.15);cursor:pointer;background:#fff;font-size:12px;color:#2d1a47">
+              <span style="width:18px;height:18px;border-radius:50%;border:2px solid #9b6fc4;display:inline-block;flex-shrink:0"></span>
+              The Structured Guardian
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;border:2px solid #623491;cursor:pointer;background:rgba(98,52,145,0.05);font-size:12px;color:#2d1a47;font-weight:700">
+              <span style="width:18px;height:18px;border-radius:50%;border:2px solid #623491;background:#623491;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;font-size:10px">✓</span>
+              The Calm Anchor
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;border:1px solid rgba(98,52,145,0.15);cursor:pointer;background:#fff;font-size:12px;color:#2d1a47">
+              <span style="width:18px;height:18px;border-radius:50%;border:2px solid #9b6fc4;display:inline-block;flex-shrink:0"></span>
+              The Empathic Explorer
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;border:1px solid rgba(98,52,145,0.15);cursor:pointer;background:#fff;font-size:12px;color:#2d1a47">
+              <span style="width:18px;height:18px;border-radius:50%;border:2px solid #9b6fc4;display:inline-block;flex-shrink:0"></span>
+              The Playful Catalyst
+            </label>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="display:flex;gap:4px">{[1,2,3,4,5].map → dots}</div>
+          <button style="padding:8px 24px;border-radius:10px;background:linear-gradient(135deg,#623491,#7d4db5);color:#e8c487;border:none;font-size:12px;font-weight:700;cursor:pointer;font-family:Georgia,serif">Next Question →</button>
+        </div>
+        <!-- Progress dots -->
+        <div style="display:flex;justify-content:center;gap:6px;margin-top:16px">
+          <div style="width:8px;height:8px;border-radius:50%;background:#2a9d5c"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#2a9d5c"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#623491"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:rgba(98,52,145,0.2)"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:rgba(98,52,145,0.2)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     14. ADMIN — COURSES LIST
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="admin-courses">
+  <div class="desktop-frame">
+    <div class="sidebar">
+      <div style="padding:14px 18px 12px;border-bottom:1px solid rgba(232,196,135,0.18)"><div style="color:#e8c487;font-size:15px;font-weight:700">🐾 Planet Calm</div><div style="color:rgba(232,196,135,0.4);font-size:9px;margin-top:2px">Admin Dashboard</div></div>
+      <div class="nav-label-m">Command</div>
+      <div class="nav-item-m"><span class="nav-icon-m">🌿</span>Overview</div>
+      <div class="nav-label-m">Content</div>
+      <div class="nav-item-m"><span class="nav-icon-m">📖</span>Content</div>
+      <div class="nav-item-m active"><span class="nav-icon-m">🎓</span>Courses</div>
+      <div class="nav-item-m"><span class="nav-icon-m">💳</span>Payments</div>
+      <div class="nav-label-m">Manage</div>
+      <div class="nav-item-m"><span class="nav-icon-m">👥</span>Clients</div>
+      <div class="nav-item-m"><span class="nav-icon-m">⚙️</span>Settings</div>
+    </div>
+    <div class="topbar"><div style="font-size:16px;font-weight:700;color:#2d1a47;flex:1">Courses</div><div style="font-size:11px;color:#7a5ea0;font-style:italic">Welcome back, Stephanie ✦</div><div style="display:inline-flex;gap:4px;background:linear-gradient(135deg,#2d1a47,#623491);color:#e8c487;font-size:10px;padding:4px 10px;border-radius:16px;font-weight:700">🤖 AI Brain</div><div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);color:#e8c487;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid #e8c487">S</div></div>
+    <div class="main">
+      <!-- Stats -->
+      <div class="desktop-kpi">
+        <div class="desktop-kpi-card"><div class="dkpi-label">Published Courses</div><div class="dkpi-val">4</div><div class="dkpi-trend">2 BARKType + 2 general</div></div>
+        <div class="desktop-kpi-card"><div class="dkpi-label">Active Learners</div><div class="dkpi-val">89</div><div class="dkpi-trend">↑ 12 this month</div></div>
+        <div class="desktop-kpi-card"><div class="dkpi-label">Avg Completion</div><div class="dkpi-val">64%</div><div class="dkpi-trend">↑ 8% vs last month</div></div>
+        <div class="desktop-kpi-card"><div class="dkpi-label">Certificates Issued</div><div class="dkpi-val">23</div><div class="dkpi-trend">8 this month</div></div>
+      </div>
+      <!-- Controls -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div style="display:flex;gap:6px">
+          <span style="padding:5px 14px;border-radius:16px;font-size:10px;font-weight:700;background:linear-gradient(135deg,#623491,#9b6fc4);color:#e8c487;cursor:pointer">All</span>
+          <span style="padding:5px 14px;border-radius:16px;font-size:10px;font-weight:700;background:rgba(98,52,145,0.06);color:#623491;cursor:pointer">Published</span>
+          <span style="padding:5px 14px;border-radius:16px;font-size:10px;font-weight:700;background:rgba(98,52,145,0.06);color:#623491;cursor:pointer">Draft</span>
+          <span style="padding:5px 14px;border-radius:16px;font-size:10px;font-weight:700;background:rgba(98,52,145,0.06);color:#623491;cursor:pointer">BARKType</span>
+        </div>
+        <button style="padding:7px 16px;border-radius:10px;background:linear-gradient(135deg,#623491,#7d4db5);color:#e8c487;border:none;font-size:11px;font-weight:700;cursor:pointer;font-family:Georgia,serif;box-shadow:0 3px 12px rgba(98,52,145,0.25)">+ Create Course</button>
+      </div>
+      <!-- Course table -->
+      <div class="card-m" style="padding:0;overflow:hidden">
+        <table>
+          <thead><tr><th>Course</th><th>Category</th><th>Enrolled</th><th>Completion</th><th>Certificates</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><div style="display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#2d1a47,#623491);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🐾</div><div><strong>BARKType Foundations</strong><div style="font-size:10px;color:#9b6fc4">8 modules · 24 lessons</div></div></div></td><td><span class="tag-m">BARKType</span></td><td><strong>34</strong></td><td><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:4px;background:rgba(98,52,145,0.12);border-radius:2px"><div style="height:100%;width:58%;background:linear-gradient(90deg,#623491,#e8c487);border-radius:2px"></div></div><span style="font-size:10px;font-weight:700;color:#623491">58%</span></div></td><td><strong style="color:#623491">12</strong></td><td><span class="pill-m pill-m-green">Published</span></td></tr>
+            <tr><td><div style="display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#623491,#9b6fc4);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🌿</div><div><strong>Calm-First Morning Routine</strong><div style="font-size:10px;color:#9b6fc4">5 modules · 12 lessons</div></div></div></td><td><span class="tag-m">Collective</span></td><td><strong>67</strong></td><td><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:4px;background:rgba(98,52,145,0.12);border-radius:2px"><div style="height:100%;width:82%;background:linear-gradient(90deg,#623491,#e8c487);border-radius:2px"></div></div><span style="font-size:10px;font-weight:700;color:#623491">82%</span></div></td><td><strong style="color:#623491">11</strong></td><td><span class="pill-m pill-m-green">Published</span></td></tr>
+            <tr><td><div style="display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#9a6800,#d4a017);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🏆</div><div><strong>BARKType Practitioner</strong><div style="font-size:10px;color:#9b6fc4">12 modules · 36 lessons</div></div></div></td><td><span class="tag-m">BARKType</span></td><td><strong>8</strong></td><td><div style="display:flex;align-items:center;gap:6px"><div style="width:50px;height:4px;background:rgba(98,52,145,0.12);border-radius:2px"><div style="height:100%;width:22%;background:linear-gradient(90deg,#623491,#e8c487);border-radius:2px"></div></div><span style="font-size:10px;font-weight:700;color:#623491">22%</span></div></td><td><strong style="color:#623491">0</strong></td><td><span class="pill-m pill-m-green">Published</span></td></tr>
+            <tr style="opacity:.6"><td><div style="display:flex;align-items:center;gap:10px"><div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#2a9d5c,#52c880);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">📖</div><div><strong>Book Companion Course</strong><div style="font-size:10px;color:#9b6fc4">3 modules · 9 lessons</div></div></div></td><td><span class="tag-m">Book</span></td><td>—</td><td>—</td><td>—</td><td><span class="pill-m pill-m-amber">Draft</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     15. ADMIN — COURSE BUILDER
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="admin-builder">
+  <div class="desktop-frame">
+    <div class="sidebar" style="background:#1e1235">
+      <div style="padding:14px 18px 12px;border-bottom:1px solid rgba(232,196,135,0.12)"><div style="color:#e8c487;font-size:13px;font-weight:700">← Back to Courses</div></div>
+      <div style="padding:14px 18px 8px"><div style="color:#e8c487;font-size:14px;font-weight:700">🐾 BARKType Foundations</div><div style="display:flex;gap:4px;margin-top:6px"><span class="pill-m pill-m-green" style="font-size:8px;padding:2px 6px">Published</span><span class="pill-m" style="font-size:8px;padding:2px 6px;background:rgba(232,196,135,0.15);color:#e8c487">BARKType</span></div></div>
+      <!-- Builder tabs -->
+      <div style="padding:12px 18px 6px;display:flex;flex-direction:column;gap:2px">
+        <div style="padding:7px 10px;border-radius:8px;font-size:11px;color:rgba(255,255,255,0.5);cursor:pointer">📋 Course Settings</div>
+        <div style="padding:7px 10px;border-radius:8px;font-size:11px;color:#e8c487;background:rgba(232,196,135,0.1);font-weight:700;cursor:pointer">📚 Curriculum</div>
+        <div style="padding:7px 10px;border-radius:8px;font-size:11px;color:rgba(255,255,255,0.5);cursor:pointer">👥 Enrollments</div>
+        <div style="padding:7px 10px;border-radius:8px;font-size:11px;color:rgba(255,255,255,0.5);cursor:pointer">📤 Assignments</div>
+        <div style="padding:7px 10px;border-radius:8px;font-size:11px;color:rgba(255,255,255,0.5);cursor:pointer">📊 Analytics</div>
+        <div style="padding:7px 10px;border-radius:8px;font-size:11px;color:rgba(255,255,255,0.5);cursor:pointer">🏆 Certificates</div>
+      </div>
+      <!-- Curriculum tree -->
+      <div style="padding:12px 0;border-top:1px solid rgba(232,196,135,0.1);margin-top:8px">
+        <div style="padding:6px 18px;font-size:10px;font-weight:700;color:rgba(232,196,135,0.5);letter-spacing:1px;text-transform:uppercase">Modules</div>
+        <div style="padding:6px 18px;font-size:11px;color:rgba(255,255,255,0.7);cursor:pointer;display:flex;align-items:center;gap:6px">⊟ <strong>Module 1 — Foundations</strong></div>
+        <div style="padding:4px 18px 4px 36px;font-size:10px;color:rgba(255,255,255,0.5)">What is Calm-First?</div>
+        <div style="padding:4px 18px 4px 36px;font-size:10px;color:rgba(255,255,255,0.5)">Understanding Your Dog</div>
+        <div style="padding:4px 18px 4px 36px;font-size:10px;color:rgba(255,255,255,0.5)">The BARKType Framework</div>
+        <div style="padding:6px 18px;font-size:11px;color:#e8c487;cursor:pointer;display:flex;align-items:center;gap:6px;font-weight:700;background:rgba(232,196,135,0.08)">⊟ <strong>Module 2 — Assessment</strong></div>
+        <div style="padding:4px 18px 4px 36px;font-size:10px;color:rgba(255,255,255,0.5)">BARKType Quiz Deep-Dive</div>
+        <div style="padding:4px 18px 4px 36px;font-size:10px;color:rgba(255,255,255,0.5)">Reading Your Results</div>
+        <div style="padding:4px 18px 4px 36px;font-size:10px;color:#e8c487;font-weight:700">📝 Quiz: Assessment Mastery</div>
+        <div style="padding:6px 18px;font-size:11px;color:rgba(255,255,255,0.7);cursor:pointer;display:flex;align-items:center;gap:6px">⊞ <strong>Module 3 — Application</strong> <span style="font-size:9px;color:rgba(255,255,255,0.3)">(4 lessons)</span></div>
+        <div style="padding:10px 18px"><button style="width:100%;padding:6px;border-radius:8px;background:rgba(232,196,135,0.1);color:#e8c487;border:1px dashed rgba(232,196,135,0.3);font-size:10px;font-weight:700;cursor:pointer;font-family:Georgia,serif">+ Add Module</button></div>
+      </div>
+    </div>
+    <div class="topbar" style="left:220px"><div style="font-size:16px;font-weight:700;color:#2d1a47;flex:1">Editing: Module 2 › Quiz: Assessment Mastery</div><div style="display:flex;gap:6px"><button style="padding:5px 14px;border-radius:8px;background:rgba(98,52,145,0.06);color:#623491;border:1px solid rgba(98,52,145,0.15);font-size:10px;font-weight:700;cursor:pointer;font-family:Georgia,serif">Preview</button><button style="padding:5px 14px;border-radius:8px;background:linear-gradient(135deg,#623491,#7d4db5);color:#e8c487;border:none;font-size:10px;font-weight:700;cursor:pointer;font-family:Georgia,serif;box-shadow:0 2px 8px rgba(98,52,145,0.25)">Save Changes</button></div></div>
+    <div class="main">
+      <!-- Quiz editor -->
+      <div class="card-m">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <div><div style="font-size:15px;font-weight:700;color:#2d1a47">📝 Quiz: Assessment Mastery</div><div style="font-size:11px;color:#9b6fc4;font-style:italic;margin-top:2px">5 questions · Pass: 80% · 3 retries</div></div>
+          <div style="display:flex;gap:6px"><button style="padding:5px 12px;border-radius:8px;background:rgba(98,52,145,0.06);color:#623491;border:1px solid rgba(98,52,145,0.15);font-size:10px;cursor:pointer;font-family:Georgia,serif">⚙️ Quiz Settings</button><button style="padding:5px 12px;border-radius:8px;background:linear-gradient(135deg,#623491,#7d4db5);color:#e8c487;border:none;font-size:10px;font-weight:700;cursor:pointer;font-family:Georgia,serif">+ Add Question</button></div>
+        </div>
+        <!-- Questions list -->
+        <div style="border:1px solid rgba(98,52,145,0.1);border-radius:10px;overflow:hidden">
+          <div style="padding:12px 14px;background:rgba(98,52,145,0.03);display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(98,52,145,0.06);cursor:grab"><span style="color:#9b6fc4;font-size:11px">⋮⋮</span><div style="flex:1"><div style="font-size:12px;font-weight:700;color:#2d1a47">Q1: What is the primary principle of Calm-First Leadership?</div><div style="font-size:10px;color:#9b6fc4">Multiple Choice · 4 options</div></div><span class="pill-m pill-m-green" style="font-size:8px;padding:2px 6px">Auto-grade</span></div>
+          <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(98,52,145,0.06);cursor:grab"><span style="color:#9b6fc4;font-size:11px">⋮⋮</span><div style="flex:1"><div style="font-size:12px;font-weight:700;color:#2d1a47">Q2: True or False: BARKType profiles are fixed and never change.</div><div style="font-size:10px;color:#9b6fc4">True/False</div></div><span class="pill-m pill-m-green" style="font-size:8px;padding:2px 6px">Auto-grade</span></div>
+          <div style="padding:12px 14px;background:rgba(232,196,135,0.05);display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(98,52,145,0.06);border-left:3px solid #e8c487;cursor:grab"><span style="color:#9b6fc4;font-size:11px">⋮⋮</span><div style="flex:1"><div style="font-size:12px;font-weight:700;color:#2d1a47">Q3: Which BARKType profile is most associated with calm leadership?</div><div style="font-size:10px;color:#9b6fc4">Multiple Choice · 4 options · <strong>Editing</strong></div></div><span class="pill-m pill-m-green" style="font-size:8px;padding:2px 6px">Auto-grade</span></div>
+          <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(98,52,145,0.06);cursor:grab"><span style="color:#9b6fc4;font-size:11px">⋮⋮</span><div style="flex:1"><div style="font-size:12px;font-weight:700;color:#2d1a47">Q4: Select all that apply — Signs of a reactive dog include:</div><div style="font-size:10px;color:#9b6fc4">Multi-Select · 5 options</div></div><span class="pill-m pill-m-green" style="font-size:8px;padding:2px 6px">Auto-grade</span></div>
+          <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:grab"><span style="color:#9b6fc4;font-size:11px">⋮⋮</span><div style="flex:1"><div style="font-size:12px;font-weight:700;color:#2d1a47">Q5: Describe a situation where Calm-First Leadership changed an outcome.</div><div style="font-size:10px;color:#9b6fc4">Short Answer</div></div><span class="pill-m pill-m-amber" style="font-size:8px;padding:2px 6px">Manual Review</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     16. MOBILE — LEONA AI CHAT
+     ═══════════════════════════════════════════════════════ -->
+<div class="view" id="mobile-leona">
+  <div class="mobile-frame">
+    <div class="mobile-status"><span>Planet Calm</span></div>
+    <div class="mobile-header" style="background:linear-gradient(135deg,#2d1a47,#623491)">
+      <h1 style="font-size:16px">🤖 Leona</h1>
+      <div style="font-size:10px;color:rgba(232,196,135,0.7)">Your Calm-First AI Guide</div>
+    </div>
+    <div class="mobile-body" style="padding-bottom:80px;background:#f5eef8">
+      <!-- Leona greeting -->
+      <div style="display:flex;gap:10px;margin-bottom:16px">
+        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🤖</div>
+        <div style="background:#fff;border-radius:14px 14px 14px 4px;padding:14px;border:1px solid rgba(98,52,145,0.1);flex:1;box-shadow:0 2px 8px rgba(98,52,145,0.05)">
+          <div style="font-size:12px;font-weight:700;color:#623491;margin-bottom:4px">Leona</div>
+          <div style="font-size:12.5px;color:#2d1a47;line-height:1.6">Hi Marisol! 🐾 I'm Leona, your Calm-First AI guide. I know everything about BARKType profiles, calm anchoring techniques, and Stephanie's framework. How can I help you and Max today?</div>
+        </div>
+      </div>
+      <!-- Suggested questions -->
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;padding-left:46px">
+        <span style="padding:6px 12px;border-radius:20px;font-size:10px;background:#fff;color:#623491;border:1px solid rgba(98,52,145,0.15);cursor:pointer;font-weight:700">What's my BARKType?</span>
+        <span style="padding:6px 12px;border-radius:20px;font-size:10px;background:#fff;color:#623491;border:1px solid rgba(98,52,145,0.15);cursor:pointer;font-weight:700">Calm anchoring tips</span>
+        <span style="padding:6px 12px;border-radius:20px;font-size:10px;background:#fff;color:#623491;border:1px solid rgba(98,52,145,0.15);cursor:pointer;font-weight:700">Help with reactivity</span>
+      </div>
+      <!-- User message -->
+      <div style="display:flex;justify-content:flex-end;margin-bottom:16px">
+        <div style="background:linear-gradient(135deg,#623491,#9b6fc4);border-radius:14px 14px 4px 14px;padding:14px;color:#fff;max-width:75%">
+          <div style="font-size:12.5px;line-height:1.6">Max gets really reactive when he sees other dogs on walks. We've been doing the calm anchoring but he still lunges sometimes. Any advice?</div>
+        </div>
+      </div>
+      <!-- Leona response -->
+      <div style="display:flex;gap:10px;margin-bottom:16px">
+        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🤖</div>
+        <div style="background:#fff;border-radius:14px 14px 14px 4px;padding:14px;border:1px solid rgba(98,52,145,0.1);flex:1;box-shadow:0 2px 8px rgba(98,52,145,0.05)">
+          <div style="font-size:12px;font-weight:700;color:#623491;margin-bottom:4px">Leona</div>
+          <div style="font-size:12.5px;color:#2d1a47;line-height:1.6">That's actually really common with German Shepherds, Marisol! Max is showing classic <strong>Structured Guardian</strong> behavior — protective but overwhelmed. Here's what I recommend:</div>
+          <div style="margin-top:10px;padding:10px;background:#f9f5fe;border-radius:8px;border-left:3px solid #623491">
+            <div style="font-size:11px;color:#2d1a47;line-height:1.6"><strong>1.</strong> Start the calm anchor 30 seconds BEFORE you see the trigger<br><strong>2.</strong> Use the "3-2-1 Breath" technique from Module 2<br><strong>3.</strong> Increase distance — don't force proximity yet</div>
+          </div>
+          <div style="margin-top:10px;font-size:11px;color:#9b6fc4;font-style:italic">📖 Related: <span style="color:#623491;font-weight:700;text-decoration:underline;cursor:pointer">Lesson 3.1 — Calm Anchoring Techniques</span></div>
+        </div>
+      </div>
+    </div>
+    <!-- Chat input -->
+    <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 16px;background:#fff;border-top:1px solid rgba(98,52,145,0.1);display:flex;gap:8px;align-items:center">
+      <input type="text" placeholder="Ask Leona anything..." style="flex:1;padding:10px 14px;border-radius:20px;border:1px solid rgba(98,52,145,0.15);font-family:Georgia,serif;font-size:12px;color:#2d1a47;background:#faf8fc;outline:none">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#623491,#9b6fc4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px">↑</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /mockup-wrap -->
+
+<script>
+function show(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.mn-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

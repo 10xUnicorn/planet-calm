@@ -305,3 +305,111 @@ input:focus, select:focus, textarea:focus {
   cursor: pointer;
 }
 .btn-secondary:hover { background: rgba(98,52,145,0.12); }
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE — Sidebar, Topbar, Main Content
+   ══════════════════════════════════════════════════════ */
+
+/* ── Sidebar base (desktop) ── */
+.sidebar-nav {
+  width: 240px;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Backdrop (hidden on desktop) ── */
+.sidebar-backdrop {
+  display: none;
+}
+
+/* ── Hamburger (hidden on desktop) ── */
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ── Topbar desktop positioning ── */
+.topbar {
+  left: 240px;
+}
+
+/* ── Main content desktop positioning ── */
+.dashboard-main {
+  margin-left: 240px;
+}
+
+/* ══════ MOBILE (<768px) ══════ */
+@media (max-width: 767px) {
+  /* Sidebar: hidden off-screen, slides in */
+  .sidebar-nav {
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+  }
+  .sidebar-nav.sidebar-open {
+    transform: translateX(0);
+  }
+
+  /* Backdrop overlay */
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 99;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+  }
+  .sidebar-backdrop.sidebar-backdrop-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Hamburger visible */
+  .hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Topbar full-width */
+  .topbar {
+    left: 0 !important;
+    padding: 0 14px !important;
+    gap: 10px !important;
+  }
+
+  /* Topbar title smaller */
+  .topbar > div:first-of-type {
+    font-size: 16px !important;
+  }
+
+  /* Hide welcome text on mobile */
+  .topbar-welcome {
+    display: none;
+  }
+
+  /* Hide AI Brain & New Task on mobile */
+  .topbar-hide-mobile {
+    display: none !important;
+  }
+
+  /* Main content full-width */
+  .dashboard-main {
+    margin-left: 0;
+  }
+
+  /* Reduce main content padding */
+  .dashboard-main > div {
+    padding: 16px !important;
+  }
+}
