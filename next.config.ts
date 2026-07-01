@@ -1,12 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Type safety is enforced via `tsc --noEmit` (passes clean). ESLint style
-  // rules (no-explicit-any, set-state-in-effect) are advisory here and must
-  // not block production deploys given the codebase's established patterns.
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // Next 16 does not run ESLint during `next build`, so no eslint config is
+  // needed here. Type safety is enforced by the build's TypeScript pass.
 };
 
 export default nextConfig;
